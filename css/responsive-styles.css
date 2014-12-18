@@ -1,0 +1,33 @@
+@media (max-width: 1200px) {
+  .webnified,
+  .copyright {
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .webnified {
+    font-size: 0.8em;
+    margin-top: 1em;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    padding: 100px 0;
+  }
+  .fold-headline {
+    width: 100%;
+    margin-bottom: 2em;
+    line-height: 1.3em;
+    font-size: 160%;
+  }
+  .sub-headline {
+    font-size: 1em;
+  }
+  .form {
+    padding: 0;
+    width: 100%;
+  }
+  .lead-contact {
+    padding: 20px 0;
+  }
+}
