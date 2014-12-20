@@ -1,9 +1,10 @@
 @import "font/jubilat/jubilat.css";
-@import "font/franklin-gothic/franklin-gothic.css";
+@import "font/proxima-nova/proxima-nova.css";
+
  body {
   font-size: 18px;
   line-height: 1.5;
-  font-family: FranklinGothic-Book, sans-serif;
+  font-family: "Proxima Nova", sans-serif;
 }
 a {
   color: #A2A3A4;
@@ -35,10 +36,11 @@ h5 {
 }
 .sub-headline {
   font-size: 1.2em;
-  font-family: FranklinGothic-Book, sans-serif;
+  font-family: "Proxima Nova", sans-serif;
+  font-weight: 100;
 }
 .sub-headline strong {
-  font-family: FranklinGothic-Demi, sans-serif;
+  font-family: "Proxima Nova", sans-serif;
 }
 .form {
   padding: 20px;
@@ -61,7 +63,7 @@ h5 {
 }
 .fold-headline {
   width: 100%;
-  margin-bottom: 1em;
+  margin-bottom: 0;
   line-height: 1.2em;
   margin-top: 1em;
   max-width: 670px;
@@ -73,9 +75,10 @@ h5 {
   margin-bottom: 20px;
 }
 .small-headline {
-  font-family: FranklinGothic-Book, sans-serif;
+  font-family: "Proxima Nova", sans-serif;
   font-size: .8em;
   color: #878A8D;
+  font-weight: 600;
 }
 .btn {
   padding: 10px;
@@ -85,9 +88,11 @@ h5 {
   color: #FFF;
   height: 50px;
   width: 100%;
+  font-weight: 500;
 }
 .form-headline {
-  font-family: FranklinGothic-Book, sans-serif;
+  font-family: "Proxima Nova", sans-serif;
+  font-weight: 600;
   font-size: 1.1em;
   margin-top: 0;
 }
