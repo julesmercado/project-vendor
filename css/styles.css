@@ -20,11 +20,12 @@ h5 {
   font-family: jubilat_semiboldregular, serif;
 }
 .header {
-  background-image: url("../img/fold-bg.jpg");
+  background-image: url("../img/fold-bg.png");
   padding: 150px 0 120px;
   background-repeat: no-repeat;
   text-align: center;
   background-size: cover;
+  color: #FFF;
 }
 .fold-headline {
   font-size: 3.42857143em;
@@ -41,7 +42,7 @@ h5 {
 }
 .form {
   padding: 20px;
-  margin: 20px auto;
+  margin: 3em auto;
   width: 480px
 }
 .input {
@@ -60,8 +61,10 @@ h5 {
 }
 .fold-headline {
   width: 100%;
-  margin-bottom: 50px;
-  line-height: 1.3em;
+  margin-bottom: 1em;
+  line-height: 1.2em;
+  margin-top: 1em;
+  max-width: 670px;
 }
 .content {
   text-align: center;
