@@ -124,3 +124,13 @@ h5 {
 .webnified {
   text-align: right;
 }
+
+.book-venue {
+  margin-top: -50px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.book-venue .input-group {
+    margin-bottom: 0;
+}
