@@ -370,10 +370,33 @@ h2
     width: 150px;
 }
 
-.customer-info, .payment-method {
+.customer-info,
+.payment-method
+{
     padding-top: 20px;
 }
 
-.book-event {
+.book-event
+{
     padding: 40px 0 100px;
+}
+.payment-method label
+{
+    display: inline-block;
+
+    margin: 15px;
+}
+
+.payment-method label input
+{
+    margin: 0 5px;
+}
+
+.btn-proceed
+{
+    margin: 15px 0;
+}
+
+.offline-payment {
+    padding: 40px 0;
 }
