@@ -56,14 +56,14 @@ h5
 
 .header
 {
-    padding: 150px 0 120px;
+    /* padding: 15px; */
 
-    text-align: center;
 
     color: #fff;
-    background-image: url('../img/fold-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
+    /* height: 70px; */
+    background-color: #EEE;
 }
 .fold-headline
 {
@@ -86,13 +86,13 @@ h5
 }
 .form
 {
-    width: 480px;
-    margin: 3em auto;
+    /* width: 540px; */
+    margin: 6em 0 3em;
     padding: 20px;
 }
 .input
 {
-    font-size: .8em;
+    font-size: 1em;
     font-weight: lighter;
 
     display: block;
@@ -121,6 +121,9 @@ h5
 .lead-page .content
 {
     text-align: center;
+    background-image: url("../img/conference.jpg");
+    height: 700;
+    background-size: 100%;
 }
 .input-group
 {
@@ -145,7 +148,7 @@ h5
     color: #fff;
     border: none;
     border-radius: 5px;
-    background: #e5a442;
+    background: #B0956C;
 }
 .form-headline
 {
@@ -198,7 +201,7 @@ h5
 
 .book-venue
 {
-    margin-top: -50px;
+    /* margin-top: -50px; */
 
     border-radius: 5px;
     background-color: #fff;
@@ -220,6 +223,7 @@ h5
 {
     margin: 0;
     padding: 20px 0;
+    position: relative;
 }
 .listing .hotel-img
 {
@@ -229,14 +233,17 @@ h5
 {
     display: inline-block;
 
-    height: 450px;
-    padding: 20px;
+    padding: 10px;
 
     border-radius: 5px;
+    overflow: hidden;
 }
 .listing > .list-item .pull-out
 {
     display: none;
+    position: absolute;
+    top: 135px;
+    right: 15px;
 }
 .listing > .list-item:hover
 {
@@ -252,11 +259,12 @@ h5
     padding: 10px 0;
 
     list-style: none;
+    font-size: 0.9em;
 }
 .listing .hotel-name
 {
     margin: 0;
-    padding: 15px 0;
+    padding: 15px 0 0;
 }
 .listing .hotel-desc
 {
@@ -285,6 +293,7 @@ h5
 .content
 {
     font-size: .85em;
+    background: #EEE;
 }
 .content h1,
 .content h2,
@@ -399,4 +408,134 @@ h2
 
 .offline-payment {
     padding: 40px 0;
+}
+.brand {
+    width: 250px;
+    display: inline-block;
+    color: #333;
+    font-size: 0.9em;
+}
+
+.logo .img {
+    width: 100%;
+}
+
+section.quick-links {
+    font-size: 0.65em;
+    color: #C2A5CB;
+}
+
+.quick-search .input {
+    width: 75%;
+    display: inline-block;
+    height: 40px;
+    border-top-right-radius: 0;  
+    border-bottom-right-radius: 0;
+    outline: none;
+    color: #333;
+    padding: 7px 10px;
+    margin-bottom: 10px;
+}
+
+.quick-search .btn {
+    width: 25%;
+    height: 40px;
+    font-size: 0.8em;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+section.utility {
+    width: 400px;
+    display: inline-block;
+    float: right;
+}
+
+.top-header {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.main-nav {
+    list-style: none;
+    padding: 20px 20px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #E2B776;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+}
+
+.nav-items {
+    display: inline-block;
+    padding: 10px;
+}
+
+.nav-items a {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+.venue-selection-page .form {
+    margin: 1em 0 0;
+    padding: 0;
+    background-color: #DDD;
+    border-radius: 5px;
+}
+
+
+.input.checkbox {
+    height: 15px !important;
+    width: auto;
+    margin: 5px;
+    display: inline;
+}
+
+.label-checkbox {
+    display: block;
+    vertical-align: middle;
+    padding-bottom: 5px;
+}
+.search-filter .input {
+    height: 35px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.search-filter .input-group {
+    margin-bottom: 0;
+}
+
+.search-filter .input-group:last-child {
+    margin-bottom: 15px;
+}
+
+.search-filter .headline {
+    margin-bottom: 0;
+}
+
+.input-group .label {
+    margin-bottom: 10px;
+}
+
+.venue-selection-page .content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+/* Alt styles */
+.venue-selection-page-alt .utility {
+        padding: 12px 0 !important;
+}
+.venue-selection-page-alt .main-nav {
+    text-align: left !important;
+    width: auto !important;
+    padding: 10px;
+}
+.venue-selection-page-alt  .quick-search .input {
+    margin-bottom: 0 !important;
 }
