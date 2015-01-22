@@ -1,0 +1,66 @@
+.step-container .headline, .step-container .step {
+    display: inline-block;
+}
+
+.step-container .step {
+    border: 1px solid #838383;
+    border-radius: 50%;
+    font-weight: bold;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    padding: 5px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.step-container {
+    color: #838383;
+    margin-bottom: 20px;
+}
+
+.steps .step-container {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 10px;
+    border-radius: 3px;
+    width: 165px;
+}
+
+.steps .step {
+    display: block;
+    margin: 0 auto;
+}
+
+.steps {
+    text-align: center;
+}
+
+.steps .headline {
+    font-size: 1em;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.steps .step-container.active {
+    background-color: #B0956C;
+    color: white;
+}
+
+.steps .step-container.active .step {
+    border-color: #FFF;
+}
+
+.steps .step-container:hover {
+    background-color: #EEE;
+}
+
+.steps .step-container:hover.active {
+    background-color: #ABABAB;  
+    color: #EEE;
+}
+
+.steps .step-container:hover.active .step {
+    border-color: #EEE;
+}

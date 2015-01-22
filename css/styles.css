@@ -23,7 +23,7 @@ h3,
 h4,
 h5
 {
-    font-family: jubilat_semiboldregular, serif;
+    font-family: jubilat_semiboldregar, serif;
 }
 
 #quick-view-details
@@ -188,7 +188,7 @@ h5
 }
 .lead-contact .lead
 {
-    font-family: jubilatregular, serif;
+    font-family: jubilatregar, serif;
     font-size: 1em;
 
     letter-spacing: .06em;
@@ -238,7 +238,7 @@ h5
     border-radius: 5px;
     overflow: hidden;
 }
-.listing > .list-item .pull-out
+.listing > .list-item .pl-out
 {
     display: none;
     position: absolute;
@@ -249,7 +249,7 @@ h5
 {
     background-color: #eee;
 }
-.listing > .list-item:hover .pull-out
+.listing > .list-item:hover .pl-out
 {
     display: inline-block;
 }
@@ -420,7 +420,7 @@ h2
     width: 100%;
 }
 
-section.quick-links {
+.quick-links {
     font-size: 0.65em;
     color: #C2A5CB;
 }
@@ -447,7 +447,7 @@ section.quick-links {
     vertical-align: top;
 }
 
-section.utility {
+.utility {
     width: 400px;
     display: inline-block;
     float: right;
@@ -538,4 +538,57 @@ section.utility {
 }
 .venue-selection-page-alt  .quick-search .input {
     margin-bottom: 0 !important;
+}
+
+.gallery-thumbnails.unstyled li {
+    display: inline-block;
+    padding: 5px;
+    background-color: #FFF;
+    margin: 5px;
+}
+
+.gallery {
+    position: relative;
+}
+
+.gallery-thumbnails.unstyled {
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+}
+
+.popup {
+    position: absolute;
+    right: 0;
+    bottom: 70px;
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 3px;
+    margin: 20px;
+}
+
+.popup-container {
+    position: absolute;
+    width: 300px;
+    right: 0;
+    bottom: 0;
+}
+
+.venue-details.btn.btn-proceed {
+    /* border: 2px solid #FFF; */
+    color: #FFF;
+    font-weight: bold;
+    width: 150px;
+    float: right;
+    margin: 20px;
+}
+
+.addons.unstyled li {
+    display: inline-block;
+    padding: 10px;
+}
+
+.addons.unstyled li.active {
+    background-color: #FC9292;
+    border-radius: 3px;
 }
