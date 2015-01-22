@@ -17,6 +17,7 @@
 .step-container {
     color: #838383;
     margin-bottom: 20px;
+    /* text-align: center; */
 }
 
 .steps .step-container {
@@ -63,4 +64,8 @@
 
 .steps .step-container:hover.active .step {
     border-color: #EEE;
+}
+
+.step-container .headline {
+    margin: 0;
 }
