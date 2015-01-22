@@ -1,0 +1,7 @@
+.gallery .headline {
+    position: absolute;
+    bottom: 90px;
+    left: 20px;
+    color: #FFF;
+    text-shadow: 2px 2px 2px #000;
+}

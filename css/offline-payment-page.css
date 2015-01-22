@@ -1,0 +1,19 @@
+.submission-format {
+    margin: 0 20px 20px;
+    border-radius: 3px;
+    background-color: #CCC;
+    display: inline-block;
+    padding: 15px;
+}
+
+.submission-format p {
+    margin: 0 0 5px;
+}
+
+.sms-format {
+    display: inline-block;
+    padding: 15px;
+    margin: 0 20px 20px;
+    background-color: #CCC;
+    border-radius: 3px;
+}
