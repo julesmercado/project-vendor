@@ -1,0 +1,23 @@
+<section header-directive></section>
+<section class="lead-page">
+  <section class="content" ng-controller="landPageController">
+    <section class="container">
+      <form action="" class="form" name="bookingFormFirstPage" no-validate>
+          <section class="form book-venue">
+            <h5 class="form-headline">Find your Dream Location</h5>
+            <section class="row"><section class="input-group col-lg-12">
+              <select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, firstPageSelection.exp )" ng-model="firstPageSelection.exp" ng-options="selection for selection in initialize.experience">
+          </select>
+
+
+            </section><section class="input-group col-lg-6">
+              <input type="text" placeholder="Location(e.g. Makati City)" name="location" ng-model="firstPageSelection.city_address" class="input" required>
+            </section><section class="input-group col-lg-6">
+              <input type="text" placeholder="Expected guests(e.g. 100)" name="mobile-name" ng-model="firstPageSelection.est_guest" class="input" required>
+            </section></section>
+            <button type="submit" class="btn" ng-click="setFirst( {exp: firstPageSelection.exp, location: firstPageSelection.city_address, guest: firstPageSelection.est_guest} )" ng-disabled="bookingFormFirstPage.$invalid">See My Options</button>
+          </section>
+      </form>
+    </section>
+  </section>
+</section>

@@ -1,0 +1,112 @@
+<section class="venue-selection-page">
+<section header-directive></section>
+<section class="content" >
+    <section class="container">
+  
+      <section class="venue search-filtered">
+        
+        <form class="form search-filter col-lg-3" name="bookingFormSecondPage"><h3 class="headline col-lg-12">Filter results</h3>
+
+<section class="input-group col-lg-12">
+          <h5 class="label">Experience</h5>
+          <select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, secondPageSelection.exp )" ng-model="secondPageSelection.exp" ng-options="selection for selection in initialize.experience">
+        </select>
+
+        </section><section class="input-group col-lg-12">
+  <h5 class="label">Location</h5>
+          <input type="text" placeholder="Location(e.g. Makati City)" name="location" ng-model="secondPageSelection.location" class="input" required>
+        </section><section class="input-group col-lg-12">
+          <h5 class="label">Features &amp; Amenities</h5>
+  <ul class="list unstyled addon-list">
+           <li class=" list-item" =""="" ng-repeat="amenity in initialize.amenities">
+              <label class="label-checkbox"><input type="checkbox" name="selectedAmenity[]" class="input checkbox" value="{{amenity.name}}">{{amenity.name}}</label>
+           </li>
+  </ul>
+
+        </section><section class="input-group col-lg-12">
+<button type="submit" class="btn">Update search</button>
+
+        </section>
+</form><section class="search-results col-lg-9">
+<h2 class="headline col-lg-12">Search for ...</h2>
+  <ul class="listing unstyled col-sm-12 col-md-12 col-lg-12">
+            <li class="list-item col-sm-4 col-md-4 col-lg-4" ng-repeat="venue in venues">
+              <img alt="Hotel" class="hotel-img" ng-src="filter/img/hotel.jpg">
+              <h3 class="hotel-name">{{venue.name}}</h3>
+              
+              <ul class="feature-list">
+                <li>Price: Php 300.00/Head</li><li>Capacity(min|max): {{venue.min_guest}} | {{venue.max_guest}}
+                </li>
+                
+              </ul>
+              <section class="pull-out">
+                <a class="quick-view" href="#quick-view-details" rel="modal:open">Quick Peek</a> <a class="select-venue" href="#">Select
+                Venue</a>
+              </section>
+            </li>
+            
+            
+          </ul><section class="search-results">
+            
+    <section class="modal quick-view-modal" id="quick-view-details">
+      <section class="img-gallery col-lg-6">
+        <section class="preview">
+          <img alt="Large Preview" class="img" ng-src="filter/img/hotel.jpg">
+        </section>
+        <section class="thumbnail">
+          <ul class="list unstyled">
+            <li class="list-item">
+              <img alt="Thumbnail Preview" class="img" ng-src="filter/img/hotel.jpg">
+            </li>
+            <li class="list-item">
+              <img alt="Thumbnail Preview" class="img" ng-src="filter/img/hotel.jpg">
+            </li>
+            <li class="list-item">
+              <img alt="Thumbnail Preview" class="img" ng-src="filter/img/hotel.jpg">
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section class="info col-lg-6">
+        <h2 class="hotel-name">
+          {{venue.name}}
+        </h2>
+        <section class="details">
+          <section class="list-item">
+            <section class="label">
+              Capacity(min|max):
+            </section>
+            <section class="value">
+              {{venue.min_guest}} | {{venue.max_guest}}
+            </section>
+          </section>
+          <section class="list-item">
+            <section class="label">
+              Rating:
+            </section>
+            <section class="value">
+              4.5
+            </section>
+          </section>
+        </section>
+        <h4>
+          Features &amp; Amenities
+        </h4>
+        <ul class="feature-list unstyled">
+          <li class="list-item">Restaurant
+          </li>
+          <li class="list-item">Private Room(s)
+          </li>
+          <li class="list-item">Terrace
+          </li>
+          <li class="list-item">Wifi
+          </li>
+        </ul>
+      </section>
+    </section>
+</section></section>
+        
+      </section>
+    </section>
+  </section>
+  </section>
