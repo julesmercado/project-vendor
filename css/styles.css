@@ -118,12 +118,11 @@ h5
 }
 .lead-page .content
 {
-    height: 700;
-
-    text-align: center;
+    height: 100%;
+    /* text-align: center; */
 
     background-image: url('../img/conference.jpg');
-    background-size: 100%;
+    background-size: cover;
 }
 .input-group
 {
@@ -201,8 +200,8 @@ h5
 
 .book-venue
 {
-    position: absolute;
-    bottom: 0;
+    display: inline-block;
+    /* bottom: 0; */
 
     border-radius: 5px;
     background-color: #fff;
