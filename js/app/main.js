@@ -20,7 +20,14 @@ VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', funct
               getSecondExperienceResolver: function( getSecondExperience ){
                 return getSecondExperience.getSecondExperience();
               }
-         } });
+          } 
+        }).
+
+        when( "/view/:id", {
+          templateUrl: "/partials/book.html"
+        } ).
+
+        otherwise( { redirectTo: "/" });
 	$locationProvider.html5Mode(true).hashPrefix('!');
 }]);
 

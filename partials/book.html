@@ -1,0 +1,76 @@
+<section class="book-event" ng-controller="bookController">
+<section header-directive></section>
+    <section class="content">
+      <section class="container">
+          <section class="venue">
+                  
+                  <section class="gallery">
+                  <h2 class="headline">{{venuesNow.name}}</h2><img alt="Hotel" class="hotel-img" src="img/venue.jpg">
+                  <ul class="gallery-thumbnails unstyled">
+                    <li><img class="thumbs" src="http://placehold.it/50x50"></li>
+                    <li><img class="thumbs" src="http://placehold.it/50x50"></li>
+                    <li><img class="thumbs" src="http://placehold.it/50x50"></li>
+                    <li><img class="thumbs" src="http://placehold.it/50x50"></li>
+                    <li><img class="thumbs" src="http://placehold.it/50x50"></li>
+                  </ul>
+                  <section class="popup-container">
+                    <a rel="modal:open" href="#quick-view-details" class="venue-details btn btn-proceed">Book this venue</a>
+                    
+                    </section>
+                  </section>
+
+              </section>
+      </section>
+    </section>
+
+    <section class="modal quick-view-modal current" id="quick-view-details" >
+      <h2 class="headline">Book a Venue</h2><section class="steps">
+<a ng-class="{'active':checkThis(1)}" ng-click="setTabBook(1)">
+<section class="step-container">
+	<section class="step">1</section><h3 class="headline">Guest Details</h3></section></a>
+<a ng-class="{'active':checkThis(2)}" ng-click="setTabBook(2)">
+<section class="step-container">
+	<section class="step">2</section><h3 class="headline">Amenities</h3></a>
+</section>
+<a ng-class="{'active':checkThis(3)}" ng-click="setTabBook(3)">
+<section class="step-container">
+	<section class="step">3</section><h3 class="headline">Payment Method</h3></a>
+	</section></section>
+
+<section class="booking-form-container">
+	<section class="customer-info" ng-show="tabBook==1">
+        <section class="step-container"><h3 class="headline">Guest Details</h3></section>
+        <input class="input" placeholder="Full Name" type="text" ng-model="formFields.name" required>
+        <input class="input" placeholder="Email" type="text" ng-model="formFields.email" required> 
+        <input class="input" placeholder="Contact #" type="text" ng-model="formFields.contact_no" required>
+        <input class="input" placeholder="Expected Guest" type="text" ng-model="formFields.expected_guest" required>
+        <button type="submit" class="btn btn-proceed" ng-click="setTabBook(2)">Continue to Amenities</button>
+  	</section>
+
+  	<section class="addons" ng-show="tabBook==2">
+        <section class="step-container"><section class="step">2</section><h3 class="headline">Amenities and Features</h3></section>
+ 
+        <ul class="addons unstyled">
+          <li ng-class="{'active':checkThis(1)}"><a href="" ng-click="setTabAmenities(1)"><img class="thumbs" src="http://placehold.it/50x50"></a></li>
+          <li ng-class="{'active':checkThis(2)}"><a href="" ng-click="setTabAmenities(2)"><img class="thumbs" src="http://placehold.it/50x50"></a></li>
+          <li ng-class="{'active':checkThis(3)}"><a href="" ng-click="setTabAmenities(3)"><img class="thumbs" src="http://placehold.it/50x50"></a></li>
+          <li ng-class="{'active':checkThis(4)}"><a href="" ng-click="setTabAmenities(4)"><img class="thumbs" src="http://placehold.it/50x50"></a></li>
+          <li ng-class="{'active':checkThis(5)}"><a href="" ng-click="setTabAmenities(5)"><img class="thumbs" src="http://placehold.it/50x50"></a></li>
+        </ul>
+        
+    </section>
+
+    <section class="payment-method" ng-show="tabBook==3">
+        <section class="step-container"><section class="step">3</section><h3 class="headline">
+          Payment Method
+        </h3></section>
+
+        <p>See instruction on how to pay after clicking the "Book Venue" button</p>
+        <button type="submit" class="btn btn-proceed" ng-click="bookVendor()">Book Venue</button>
+    </section></section>
+
+      
+
+      
+      <a href="#close-modal" rel="modal:close" class="close-modal">Close</a></section>
+</section>
