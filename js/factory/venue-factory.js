@@ -23,7 +23,7 @@ VendorMine.factory('getExperience',
 		function factory( $http ){
 
 			return function getExperience( callback ){
-				$.get( "http://192.168.1.36:3000/vendormines/get_experience",
+				$.get( "http://192.168.1.39:3000/vendormines/get_experience",
 					function(data){
 						callback(data);
 					} );
@@ -39,7 +39,7 @@ VendorMine.factory('getSecondExperience',
 
 			return {
 				getSecondExperience: function ( callback ){
-					var promise = $.get("http://192.168.1.36:3000/vendormines/get_experience", 
+					var promise = $.get("http://192.168.1.39:3000/vendormines/get_experience", 
 							function( data ){
 								var experience = data.map(function (w) {
 						            return w.name;
@@ -59,7 +59,7 @@ VendorMine.factory('getAmenities',
 
 			return {
 				getAmenities: function ( callback ){
-					var promise = $.get("http://192.168.1.36:3000/vendormines/get_amenities", 
+					var promise = $.get("http://192.168.1.39:3000/vendormines/get_amenities", 
 							function( data ){
 								var amenities = data.map(function (w) {
 							        	return {name: w.name, selected: false};
@@ -81,7 +81,7 @@ VendorMine.service('postFilter',
 			return {
 				getPostFilter: function( dataFirst, callback ){
 					if(dataFirst){
-						var promise = $.post( "http://192.168.1.36:3000/vendormines/venues",
+						var promise = $.post( "http://192.168.1.39:3000/vendormines/venues",
 							{
 								"exp": dataFirst.exp, 
 								"city_address" : dataFirst.city_address, 
@@ -111,7 +111,7 @@ VendorMine.service('amenityAndFeatures',
 				getAmenityAndFeatures: function( id ){
 					if(id){
 						var promise = $.ajax( {
-										url: "http://192.168.1.36:3000/vendormines/show",
+										url: "http://192.168.1.39:3000/vendormines/show",
 										type: "POST",
 										data: {
 											id: id
@@ -138,7 +138,7 @@ VendorMine.service('bookVendorVenues',
 			return function bookVendorVenues( dataVendor ){
 					$.ajax( {
 						type: "POST",
-						url: "http://192.168.1.36:3000/vendormines/",
+						url: "http://192.168.1.39:3000/vendormines/",
 						data: dataVendor
 						})
 					.success( function(data){
@@ -149,6 +149,46 @@ VendorMine.service('bookVendorVenues',
 					.error( function(error){
 						return error;
 					} );
+				}
+				
+			
+		}
+	]);
+VendorMine.service('staticVenue', 
+	[
+		'$http',
+		function service( $http ){
+			var staticData = [{
+				$$hashKey: "00B",
+				address: "Divisoria",
+				city_address: "Cagayan de Oro",
+				contact: "09263593778",
+				created_at: "2015-01-19T13:36:22.833Z",
+				email: "eebasadre20@gmail.com",
+				id: 4,
+				max_guest: 50,
+				min_guest: 20,
+				name: "Dynasty Hotel",
+				updated_at: "2015-01-19T13:36:22.833Z",
+				venue_code: null
+			},{
+				$$hashKey: "00A",
+				address: "Divisoria",
+				city_address: "Cagayan de Oro",
+				contact: "09263593778",
+				created_at: "2015-01-19T13:36:22.833Z",
+				email: "eebasadre20@gmail.com",
+				id: 4,
+				max_guest: 50,
+				min_guest: 20,
+				name: "VIP Hotel",
+				updated_at: "2015-01-19T13:36:22.833Z",
+				venue_code: null
+			}];
+			return {
+					getStaticData: function getStaticData(){
+						return staticData;
+					}
 				}
 				
 			

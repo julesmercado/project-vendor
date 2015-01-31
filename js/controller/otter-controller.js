@@ -53,11 +53,12 @@ VendorMine.controller('landPageController',
 					experience: ""
 			};
 			if($scope.bookingFormFirstPage==undefined){
-				getExperience( function(data){
+				/*getExperience( function(data){
 					$scope.initialize.experience = data.map(function (w) {
 					    return w.name;
 					});
-				} )
+				} )*/
+				$scope.initialize.experience = ["Beach", "Resort"];
 			}
 			
 			$scope.firstPageSelection = {
@@ -95,24 +96,24 @@ VendorMine.controller( 'bookController',
 			
 			$scope.$on( 'Venues', function(event, data){	
 				$rootScope.venuesNow = data[$route.current.params.id];
-				
 				/*console.log($route.current.params.id);
 				console.log(data);*/
 
 				//$rootScope.amenityAndFeatures = getAmenityAndFeaturesResolver;
+				$scope.formFields = {
+					venue_id: $rootScope.venuesNow.id,
+					name: "",
+					email: "",
+					contact_no: "",
+					expected_guest: ""/*,
+					original_date: "",
+					second_date: "",
+					third_date: "",
+					amenenities: [],
+					rooms: []*/
+				};
 			} );
-			$scope.formFields = {
-				venue_id: $rootScope.venuesNow.id,
-				name: "",
-				email: "",
-				contact_no: "",
-				expected_guest: ""/*,
-				original_date: "",
-				second_date: "",
-				third_date: "",
-				amenenities: [],
-				rooms: []*/
-			};
+			
 
 			$scope.setTabBook = function setTabBook(tab){
 				$scope.tabBook = tab;
@@ -166,22 +167,25 @@ VendorMine.controller( 'filterFormController',
 		'getAmenitiesResolver',
 		'getSecondExperienceResolver',
 		function filterFormController( $scope, $route, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver ){
-			$scope.initialize = {
+			/*$scope.initialize = {
 					experience: getSecondExperienceResolver.map(function (w) {
 			            return w.name;
 			        }),
 					amenities: getAmenitiesResolver.map(function (w) {
 			            return {name: w.name, selected: false};
 			        })
+			};*/
+			$scope.initialize = {
+					experience: ["Beach", "Resort"],
+					amenities: [{name: "Swimming Pool", selected: false}, {name: "Gym", selected: false}, {name: "Billiard pool", selected: false}]
 			};
-
 			$scope.filters = {
 				"exp": $route.current.params.exp,
 				"city_address": $route.current.params.location,
 				"est_guest": $route.current.params.guest
 			};	
 			
-			postFilter.getPostFilter( $scope.filters, function(error, data){
+			/*postFilter.getPostFilter( $scope.filters, function(error, data){
 				if(error){
 					console.log(error);
 				}else{
@@ -190,7 +194,68 @@ VendorMine.controller( 'filterFormController',
 					$scope.$apply();
 				}
 				return venues;
-			} );
+			} );*/
+			$scope.venues = [{
+				address: "Divisoria",
+				city_address: "Cagayan de Oro",
+				contact: "09263593778",
+				created_at: "2015-01-19T13:36:22.833Z",
+				email: "eebasadre20@gmail.com",
+				id: 4,
+				max_guest: 50,
+				min_guest: 20,
+				name: "Dynasty Hotel",
+				updated_at: "2015-01-19T13:36:22.833Z",
+				venue_code: null
+			},{
+				address: "Divisoria",
+				city_address: "Cagayan de Oro",
+				contact: "09263593778",
+				created_at: "2015-01-19T13:36:22.833Z",
+				email: "eebasadre20@gmail.com",
+				id: 4,
+				max_guest: 50,
+				min_guest: 20,
+				name: "VIP Hotel",
+				updated_at: "2015-01-19T13:36:22.833Z",
+				venue_code: null
+			},{
+				address: "Divisoria",
+				city_address: "Cagayan de Oro",
+				contact: "09263593778",
+				created_at: "2015-01-19T13:36:22.833Z",
+				email: "eebasadre20@gmail.com",
+				id: 4,
+				max_guest: 50,
+				min_guest: 20,
+				name: "Lux Hotel",
+				updated_at: "2015-01-19T13:36:22.833Z",
+				venue_code: null
+			},{
+				address: "Divisoria",
+				city_address: "Cagayan de Oro",
+				contact: "09263593778",
+				created_at: "2015-01-19T13:36:22.833Z",
+				email: "eebasadre20@gmail.com",
+				id: 4,
+				max_guest: 50,
+				min_guest: 20,
+				name: "Pearlmont Hotel",
+				updated_at: "2015-01-19T13:36:22.833Z",
+				venue_code: null
+			},{
+				address: "Divisoria",
+				city_address: "Cagayan de Oro",
+				contact: "09263593778",
+				created_at: "2015-01-19T13:36:22.833Z",
+				email: "eebasadre20@gmail.com",
+				id: 4,
+				max_guest: 50,
+				min_guest: 20,
+				name: "N Hotel",
+				updated_at: "2015-01-19T13:36:22.833Z",
+				venue_code: null
+			}];
 
 			$scope.secondPageSelection = {
 					"exp": "", 
@@ -223,6 +288,7 @@ VendorMine.controller( 'filterFormController',
 					}
 			            	
 			     });
+				console.log($scope.secondPageSelection);
 				postFilter.getPostFilter( $scope.secondPageSelection, function(error, data){
 					if(error){
 						console.log(error);
