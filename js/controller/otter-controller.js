@@ -17,7 +17,7 @@ VendorMine.controller( 'headerController',
 			$scope.getVenueSuppliers = function getVenueSuppliers(){
 				venueFactory( function onData( error, data ){
 					if( error ){
-						console.log( error );
+						
 						return data = "null";
 					}else{
 						var dataVenue = data;
@@ -53,12 +53,12 @@ VendorMine.controller('landPageController',
 					experience: ""
 			};
 			if($scope.bookingFormFirstPage==undefined){
-				/*getExperience( function(data){
+				getExperience( function(data){
 					$scope.initialize.experience = data.map(function (w) {
 					    return w.name;
 					});
-				} )*/
-				$scope.initialize.experience = ["Beach", "Resort"];
+				} )
+				
 			}
 			
 			$scope.firstPageSelection = {
@@ -77,78 +77,44 @@ VendorMine.controller('landPageController',
 		    
 	]);
 
-VendorMine.controller( 'venueController', 
-	[
-		'$scope',
-		function venueController( $scope ){
-
-		}
-	] );
-
 VendorMine.controller( 'bookController', 
 	[
 		'$scope',
 		'$route',
 		'$rootScope',
 		'bookVendorVenues',
-		function bookController( $scope, $route, $rootScope, bookVendorVenues ){
-			$scope.tabBook = 1;
-			
+		'amenityAndFeatures',
+		'$timeout',
+		function bookController( $scope, $route, $rootScope, bookVendorVenues, amenityAndFeatures, timeout ){  
+
 			$scope.$on( 'Venues', function(event, data){	
 				$rootScope.venuesNow = data[$route.current.params.id];
-				/*console.log($route.current.params.id);
-				console.log(data);*/
-
-				//$rootScope.amenityAndFeatures = getAmenityAndFeaturesResolver;
-				$scope.formFields = {
-					venue_id: $rootScope.venuesNow.id,
-					name: "",
-					email: "",
-					contact_no: "",
-					expected_guest: ""/*,
-					original_date: "",
-					second_date: "",
-					third_date: "",
-					amenenities: [],
-					rooms: []*/
-				};
 			} );
-			
+
+			$scope.getDetails = function(){
+				amenityAndFeatures.getAmenityAndFeatures($rootScope.venuesNow.id, function(error, data){
+					if(error){
+						console.error(error)
+					}else{
+						timeout(function() {
+							$scope.initialize = {
+								amenities: data.amenities,
+								rooms: data.rooms
+							};
+							$rootScope.$broadcast('amenities', $scope.initialize, $rootScope.venuesNow );
+						}, 0);
+						
+					}
+				});
+				
+			};
+			$scope.tabBook = 1;
 
 			$scope.setTabBook = function setTabBook(tab){
 				$scope.tabBook = tab;
-				console.log($rootScope.venuesNow);
+				//
 			};
-
-			$scope.setTabAmenities = function setTabAmenities(tab){
-				$scope.tabAmenities = tab;
-				console.log($scope.tabAmenities);
-			};
-
-			$scope.checkThisAmenities = function checkThisAmenities( num ){
-				if($scope.tabAmenities == num){
-					
-					return true;
-				}else{
-					return false;
-				}
-				
-			};
-
-			$scope.checkThis = function checkThis( num ){
-				if($scope.tabBook == num){
-					
-					return true;
-				}else{
-					return false;
-				}
-				
-			};
-
-			$scope.bookVendor = function bookVendor(){
-				bookVendorVenues( $scope.formFields );
-				$.modal.close();
-			};
+			
 		}
 	] );
 
@@ -166,104 +132,43 @@ VendorMine.controller( 'filterFormController',
 		'postFilterResolver',
 		'getAmenitiesResolver',
 		'getSecondExperienceResolver',
-		function filterFormController( $scope, $route, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver ){
-			/*$scope.initialize = {
+		'postFilterAmenities',
+		'amenityAndFeatures',
+		function filterFormController( $scope, $route, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures){
+			$scope.initialize = {
 					experience: getSecondExperienceResolver.map(function (w) {
 			            return w.name;
 			        }),
 					amenities: getAmenitiesResolver.map(function (w) {
-			            return {name: w.name, selected: false};
+			            return {name: w.name, id: w.id, selected: false};
 			        })
-			};*/
-			$scope.initialize = {
-					experience: ["Beach", "Resort"],
-					amenities: [{name: "Swimming Pool", selected: false}, {name: "Gym", selected: false}, {name: "Billiard pool", selected: false}]
 			};
+			
 			$scope.filters = {
 				"exp": $route.current.params.exp,
 				"city_address": $route.current.params.location,
 				"est_guest": $route.current.params.guest
 			};	
 			
-			/*postFilter.getPostFilter( $scope.filters, function(error, data){
+			postFilter.getPostFilter( $scope.filters, function(error, data){
 				if(error){
-					console.log(error);
+					
 				}else{
 					var venues = data;
 					$scope.venues = venues;
 					$scope.$apply();
 				}
 				return venues;
-			} );*/
-			$scope.venues = [{
-				address: "Divisoria",
-				city_address: "Cagayan de Oro",
-				contact: "09263593778",
-				created_at: "2015-01-19T13:36:22.833Z",
-				email: "eebasadre20@gmail.com",
-				id: 4,
-				max_guest: 50,
-				min_guest: 20,
-				name: "Dynasty Hotel",
-				updated_at: "2015-01-19T13:36:22.833Z",
-				venue_code: null
-			},{
-				address: "Divisoria",
-				city_address: "Cagayan de Oro",
-				contact: "09263593778",
-				created_at: "2015-01-19T13:36:22.833Z",
-				email: "eebasadre20@gmail.com",
-				id: 4,
-				max_guest: 50,
-				min_guest: 20,
-				name: "VIP Hotel",
-				updated_at: "2015-01-19T13:36:22.833Z",
-				venue_code: null
-			},{
-				address: "Divisoria",
-				city_address: "Cagayan de Oro",
-				contact: "09263593778",
-				created_at: "2015-01-19T13:36:22.833Z",
-				email: "eebasadre20@gmail.com",
-				id: 4,
-				max_guest: 50,
-				min_guest: 20,
-				name: "Lux Hotel",
-				updated_at: "2015-01-19T13:36:22.833Z",
-				venue_code: null
-			},{
-				address: "Divisoria",
-				city_address: "Cagayan de Oro",
-				contact: "09263593778",
-				created_at: "2015-01-19T13:36:22.833Z",
-				email: "eebasadre20@gmail.com",
-				id: 4,
-				max_guest: 50,
-				min_guest: 20,
-				name: "Pearlmont Hotel",
-				updated_at: "2015-01-19T13:36:22.833Z",
-				venue_code: null
-			},{
-				address: "Divisoria",
-				city_address: "Cagayan de Oro",
-				contact: "09263593778",
-				created_at: "2015-01-19T13:36:22.833Z",
-				email: "eebasadre20@gmail.com",
-				id: 4,
-				max_guest: 50,
-				min_guest: 20,
-				name: "N Hotel",
-				updated_at: "2015-01-19T13:36:22.833Z",
-				venue_code: null
-			}];
+			} );
 
 			$scope.secondPageSelection = {
 					"exp": "", 
 					"city_address" : "", 
+					"est_guest": $scope.filters.est_guest,
 					"amenities" : []
 			};
 
-			$scope.bookVenue = function bookVenue( index ){
+			$scope.bookVenue = function bookVenue( index, id ){
 				$timeout( function(){
 					$rootScope.$broadcast( 'Venues', $scope.venues );
 				}, 100 );
@@ -278,7 +183,7 @@ VendorMine.controller( 'filterFormController',
 				$scope.secondPageSelection.amenities = $scope.initialize.amenities.map(function( element, index , array){
 					if(element.selected==true){
 						var indexAmenities = "";
-						return indexAmenities + index;
+						return indexAmenities + element.id;
 					}
 				}).filter(function (w, idx, arr) {
 					if(w==undefined){
@@ -288,13 +193,14 @@ VendorMine.controller( 'filterFormController',
 					}
 			            	
 			     });
-				console.log($scope.secondPageSelection);
-				postFilter.getPostFilter( $scope.secondPageSelection, function(error, data){
+				
+				postFilterAmenities.getPostFilterAmenities( $scope.secondPageSelection, function(error, data){
 					if(error){
-						console.log(error);
+						
 					}else{
 						$scope.venues = data;
-						console.log($scope.venues);
+						
+						
 						$scope.$apply();
 					}
 				} )

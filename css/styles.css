@@ -646,3 +646,26 @@ h2
 {
     padding: 0;
 }
+.datepicker-input span.input-group-btn {
+    position: relative; font-size: 0; white-space: nowrap; display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 35px;
+}
+
+.datepicker-input .form-control{
+    display: inline-block; width: auto; clear: none;
+    height: 42px;
+    padding: 0;
+    vertical-align: top;
+    width: 100%;
+}
+
+section.input.datepicker-input {
+    padding: 0;
+    position: relative;
+}
+
+section.input.datepicker-input > input {
+    border: none;
+}

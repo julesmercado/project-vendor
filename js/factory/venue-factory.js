@@ -23,7 +23,7 @@ VendorMine.factory('getExperience',
 		function factory( $http ){
 
 			return function getExperience( callback ){
-				$.get( "http://192.168.1.39:3000/vendormines/get_experience",
+				$.get( "http://192.168.1.35:3000/vendormines/get_experience",
 					function(data){
 						callback(data);
 					} );
@@ -39,7 +39,7 @@ VendorMine.factory('getSecondExperience',
 
 			return {
 				getSecondExperience: function ( callback ){
-					var promise = $.get("http://192.168.1.39:3000/vendormines/get_experience", 
+					var promise = $.get("http://192.168.1.35:3000/vendormines/get_experience", 
 							function( data ){
 								var experience = data.map(function (w) {
 						            return w.name;
@@ -59,7 +59,7 @@ VendorMine.factory('getAmenities',
 
 			return {
 				getAmenities: function ( callback ){
-					var promise = $.get("http://192.168.1.39:3000/vendormines/get_amenities", 
+					var promise = $.get("http://192.168.1.35:3000/vendormines/get_amenities", 
 							function( data ){
 								var amenities = data.map(function (w) {
 							        	return {name: w.name, selected: false};
@@ -81,11 +81,40 @@ VendorMine.service('postFilter',
 			return {
 				getPostFilter: function( dataFirst, callback ){
 					if(dataFirst){
-						var promise = $.post( "http://192.168.1.39:3000/vendormines/venues",
+						var promise = $.post( "http://192.168.1.35:3000/vendormines/venues",
 							{
 								"exp": dataFirst.exp, 
 								"city_address" : dataFirst.city_address, 
 								"est_guest" : dataFirst.est_guest
+							}
+						)
+						.success( function(data){
+							callback(null, data)
+						} )
+						.error( function(error){
+							callback(error);
+						} );
+						
+					}
+					return promise;
+				}
+			}
+		}
+	]);
+VendorMine.service('postFilterAmenities', 
+	[
+		'$http',
+		function service( $http ){
+
+			return {
+				getPostFilterAmenities: function( dataFirst, callback ){
+					if(dataFirst){
+						var promise = $.post( "http://192.168.1.35:3000/vendormines/venues",
+							{
+								"exp": dataFirst.exp, 
+								"city_address" : dataFirst.city_address, 
+								"est_guest"	: dataFirst.est_guest,
+								"amenities" : dataFirst.amenities
 							}
 						)
 						.success( function(data){
@@ -106,23 +135,21 @@ VendorMine.service('amenityAndFeatures',
 	[
 		'$http',
 		function service( $http ){
-			console.log("aw");
 			return {
-				getAmenityAndFeatures: function( id ){
+				getAmenityAndFeatures: function( id, callback ){
 					if(id){
 						var promise = $.ajax( {
-										url: "http://192.168.1.39:3000/vendormines/show",
+										url: "http://192.168.1.35:3000/vendormines/show",
 										type: "POST",
 										data: {
 											id: id
 										}
 										})
 						.success( function(data){
-							var amenityAndFeatures = data;
-							return amenityAndFeatures;
+							callback(null, data);
 						} )
 						.error( function(error){
-							return error;
+							callback(error);
 						} );
 						
 					}
@@ -138,7 +165,7 @@ VendorMine.service('bookVendorVenues',
 			return function bookVendorVenues( dataVendor ){
 					$.ajax( {
 						type: "POST",
-						url: "http://192.168.1.39:3000/vendormines/",
+						url: "http://192.168.1.35:3000/vendormines/",
 						data: dataVendor
 						})
 					.success( function(data){

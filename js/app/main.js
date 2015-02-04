@@ -1,6 +1,7 @@
-var VendorMine = angular.module( 'VendorMine', [ 'ngRoute' ] );
+var VendorMine = angular.module( 'VendorMine', [ 'ngRoute', 'ui.bootstrap' ] );
 VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', function ($httpProvider, $locationProvider, $routeProvider) {
-   	$routeProvider.
+  $locationProvider.html5Mode(true).hashPrefix('!');
+    $routeProvider.
         when("/",{ 
           templateUrl: "/partials/land-page.html"
         }).
@@ -28,7 +29,6 @@ VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', funct
         } ).
 
         otherwise( { redirectTo: "/" });
-	$locationProvider.html5Mode(true).hashPrefix('!');
 }]);
 
 VendorMine.run(['$rootScope', function($root) {
