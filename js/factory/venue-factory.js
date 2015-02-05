@@ -23,7 +23,7 @@ VendorMine.factory('getExperience',
 		function factory( $http ){
 
 			return function getExperience( callback ){
-				$.get( "http://demo-otter.herokuapp.com//vendormines/get_experience",
+				$.get( "http://demo-otter.herokuapp.com/vendormines/get_experience",
 					function(data){
 						callback(data);
 					} );
@@ -39,7 +39,7 @@ VendorMine.factory('getSecondExperience',
 
 			return {
 				getSecondExperience: function ( callback ){
-					var promise = $.get("http://demo-otter.herokuapp.com//vendormines/get_experience", 
+					var promise = $.get("http://demo-otter.herokuapp.com/vendormines/get_experience", 
 							function( data ){
 								var experience = data.map(function (w) {
 						            return w.name;
@@ -59,7 +59,7 @@ VendorMine.factory('getAmenities',
 
 			return {
 				getAmenities: function ( callback ){
-					var promise = $.get("http://demo-otter.herokuapp.com//vendormines/get_amenities", 
+					var promise = $.get("http://demo-otter.herokuapp.com/vendormines/get_amenities", 
 							function( data ){
 								var amenities = data.map(function (w) {
 							        	return {name: w.name, selected: false};
@@ -81,7 +81,7 @@ VendorMine.service('postFilter',
 			return {
 				getPostFilter: function( dataFirst, callback ){
 					if(dataFirst){
-						var promise = $.post( "http://demo-otter.herokuapp.com//vendormines/venues",
+						var promise = $.post( "http://demo-otter.herokuapp.com/vendormines/venues",
 							{
 								"exp": dataFirst.exp, 
 								"city_address" : dataFirst.city_address, 
@@ -109,7 +109,7 @@ VendorMine.service('postFilterAmenities',
 			return {
 				getPostFilterAmenities: function( dataFirst, callback ){
 					if(dataFirst){
-						var promise = $.post( "http://demo-otter.herokuapp.com//vendormines/venues",
+						var promise = $.post( "http://demo-otter.herokuapp.com/vendormines/venues",
 							{
 								"exp": dataFirst.exp, 
 								"city_address" : dataFirst.city_address, 
@@ -139,7 +139,7 @@ VendorMine.service('amenityAndFeatures',
 				getAmenityAndFeatures: function( id, callback ){
 					if(id){
 						var promise = $.ajax( {
-										url: "http://demo-otter.herokuapp.com//vendormines/show",
+										url: "http://demo-otter.herokuapp.com/vendormines/show",
 										type: "POST",
 										data: {
 											id: id
@@ -165,7 +165,7 @@ VendorMine.service('bookVendorVenues',
 			return function bookVendorVenues( dataVendor ){
 					$.ajax( {
 						type: "POST",
-						url: "http://demo-otter.herokuapp.com//vendormines/",
+						url: "http://demo-otter.herokuapp.com/vendormines/",
 						data: dataVendor
 						})
 					.success( function(data){
