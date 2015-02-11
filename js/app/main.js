@@ -29,7 +29,7 @@ VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', 'pagi
           templateUrl: "/partials/book.html"
         } ).
 
-        otherwise( { redirectTo: "/filter" });
+        otherwise( { redirectTo: "/" });
 }]);
 
 VendorMine.run(['$rootScope', function($root) {
