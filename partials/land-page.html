@@ -1,13 +1,13 @@
 <section header-directive></section>
 <section class="lead-page">
-  <section class="content" ng-controller="landPageController">
+  <section class="content" land-page-directive>
     <section class="container">
       <form action="" class="form" name="bookingFormFirstPage" no-validate>
           <section class="form book-venue">
             <h5 class="form-headline">Find your Dream Location</h5>
-            <section class="row"><section class="input-group col-lg-12">
+            <section class="row"><section class="input-group col-lg-12" experience-directive>
               <select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, firstPageSelection.exp )" ng-model="firstPageSelection.exp" ng-options="selection for selection in initialize.experience">
-          </select>
+              </select>
 
 
             </section><section class="input-group col-lg-6">

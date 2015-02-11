@@ -48,31 +48,7 @@ VendorMine.controller('landPageController',
 		'$location',
 		'getExperience',
 		function landPageController( $scope, http, postFilter, $rootScope, $location, getExperience ) {
-			$scope.initialize = {
-					tab: 1,
-					experience: ""
-			};
-			if($scope.bookingFormFirstPage==undefined){
-				getExperience( function(data){
-					$scope.initialize.experience = data.map(function (w) {
-					    return w.name;
-					});
-				} )
-				
-			}
 			
-			$scope.firstPageSelection = {
-					"exp": "", 
-					"city_address" : "", 
-					"est_guest" : ""
-			};
-			
-			$scope.change = function change( id, selected ){
-			};
-			
-			$scope.setFirst= function( obj ){
-				$location.path( "filter/" + obj.exp + "/location/" + obj.location + "/guest/" + obj.guest );
-			};
 		}
 		    
 	]);

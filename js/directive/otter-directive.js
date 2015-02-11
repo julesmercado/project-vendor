@@ -13,17 +13,58 @@ VendorMine.directive( 'headerDirective',
 			}
 		}
 	] )
-VendorMine.directive( 'landPageDirective', 
+VendorMine.directive( 'experienceDirective', 
 	[
 		function directive(){
 			return {
 				
 				"restrict": "A",
-				"controller": "landPageController",
-				"templateUrl": "js/template/land-page-template.html",
+				"transclude": true,
+				"template": "<div ng-transclude></div>",
 				"link": function link( scope, element, attribute ){
 					
 					
+				}
+			}
+		}
+	] )
+VendorMine.directive( 'landPageDirective', 
+	[
+		'$location',
+		'getExperience',
+		'experienceService',
+		'$timeout',
+		function directive( $location, getExperience, experienceService, timeout ){
+			return {
+				
+				"restrict": "A",
+				"transclude": true,
+				"template": "<div ng-transclude></div>",
+				"link": {
+					pre: function link( $scope, element, attribute ){
+						$scope.initialize = {
+								tab: 1,
+								experience: ""
+						};
+						experienceService.setExperienced();
+						
+						timeout( function(){
+							$scope.initialize.experience = experienceService.getExperienced();
+						}, 1000 );
+						
+						$scope.firstPageSelection = {
+								"exp": "", 
+								"city_address" : "", 
+								"est_guest" : ""
+						};
+						
+						$scope.change = function change( id, selected ){
+						};
+						
+						$scope.setFirst= function( obj ){
+							$location.path( "filter/" + obj.exp + "/location/" + obj.location + "/guest/" + obj.guest );
+						};
+					}
 				}
 			}
 		}
