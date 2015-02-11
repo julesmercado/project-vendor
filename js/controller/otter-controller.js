@@ -90,9 +90,8 @@ VendorMine.controller( 'bookController',
 			$scope.$on( 'Venues', function(event, data){	
 				$rootScope.venuesNow = data[$route.current.params.id];
 				$scope.venuesNow = $rootScope.venuesNow;
-			} );
 
-			$scope.getDetails = function(){
+				$scope.getDetails = function getDetails(){
 				amenityAndFeatures.getAmenityAndFeatures($scope.venuesNow.id, function(error, data){
 					if(error){
 						console.error(error)
@@ -109,6 +108,9 @@ VendorMine.controller( 'bookController',
 				});
 				
 			};
+			} );
+
+			
 			$scope.tabBook = 1;
 
 			$scope.setTabBook = function setTabBook(tab){
