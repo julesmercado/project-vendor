@@ -17,3 +17,21 @@ VendorMine.service('tabService',
 			
 		}
 	]);
+VendorMine.service('eventService', 
+	[
+		function service(  ){
+			
+			var Venue = {};
+
+				return {
+					getVenue: function getTab( ){
+						return Venue;
+					},
+					setVenue: function setEvent( venue ){
+						Venue = venue;
+					},
+					
+				}
+			
+		}
+	]);

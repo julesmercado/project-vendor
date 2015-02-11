@@ -59,6 +59,53 @@ VendorMine.directive( 'venueDirective',
 			}
 		}
 	] )
+VendorMine.directive( 'bookEvent', 
+	[
+	'amenityAndFeatures',
+	'$rootScope',
+	'$route',
+	'eventService',
+	'$timeout',
+		function directive( amenityAndFeatures, $rootScope, $route, eventService, timeout ){
+			return {
+				
+				"restrict": "A",
+				"transclude": true,
+				"template": "<div ng-transclude></div>",
+				"link": function link( scope, element, attribute ){
+					var venuesNow = {};
+
+					console.log("aw");
+					venuesNow = eventService.getVenue();
+
+					scope.getDetails = function(){
+						amenityAndFeatures.getAmenityAndFeatures(venuesNow[$route.current.params.id].id, function(error, data){
+							if(error){
+								console.error(error)
+							}else{
+								timeout(function() {
+									scope.initialize = {
+										amenities: data.amenities,
+										rooms: data.rooms
+									};
+									$rootScope.$broadcast('amenities', scope.initialize, venuesNow[$route.current.params.id] );
+								}, 0);
+								
+							}
+						});
+						
+					};
+					scope.tabBook = 1;
+
+					scope.setTabBook = function setTabBook(tab){
+						scope.tabBook = tab;
+						//
+					};
+					
+				}
+			}
+		}
+	] )
 VendorMine.directive( 'amenitiesDetails', 
 	[
 		'bookVendorVenues',
@@ -83,7 +130,7 @@ VendorMine.directive( 'amenitiesDetails',
 					$scope.$on('amenities', function(event, data, venue){
 						$scope.amenities = data;
 						$scope.venue = venue;
-						
+						console.log(venue);
 						
 						$scope.formFields.venue_id = $scope.venue.id;
 						$scope.amenityAndFeatures = {

@@ -86,36 +86,6 @@ VendorMine.controller( 'bookController',
 		'amenityAndFeatures',
 		'$timeout',
 		function bookController( $scope, $route, $rootScope, bookVendorVenues, amenityAndFeatures, timeout ){  
-			var venuesNow = {};
-			$scope.$on( 'Venues', function(event, data){	
-				$rootScope.venuesNow = data[$route.current.params.id];
-				venuesNow = $rootScope.venuesNow;
-			} );
-
-			$scope.getDetails = function(){
-				amenityAndFeatures.getAmenityAndFeatures(venuesNow.id, function(error, data){
-					if(error){
-						console.error(error)
-					}else{
-						timeout(function() {
-							$scope.initialize = {
-								amenities: data.amenities,
-								rooms: data.rooms
-							};
-							$rootScope.$broadcast('amenities', $scope.initialize, $rootScope.venuesNow );
-						}, 0);
-						
-					}
-				});
-				
-			};
-			$scope.tabBook = 1;
-
-			$scope.setTabBook = function setTabBook(tab){
-				$scope.tabBook = tab;
-				//
-			};
-			
 		}
 	] );
 
@@ -135,7 +105,8 @@ VendorMine.controller( 'filterFormController',
 		'getSecondExperienceResolver',
 		'postFilterAmenities',
 		'amenityAndFeatures',
-		function filterFormController( $scope, $route, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures){
+		'eventService',
+		function filterFormController( $scope, $route, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures, eventService){
 			$scope.initialize = {
 					experience: getSecondExperienceResolver.map(function (w) {
 			            return w.name;
@@ -170,12 +141,10 @@ VendorMine.controller( 'filterFormController',
 			};
 
 			$scope.bookVenue = function bookVenue( index, id ){
-				$timeout( function(){
-					$rootScope.$broadcast( 'Venues', $scope.venues );
-				}, 100 );
+				eventService.setVenue( $scope.venues );
 				$location.path( "view/" + index  );
 			};
-			
+
 			$scope.change = function change( id, selected ){
 				
 			};
