@@ -86,13 +86,14 @@ VendorMine.controller( 'bookController',
 		'amenityAndFeatures',
 		'$timeout',
 		function bookController( $scope, $route, $rootScope, bookVendorVenues, amenityAndFeatures, timeout ){  
-
+			var venuesNow = {};
 			$scope.$on( 'Venues', function(event, data){	
 				$rootScope.venuesNow = data[$route.current.params.id];
-				$scope.venuesNow = $rootScope.venuesNow;
+				venuesNow = $rootScope.venuesNow;
+			} );
 
-				$scope.getDetails = function getDetails(){
-				amenityAndFeatures.getAmenityAndFeatures($scope.venuesNow.id, function(error, data){
+			$scope.getDetails = function(){
+				amenityAndFeatures.getAmenityAndFeatures(venuesNow.id, function(error, data){
 					if(error){
 						console.error(error)
 					}else{
@@ -108,9 +109,6 @@ VendorMine.controller( 'bookController',
 				});
 				
 			};
-			} );
-
-			
 			$scope.tabBook = 1;
 
 			$scope.setTabBook = function setTabBook(tab){
