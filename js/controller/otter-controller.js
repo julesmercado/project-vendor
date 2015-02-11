@@ -89,12 +89,10 @@ VendorMine.controller( 'bookController',
 
 			$scope.$on( 'Venues', function(event, data){	
 				$rootScope.venuesNow = data[$route.current.params.id];
-				console.log(data);
-				console.log($route.current.params);
 			} );
 
 			$scope.getDetails = function(){
-				amenityAndFeatures.getAmenityAndFeatures($rootScope.venuesNow.id, function(error, data){
+				amenityAndFeatures.getAmenityAndFeatures($route.current.params.id, function(error, data){
 					if(error){
 						console.error(error)
 					}else{
