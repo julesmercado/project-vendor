@@ -50,7 +50,7 @@ VendorMine.directive( 'landPageDirective',
 						
 						timeout( function(){
 							$scope.initialize.experience = experienceService.getExperienced();
-						}, 1000 );
+						}, 500 );
 						
 						$scope.firstPageSelection = {
 								"exp": "", 
