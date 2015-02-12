@@ -54,8 +54,9 @@ VendorMine.service('experienceService',
 						experience = experienced;
 						console.log(experience);
 					});
+					
 				}
 			}
-			
+			location.reload();
 		}
 	]);

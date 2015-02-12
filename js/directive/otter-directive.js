@@ -64,6 +64,7 @@ VendorMine.directive( 'landPageDirective',
 						$scope.setFirst= function( obj ){
 							$location.path( "filter/" + obj.exp + "/location/" + obj.location + "/guest/" + obj.guest );
 						};
+						
 					}
 				}
 			}
