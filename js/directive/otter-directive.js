@@ -16,7 +16,8 @@ VendorMine.directive( 'headerDirective',
 VendorMine.directive( 'experienceDirective', 
 	[
 		'experienceService',
-		function directive( experienceService ){
+		'$timeout',
+		function directive( experienceService, timeout ){
 			return {
 				
 				"restrict": "A",
@@ -26,6 +27,12 @@ VendorMine.directive( 'experienceDirective',
 					pre: function link( scope, element, attribute ){
 						experienceService.setExperienced(scope);
 					
+					},
+					post: function link( scope, element, attribute ){
+						timeout( function(){
+							scope.initialize.experience = experienceService.getExperienced();
+						}, 500 );
+						
 					}
 				}
 				
@@ -52,9 +59,9 @@ VendorMine.directive( 'landPageDirective',
 						};
 						
 						
-						timeout( function(){
-							$scope.initialize.experience = experienceService.getExperienced();
-						}, 500 );
+						
+							
+						
 						console.log($scope.initialize.experience);
 						$scope.firstPageSelection = {
 								"exp": "", 
