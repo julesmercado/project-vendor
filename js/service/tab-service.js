@@ -38,25 +38,29 @@ VendorMine.service('eventService',
 VendorMine.service('experienceService', 
 	[
 	'getExperience',
-		function service( getExperience ){
+	'safeApply',
+		function service( getExperience, safeApply ){
 			var experience = "";
 
 			return {
 				getExperienced: function getExperienced( ){
 					return experience;
 				},
-				setExperienced: function setExperienced(){
+				setExperienced: function setExperienced(scope){
 					console.log("first");
 					getExperience(function(data){
-						experienced = data.map(function (w) {
+						scope.experienced = data.map(function (w) {
 						    return w.name;
 						});
-						experience = experienced;
+						experience = scope.experienced;
+						scope.$watch('experienced', function() {
+							console.log("changed");
+						       safeApply(scope);
+						});
 						console.log(experience);
 					});
-					
+
 				}
 			}
-			location.reload();
 		}
 	]);
