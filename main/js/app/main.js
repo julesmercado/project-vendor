@@ -2,7 +2,7 @@ var VendorMine = angular.module( 'VendorMine', [ 'ngRoute', 'ui.router', 'ui.boo
 VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', 'paginationTemplateProvider', '$stateProvider', '$urlRouterProvider', function ($httpProvider, $locationProvider, $routeProvider, paginationTemplateProvider, $stateProvider, $urlRouterProvider) {
   paginationTemplateProvider.setPath('/lib/dirPagination.tpl.html');
 
-  $urlRouterProvider.otherwise("/index")
+  $urlRouterProvider.otherwise("/")
     $stateProvider.
         state("index",{ 
           url: '/index',

@@ -1,0 +1,19 @@
+<div class="login jumbotron center-block">
+  <h1>Login</h1>
+  <form role="form">
+  <div class="form-group">
+    <label for="username">Experience</label>
+    <input type="text" class="form-control" ng-model="user.exp" id="username" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <label for="password">Location</label>
+    <input type="text" class="form-control" id="password" ng-model="user.city_address" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="password">Guest</label>
+    <input type="text" class="form-control" id="password" ng-model="user.est_guest" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default" ng-click="login()">Submit</button>
+</form>
+<a ui-sref="signup()">Click here to Signup</a>
+</div>

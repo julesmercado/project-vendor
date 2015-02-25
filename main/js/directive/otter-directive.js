@@ -5,7 +5,7 @@ VendorMine.directive( 'headerDirective',
 				
 				"restrict": "A",
 				"controller": "headerController",
-				"templateUrl": "js/template/tab.html",
+				"templateUrl": "main/js/template/tab.html",
 				"link": function link( scope, element, attribute ){
 					
 					
