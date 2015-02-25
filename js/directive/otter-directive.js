@@ -45,7 +45,8 @@ VendorMine.directive( 'landPageDirective',
 		'getExperience',
 		'experienceService',
 		'$timeout',
-		function directive( $location, getExperience, experienceService, timeout ){
+		'$state',
+		function directive( $location, getExperience, experienceService, timeout, $state ){
 			return {
 				
 				"restrict": "A",
@@ -73,7 +74,7 @@ VendorMine.directive( 'landPageDirective',
 						};
 						
 						$scope.setFirst= function( obj ){
-							$location.path( "filter/" + obj.exp + "/location/" + obj.location + "/guest/" + obj.guest );
+							$state.go('filter', {experience: obj.exp});
 						};
 
 					}
@@ -116,10 +117,10 @@ VendorMine.directive( 'bookEvent',
 	[
 	'amenityAndFeatures',
 	'$rootScope',
-	'$route',
+	'$stateParams',
 	'eventService',
 	'$timeout',
-		function directive( amenityAndFeatures, $rootScope, $route, eventService, timeout ){
+		function directive( amenityAndFeatures, $rootScope, $stateParams, eventService, timeout ){
 			return {
 				
 				"restrict": "A",
@@ -128,11 +129,12 @@ VendorMine.directive( 'bookEvent',
 				"link": function link( scope, element, attribute ){
 					var venuesNow = {};
 
-					console.log("aw");
 					venuesNow = eventService.getVenue();
-
+					console.log(venuesNow);
 					scope.getDetails = function(){
-						amenityAndFeatures.getAmenityAndFeatures(venuesNow[$route.current.params.id].id, function(error, data){
+						$('#quick-view-details').modal();
+						timeout( function(){
+						amenityAndFeatures.getAmenityAndFeatures(venuesNow.id, function(error, data){
 							if(error){
 								console.error(error)
 							}else{
@@ -141,11 +143,13 @@ VendorMine.directive( 'bookEvent',
 										amenities: data.amenities,
 										rooms: data.rooms
 									};
-									$rootScope.$broadcast('amenities', scope.initialize, venuesNow[$route.current.params.id] );
+									$rootScope.$broadcast('amenities', scope.initialize, venuesNow );
 								}, 0);
 								
 							}
 						});
+						
+						}, 2000);
 						
 					};
 					scope.tabBook = 1;

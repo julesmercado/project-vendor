@@ -1,17 +1,18 @@
-var VendorMine = angular.module( 'VendorMine', [ 'ngRoute', 'ui.bootstrap', 'angularUtils.directives.dirPagination' ] );
-VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', 'paginationTemplateProvider', function ($httpProvider, $locationProvider, $routeProvider, paginationTemplateProvider) {
+var VendorMine = angular.module( 'VendorMine', [ 'ngRoute', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination' ] );
+VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', 'paginationTemplateProvider', '$stateProvider', '$urlRouterProvider', function ($httpProvider, $locationProvider, $routeProvider, paginationTemplateProvider, $stateProvider, $urlRouterProvider) {
   paginationTemplateProvider.setPath('/lib/dirPagination.tpl.html');
-  $locationProvider.html5Mode(true).hashPrefix('!');
-    $routeProvider.
-        when("/",{ 
+
+  $urlRouterProvider.otherwise("/index")
+    $stateProvider.
+        state("index",{ 
+          url: '/index',
           templateUrl: "/partials/land-page.html"
         }).
 
-        when("/filter/:exp/location/:location/guest/:guest",{ 
-          templateUrl: function(params, path, search){
-        	   return '/partials/filter-page.html'; 
-          },
+        state("filter",{ 
+          url: "/filter?experience&location&guest",
           controller: "filterFormController",
+          templateUrl: '/partials/filter-page.html',
           resolve: {
               postFilterResolver: function( postFilter ){
                 return  postFilter;
@@ -25,14 +26,13 @@ VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', 'pagi
           } 
         }).
 
-        when( "/view/:id", {
+        state( "view", {
+          url: "/view/:id",
           templateUrl: "/partials/book.html"
-        } ).
-
-        otherwise({redirectTo:'/'});
+        } )
 }]);
 
-VendorMine.run(['$rootScope', function($root) {
+/*VendorMine.run(['$rootScope', function($root) {
   $root.$on('$routeChangeStart', function(e, curr, prev) { 
     if (curr.$$route && curr.$$route.resolve) {
       // Show a loading message until promises are not resolved
@@ -43,4 +43,4 @@ VendorMine.run(['$rootScope', function($root) {
     // Hide loading message
     $root.loadingView = false;
   });
-}]);
+}]);*/

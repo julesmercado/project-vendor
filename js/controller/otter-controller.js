@@ -69,7 +69,8 @@ VendorMine.controller( 'bookController',
 VendorMine.controller( 'filterFormController', 
 	[
 		'$scope',
-		'$route',
+		'$stateParams',
+		'$state',
 		'$timeout',
 		'$location',
 		'$rootScope',
@@ -82,7 +83,7 @@ VendorMine.controller( 'filterFormController',
 		'postFilterAmenities',
 		'amenityAndFeatures',
 		'eventService',
-		function filterFormController( $scope, $route, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures, eventService){
+		function filterFormController( $scope, $stateParams, $state, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures, eventService){
 			$scope.initialize = {
 					experience: getSecondExperienceResolver.map(function (w) {
 			            return w.name;
@@ -93,11 +94,10 @@ VendorMine.controller( 'filterFormController',
 			};
 			
 			$scope.filters = {
-				"exp": $route.current.params.exp,
-				"city_address": $route.current.params.location,
-				"est_guest": $route.current.params.guest
+				"exp": $stateParams.experience,
+				"city_address": $stateParams.location,
+				"est_guest": $stateParams.guest
 			};	
-			
 			postFilter.getPostFilter( $scope.filters, function(error, data){
 				if(error){
 					
@@ -117,8 +117,8 @@ VendorMine.controller( 'filterFormController',
 			};
 
 			$scope.bookVenue = function bookVenue( index, id ){
-				eventService.setVenue( $scope.venues );
-				$location.path( "view/" + index  );
+				eventService.setVenue( $scope.venues[index] );
+				$state.go( 'view', {id: id} );
 			};
 
 			$scope.change = function change( id, selected ){
