@@ -74,7 +74,8 @@ VendorMine.directive( 'landPageDirective',
 						};
 						
 						$scope.setFirst= function( obj ){
-							$state.go('filter', {experience: obj.exp});
+							alert(obj);
+							//$state.go('filter', {experience: obj.exp});
 						};
 
 					}
@@ -130,7 +131,6 @@ VendorMine.directive( 'bookEvent',
 					var venuesNow = {};
 
 					venuesNow = eventService.getVenue();
-					console.log(venuesNow);
 					scope.getDetails = function(){
 						$('#quick-view-details').modal();
 						timeout( function(){
@@ -158,6 +158,10 @@ VendorMine.directive( 'bookEvent',
 						scope.tabBook = tab;
 						//
 					};
+					scope.setAddons = function setAddons(tab){
+						scope.thirdPartyAddons = tab;
+						//
+					};
 					
 				}
 			}
@@ -167,7 +171,8 @@ VendorMine.directive( 'amenitiesDetails',
 	[
 		'bookVendorVenues',
 		'$filter',
-		function directive(bookVendorVenues, $filter){
+		'flash',
+		function directive(bookVendorVenues, $filter, flash){
 			return {
 				
 				"restrict": "A",
@@ -179,11 +184,22 @@ VendorMine.directive( 'amenitiesDetails',
 						second: false,
 						third: false
 					};
+					$scope.addons = {
+						grabCar: false,
+						skyEye: false
+					}
 					$scope.dates = {
-						original_date: "",
-						second_date: "",
-						third_date: ""
+						original_date: ""
 					};
+					 $scope.$watch('dates.original_date', function( newValue, oldValue ) {
+					 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
+					 		var dateOriginal = $filter('date')($scope.dates.original_date, 'yyyy-MM-dd');
+					 		console.log( dateOriginal );
+					 		flash('error', 'Something went wrong…');
+					 	}
+					       console.log( typeof newValue);
+					       console.log(oldValue);
+					 });
 					$scope.$on('amenities', function(event, data, venue){
 						$scope.amenities = data;
 						$scope.venue = venue;
@@ -206,8 +222,6 @@ VendorMine.directive( 'amenitiesDetails',
 						contact_no: "",
 						expected_guest: "",
 						original_date: "",
-						second_date: "",
-						third_date: "",
 						amenities: [],
 						rooms: []
 					};
@@ -296,8 +310,6 @@ VendorMine.directive( 'amenitiesDetails',
 					            	
 					     });
 						$scope.formFields.original_date = $filter('date')($scope.dates.original_date, 'yyyy-MM-dd');
-						$scope.formFields.second_date	= $filter('date')($scope.dates.second_date, 'yyyy-MM-dd');
-						$scope.formFields.third_date	= $filter('date')($scope.dates.third_date, 'yyyy-MM-dd');
 						bookVendorVenues( $scope.formFields );
 						
 						$.modal.close();

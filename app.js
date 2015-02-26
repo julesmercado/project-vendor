@@ -1,6 +1,7 @@
 angular.module( 'otter', [
   'VendorMine',
   'login',
+  'member',
   'angular-jwt'
 ])
 .config( function myAppConfig ($urlRouterProvider, jwtInterceptorProvider, $httpProvider) {

@@ -1,4 +1,4 @@
-var VendorMine = angular.module( 'VendorMine', [ 'ngRoute', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination' ] );
+var VendorMine = angular.module( 'VendorMine', [ 'ngRoute', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'flash' ] );
 VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', 'paginationTemplateProvider', '$stateProvider', '$urlRouterProvider', function ($httpProvider, $locationProvider, $routeProvider, paginationTemplateProvider, $stateProvider, $urlRouterProvider) {
   paginationTemplateProvider.setPath('/lib/dirPagination.tpl.html');
 

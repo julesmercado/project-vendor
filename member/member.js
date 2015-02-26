@@ -1,12 +1,12 @@
-angular.module( 'login', [
+angular.module( 'member', [
   'ui.router',
   'angular-storage'
 ])
 .config(function($stateProvider) {
-  $stateProvider.state('login', {
-    url: '/',
+  $stateProvider.state('member', {
+    url: '/member',
     controller: 'LoginCtrl',
-    templateUrl: 'login/login.html'
+    templateUrl: 'member/member.html'
   });
 })
 .controller( 'LoginCtrl', function LoginController( $scope, $http, store, $state) {
@@ -20,8 +20,7 @@ angular.module( 'login', [
       $scope.user
     )
     .success( function( response ) {
-      console.log(response);
-      store.set('jwt', response.city_address);/*
+      store.set('jwt', response.data);/*
       $state.go('index');*/
     })
     .error( function( error ) {
