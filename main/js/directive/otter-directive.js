@@ -1,13 +1,19 @@
 VendorMine.directive( 'headerDirective', 
 	[
-		function directive(){
+
+		'$stateParams',
+		function directive( $stateParams ){
 			return {
 				
 				"restrict": "A",
 				"controller": "headerController",
 				"templateUrl": "main/js/template/tab.html",
 				"link": function link( scope, element, attribute ){
-					
+					scope.member = {
+							memberExperience: $stateParams.memberExperience,
+							memberLocation: $stateParams.memberLocation,
+							memberGuest: $stateParams.memberGuest
+						};
 					
 				}
 			}
@@ -46,7 +52,8 @@ VendorMine.directive( 'landPageDirective',
 		'experienceService',
 		'$timeout',
 		'$state',
-		function directive( $location, getExperience, experienceService, timeout, $state ){
+		'$stateParams',
+		function directive( $location, getExperience, experienceService, timeout, $state, $stateParams ){
 			return {
 				
 				"restrict": "A",
@@ -58,7 +65,11 @@ VendorMine.directive( 'landPageDirective',
 								tab: 1,
 								experience: ""
 						};
-						
+						$scope.member = {
+							memberExperience: $stateParams.memberExperience,
+							memberLocation: $stateParams.memberLocation,
+							memberGuest: $stateParams.memberGuest,
+						};
 						
 						
 							
@@ -75,7 +86,7 @@ VendorMine.directive( 'landPageDirective',
 						
 						$scope.setFirst= function( obj ){
 							alert(obj);
-							//$state.go('filter', {experience: obj.exp});
+							$state.go('filter', {experience: obj.exp});
 						};
 
 					}

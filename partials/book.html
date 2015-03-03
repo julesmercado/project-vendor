@@ -95,21 +95,22 @@
                 <h3 class="headline">Sky Eye</h3>
               </section> 
           </section> 
-            
-          </section>
         <section ng-show="addons.grabCar">
           <input type="text" ng-model="formFields.grabCar" placeholder="Grab Car ">
         </section>
         <section ng-show="addons.skyEye">
           <input type="text" ng-model="formFields.skyEye" placeholder="Sky Eye">
-        </section>
+        </section>  
+    </section>
+        
     </section>
 
     <section class="payment-method" ng-show="tabBook==4">
         <section class="step-container"><section class="step">4</section><h3 class="headline">
           Payment Method
         </h3></section>
-
+        
+          <!-- {{formFields | json}} -->
         <p>See instruction on how to pay after clicking the "Book Venue" button</p>
         <button type="submit" class="btn btn-proceed" ng-click="bookVendor()">Book Venue</button>
     </section>

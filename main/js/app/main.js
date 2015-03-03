@@ -1,35 +1,57 @@
-var VendorMine = angular.module( 'VendorMine', [ 'ngRoute', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'flash' ] );
-VendorMine.config(['$httpProvider', '$locationProvider', '$routeProvider', 'paginationTemplateProvider', '$stateProvider', '$urlRouterProvider', function ($httpProvider, $locationProvider, $routeProvider, paginationTemplateProvider, $stateProvider, $urlRouterProvider) {
-  paginationTemplateProvider.setPath('/lib/dirPagination.tpl.html');
+var VendorMine = angular.module( 'VendorMine', [ 
+  'ngRoute', 
+  'ui.router', 
+  'ui.bootstrap', 
+  'angularUtils.directives.dirPagination', 
+  'flash',
+  'angular-storage',
+  'angular-jwt' 
+] );
+VendorMine.config([
+  '$httpProvider', 
+  '$locationProvider', 
+  '$routeProvider', 
+  'paginationTemplateProvider', 
+  '$stateProvider', 
+  '$urlRouterProvider', 
+  'jwtInterceptorProvider',
+    function ($httpProvider, $locationProvider, $routeProvider, paginationTemplateProvider, $stateProvider, $urlRouterProvider, jwtInterceptorProvider) {
+      paginationTemplateProvider.setPath('/lib/dirPagination.tpl.html');
 
-  $urlRouterProvider.otherwise("/")
-    $stateProvider.
-        state("index",{ 
-          url: '/index',
-          templateUrl: "/partials/land-page.html"
-        }).
+      jwtInterceptorProvider.tokenGetter = function(store) {
+        return store.get('jwt');
+      }
 
-        state("filter",{ 
-          url: "/filter?experience&location&guest",
-          controller: "filterFormController",
-          templateUrl: '/partials/filter-page.html',
-          resolve: {
-              postFilterResolver: function( postFilter ){
-                return  postFilter;
-              },
-              getAmenitiesResolver: function( getAmenities ){
-                return getAmenities.getAmenities();
-              },
-              getSecondExperienceResolver: function( getSecondExperience ){
-                return getSecondExperience.getSecondExperience();
-              }
-          } 
-        }).
+      $httpProvider.interceptors.push('jwtInterceptor');
 
-        state( "view", {
-          url: "/view/:id",
-          templateUrl: "/partials/book.html"
-        } )
+      $urlRouterProvider.otherwise("/")
+        $stateProvider.
+            state("index",{ 
+              url: '/index',
+              templateUrl: "/partials/land-page.html"
+            }).
+
+            state("filter",{ 
+              url: "/filter?experience&location&guest",
+              controller: "filterFormController",
+              templateUrl: '/partials/filter-page.html',
+              resolve: {
+                  postFilterResolver: function( postFilter ){
+                    return  postFilter;
+                  },
+                  getAmenitiesResolver: function( getAmenities ){
+                    return getAmenities.getAmenities();
+                  },
+                  getSecondExperienceResolver: function( getSecondExperience ){
+                    return getSecondExperience.getSecondExperience();
+                  }
+              } 
+            }).
+
+            state( "view", {
+              url: "/view/:id",
+              templateUrl: "/partials/book.html"
+            } )
 }]);
 
 /*VendorMine.run(['$rootScope', function($root) {
