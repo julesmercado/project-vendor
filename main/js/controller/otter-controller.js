@@ -126,6 +126,7 @@ VendorMine.controller( 'filterFormController',
 
 			$scope.bookVenue = function bookVenue( index, id ){
 				Authentication.setView();
+				console.log($scope.venues[index]);
 				eventService.setVenue( $scope.venues[index] );
 				$state.go( 'view', {id: id} );
 			};

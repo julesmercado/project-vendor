@@ -102,18 +102,31 @@
           <input type="text" ng-model="formFields.skyEye" placeholder="Sky Eye">
         </section>  
     </section>
-        
-    </section>
-
     <section class="payment-method" ng-show="tabBook==4">
         <section class="step-container"><section class="step">4</section><h3 class="headline">
           Payment Method
         </h3></section>
-        
+          <table>
+            <tr>
+              <td>Venue Name</td>
+              <td>Address</td>
+              <td>Contacts</td>
+              <td>Email</td>
+            </tr>
+            <tr>
+              <td>{{venue.name}}</td>
+              <td>{{venue.city_address}}</td>
+              <td>{{venue.contact}}</td>
+              <td>{{venue.email}}</td>
+            </tr>
+          </table>
           <!-- {{formFields | json}} -->
         <p>See instruction on how to pay after clicking the "Book Venue" button</p>
         <button type="submit" class="btn btn-proceed" ng-click="bookVendor()">Book Venue</button>
+    </section>    
     </section>
+
+    
 </section>
 
       

@@ -2,6 +2,7 @@ angular.module( 'otter', [
   'VendorMine',
   'login',
   'member',
+  'verify',
   'angular-storage',
   'angular-jwt'
 ])

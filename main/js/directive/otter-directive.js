@@ -146,8 +146,8 @@ VendorMine.directive( 'bookEvent',
 			          $state.go("index")
 			        }
 					var venuesNow = {};
-
 					venuesNow = eventService.getVenue();
+					scope.venuesNow = venuesNow;
 					scope.getDetails = function(){
 						$('#quick-view-details').modal();
 						timeout( function(){

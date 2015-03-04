@@ -25,9 +25,11 @@ VendorMine.service('eventService',
 
 				return {
 					getVenue: function getTab( ){
+						console.log("Venue is set");
 						return Venue;
 					},
 					setVenue: function setEvent( venue ){
+						console.log("venue");
 						Venue = venue;
 					}
 					

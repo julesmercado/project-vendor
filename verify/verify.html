@@ -1,0 +1,15 @@
+<div class="login jumbotron center-block">
+  <h1>Verify Payment</h1>
+  <form role="form">
+  <div class="form-group">
+    <label for="username">Reference Number</label>
+    <input type="text" class="form-control" ng-model="user.exp" id="username" placeholder="Input your 8 digit Reference number">
+  </div>
+  <div class="form-group">
+    <label for="password">Date settled</label>
+    <input type="text" class="form-control" id="password" ng-model="user.city_address" placeholder="I settled my bill last">
+  </div>
+  <button type="submit" class="btn btn-default" ng-click="verify()">Submit</button>
+</form>
+<a ui-sref="signup()">Click here to Signup</a>
+</div>
