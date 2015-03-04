@@ -9,24 +9,20 @@ angular.module( 'member', [
     templateUrl: 'member/member.html'
   });
 })
-.controller( 'LoginMemberCtrl', function LoginController( $scope, $http, store, $state) {
+.controller( 'LoginMemberCtrl', function LoginController( $scope, $http, store, $state, Authentication ) {
 
+  if(Authentication.memberExists()){
+    $state.go("index")
+  }
+  if(!Authentication.exists()){
+    $state.go("index")
+  }
+  console.log("membersssssssss");
   $scope.user = {};
 
   $scope.loginMember = function() {
     console.log($scope.user);
-    $.post( 
-      "https://demo-otter.herokuapp.com/vendormines/venues", 
-      $scope.user
-    )
-    .success( function( response ) {
-      console.log("member");
-      store.set('jwt', response.data);
-      $state.go('index');
-    })
-    .error( function( error ) {
-      alert( error.data );
-    });
+    Authentication.requestMember( $scope.user );  
   }
 
 });

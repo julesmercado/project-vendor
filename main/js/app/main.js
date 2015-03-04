@@ -28,7 +28,8 @@ VendorMine.config([
         $stateProvider.
             state("index",{ 
               url: '/index',
-              templateUrl: "/partials/land-page.html"
+              templateUrl: "/partials/land-page.html",
+              controller: 'landPageController'
             }).
 
             state("filter",{ 
@@ -52,6 +53,7 @@ VendorMine.config([
               url: "/view/:id",
               templateUrl: "/partials/book.html"
             } )
+
 }]);
 
 /*VendorMine.run(['$rootScope', function($root) {

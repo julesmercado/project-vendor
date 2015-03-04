@@ -1,8 +1,12 @@
-VendorMine.controller( 'myController', 
+VendorMine.controller( 'viewController', 
 	[
 		'$scope',
-		function headerController( $scope ){
-			
+		'state',
+		'Authentication',
+		function headerController( $scope, state, Authentication ){
+			if(!Authentication.exists()){
+				state.go("login")
+			}
 		}
 	] );
 VendorMine.controller( 'headerController', 
@@ -46,9 +50,12 @@ VendorMine.controller('landPageController',
 		'postFilter',
 		'$rootScope',
 		'$location',
-		'getExperience',
-		function landPageController( $scope, http, postFilter, $rootScope, $location, getExperience ) {
-			
+		'$state',
+		'Authentication',
+		function landPageController( $scope, http, postFilter, $rootScope, $location, state, Authentication ) {
+			if(!Authentication.exists()){
+				state.go("login")
+			}
 		}
 		    
 	]);
@@ -83,7 +90,8 @@ VendorMine.controller( 'filterFormController',
 		'postFilterAmenities',
 		'amenityAndFeatures',
 		'eventService',
-		function filterFormController( $scope, $stateParams, $state, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures, eventService){
+		'Authentication',
+		function filterFormController( $scope, $stateParams, $state, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures, eventService, Authentication){
 			$scope.initialize = {
 					experience: getSecondExperienceResolver.map(function (w) {
 			            return w.name;
@@ -117,6 +125,7 @@ VendorMine.controller( 'filterFormController',
 			};
 
 			$scope.bookVenue = function bookVenue( index, id ){
+				Authentication.setView();
 				eventService.setVenue( $scope.venues[index] );
 				$state.go( 'view', {id: id} );
 			};

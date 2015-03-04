@@ -9,25 +9,25 @@ angular.module( 'login', [
     templateUrl: 'login/login.html'
   });
 })
-.controller( 'LoginBetaCtrl', function LoginController( $scope, $http, store, $state) {
+.controller( 'LoginBetaCtrl', [
+    '$scope',
+    '$http',
+    'store',
+    '$state',
+    'Authentication',
+    function LoginController( $scope, $http, store, $state, Authentication ) {
 
-  $scope.user = {};
-  $scope.$watch('user.exp', function(){
-    console.log("exp");
-  })
-  $scope.login = function login() {
-    $.post( 
-      "http://demo1290827.mockable.io/venue/get/data", 
-      $scope.user
-    )
-    .success( function( response ) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-      console.log(response.data);
-      store.set('jwt', response.data.token);
-      //$state.go('index');
-    })
-    .error( function( error ) {
-      alert( error.data );
-    });
+        if(Authentication.exists()){
+          $state.go("index")
+        }
+
+        $scope.user = {};
+        $scope.$watch('user.exp', function(){
+          console.log("exp");
+        })
+        $scope.login = function login() {
+          Authentication.requestUser( $scope.user );  
+        }
+
   }
-
-});
+]);

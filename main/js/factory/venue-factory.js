@@ -1,3 +1,196 @@
+'use strict';
+
+VendorMine.factory('RouteFilter', function Routefilter($location) {
+    var filters = [];
+
+    var getFilter = function(route)
+    {
+        console.log(filters);
+        console.log(route);
+        for (var i = filters.length - 1; i >= 0; i--) {
+            for (var j = filters[i].routes.length - 1; j >= 0; j--) {
+
+                if(matchRoute(filters[i].routes[j], route))
+                {
+                    return filters[i];
+                }
+            };
+        };
+    }
+
+    var matchRoute = function(filterRoute, route)
+    {
+        if(route instanceof RegExp)
+        {
+            return route.test(filterRoute);
+        }
+
+        else
+        {
+            return route === filterRoute;
+        }
+    }
+
+    return {
+        canAccess: function(route)
+        {
+            console.log("routeFilter.canAccess");
+            var filter = getFilter(route);
+
+            return filter.callback();
+        },
+        
+        register: function(name, routes, callback, redirectUrl)
+        {
+            console.log("routeFilter.register");
+            redirectUrl = typeof redirectUrl !== "undefined" ? redirectUrl : null;
+
+            filters.push({
+                name: name,
+                routes:routes,
+                callback: callback,
+                redirectUrl: redirectUrl
+            });
+        },
+
+        run: function(route)
+        {
+            console.log("routeFilter.run");
+            console.log(route);
+            var filter = getFilter(route);
+
+            if(filter != null && filter.redirectUrl != null)
+            {
+                // User can access this page
+                if(! filter.callback())
+                {
+                    $location.path(filter.redirectUrl);
+                }
+            }
+        }
+    }
+  });
+
+VendorMine.factory('Authentication', function Authentication($q, $http, $timeout, store, $state) {
+
+    var authenticatedUser = null;
+    var memberUser = null;
+    var setView = null;
+
+    return  {
+    	setView: function(){
+    		console.log("set");
+    		setView = true;
+    	},
+    	viewExists: function(){
+    		return setView != null;
+    	},
+        requestUser: function( credentials )
+        {
+            console.log("authentication.requestUser");
+            var deferred = $q.defer();
+
+            $.post( 
+		      "http://demo1290827.mockable.io/venue/get/data", 
+		      credentials
+		    )
+		    .success( function( response ) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+		      console.log(response.data);
+
+		      authenticatedUser = response.data;
+		      
+		      store.set('beta', response.data.token);
+		      $state.go('index');
+		    })
+		    .error( function( error ) {
+		      alert( error.data );
+		    });
+
+            return deferred.promise;
+        },
+
+        requestMember: function( credentials )
+        {
+            var deferred = $q.defer();
+
+            $.post( 
+		      "http://demo1290827.mockable.io/venue/get/data", 
+		      credentials
+		    )
+		    .success( function( response ) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+		      console.log(response.data);
+
+		      memberUser = response.data;
+		      store.set('member', response.data.token);
+		      $state.go('index');
+		    })
+		    .error( function( error ) {
+		      alert( error.data );
+		    });
+
+            return deferred.promise;
+        },
+
+        getUser: function()
+        {
+            console.log("authentication.getUser");
+            return authenticatedUser;
+        },
+
+        getMember: function()
+        {
+            console.log("authentication.getUser");
+            return memberUser;
+        },
+
+        memberExists: function()
+        {
+            console.log("authentication.exists");
+            return memberUser != null;
+        },
+        exists: function()
+        {
+            console.log("authentication.exists");
+            return authenticatedUser != null;
+        },
+
+        login: function(credentials)
+        {
+            var deferred = $q.defer();
+
+            $http.post('/auth/login', credentials).success(function(user)
+            {
+                if(user)
+                {
+                    authenticatedUser = user;
+                    deferred.resolve(user);
+                }
+                else
+                {
+                    deferred.reject('Given credentials are incorrect');
+                }
+
+            }).error(function(error)
+            {
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        },
+
+
+        logout: function()
+        {
+            authenticatedUser = null;
+        },
+
+        isDeveloper: function()
+        {
+            return this.exists() && authenticatedUser.type == 'developer';
+        }
+    }
+  });
+
 VendorMine.factory('safeApply', 
 	[
 		'$rootScope',

@@ -13,16 +13,39 @@ angular.module( 'otter', [
   }
 
   $httpProvider.interceptors.push('jwtInterceptor');
-})
-/*.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
-  $scope.$on('$routeChangeSuccess', function(e, nextRoute){
-    if ( nextRoute.$$route && angular.isDefined( nextRoute.$$route.pageTitle ) ) {
-      $scope.pageTitle = nextRoute.$$route.pageTitle + ' | ngEurope Sample' ;
-    }
-    console.log(nextRoute);
+});
+angular.module('otter')
+
+.run(function (RouteFilter, Authentication, $location)
+{
+    console.log("filters run: first");
+    RouteFilter.register('auth', ['/index'], function()
+    {
+        return Authentication.exists();
+    }, 'index');
+
+    RouteFilter.register('guest', ['/login'], function()
+    {
+        return ! Authentication.exists();
+    }, '/');
+
+    RouteFilter.register('developer', ['/settings'], function()
+    {
+        return Authentication.isDeveloper();
+    }, '/');
+    console.log("filters run: second");
+
+    //console.log("Test: " + $location.path().test('profile')); 
+});
+angular.module('otter')
+ .run(function (Authentication, $rootScope, $location, RouteFilter) {
+    console.log("app.js run: first");
+
+    $rootScope.$on('$locationChangeStart', function(scope, next, current) {
+      console.log(next);
+      console.log(current);
+      console.log("From: " + $location.path()); 
+      RouteFilter.run($location.path());
+    })
+    console.log("app.js run: second");
   });
-  
-})*/
-
-;
-

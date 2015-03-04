@@ -132,13 +132,19 @@ VendorMine.directive( 'bookEvent',
 	'$stateParams',
 	'eventService',
 	'$timeout',
-		function directive( amenityAndFeatures, $rootScope, $stateParams, eventService, timeout ){
+	'$state',
+	'Authentication',
+		function directive( amenityAndFeatures, $rootScope, $stateParams, eventService, timeout, $state, Authentication ){
 			return {
 				
 				"restrict": "A",
 				"transclude": true,
 				"template": "<div ng-transclude></div>",
 				"link": function link( scope, element, attribute ){
+					//if member is not logged in AND view is not set
+					if( !Authentication.memberExists() && !Authentication.viewExists() ){
+			          $state.go("index")
+			        }
 					var venuesNow = {};
 
 					venuesNow = eventService.getVenue();
