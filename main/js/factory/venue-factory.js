@@ -5,8 +5,8 @@ VendorMine.factory('RouteFilter', function Routefilter($location) {
 
     var getFilter = function(route)
     {
-        console.log(filters);
-        console.log(route);
+        //console.log(filters);
+        //console.log(route);
         for (var i = filters.length - 1; i >= 0; i--) {
             for (var j = filters[i].routes.length - 1; j >= 0; j--) {
 
@@ -34,7 +34,7 @@ VendorMine.factory('RouteFilter', function Routefilter($location) {
     return {
         canAccess: function(route)
         {
-            console.log("routeFilter.canAccess");
+            //console.log("routeFilter.canAccess");
             var filter = getFilter(route);
 
             return filter.callback();
@@ -42,7 +42,7 @@ VendorMine.factory('RouteFilter', function Routefilter($location) {
         
         register: function(name, routes, callback, redirectUrl)
         {
-            console.log("routeFilter.register");
+            //console.log("routeFilter.register");
             redirectUrl = typeof redirectUrl !== "undefined" ? redirectUrl : null;
 
             filters.push({
@@ -55,8 +55,8 @@ VendorMine.factory('RouteFilter', function Routefilter($location) {
 
         run: function(route)
         {
-            console.log("routeFilter.run");
-            console.log(route);
+            //console.log("routeFilter.run");
+            //console.log(route);
             var filter = getFilter(route);
 
             if(filter != null && filter.redirectUrl != null)
@@ -72,14 +72,14 @@ VendorMine.factory('RouteFilter', function Routefilter($location) {
   });
 
 VendorMine.factory('Authentication', function Authentication($q, $http, $timeout, store, $state) {
-
-    var authenticatedUser = null;
-    var memberUser = null;
+	
+    var authenticatedUser = store.get('beta');
+    var memberUser = store.get('member');
     var setView = null;
 
     return  {
     	setView: function(){
-    		console.log("set");
+    		//console.log("set");
     		setView = true;
     	},
     	viewExists: function(){
@@ -87,7 +87,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
     	},
         requestUser: function( credentials )
         {
-            console.log("authentication.requestUser");
+            //console.log("authentication.requestUser");
             var deferred = $q.defer();
 
             $.post( 
@@ -95,7 +95,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 		      credentials
 		    )
 		    .success( function( response ) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-		      console.log(response.data);
+		      //console.log(response.data);
 
 		      authenticatedUser = response.data;
 		      
@@ -118,7 +118,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 		      credentials
 		    )
 		    .success( function( response ) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-		      console.log(response.data);
+		      //console.log(response.data);
 
 		      memberUser = response.data;
 		      store.set('member', response.data.token);
@@ -133,24 +133,24 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 
         getUser: function()
         {
-            console.log("authentication.getUser");
+            //console.log("authentication.getUser");
             return authenticatedUser;
         },
 
         getMember: function()
         {
-            console.log("authentication.getUser");
+            //console.log("authentication.getUser");
             return memberUser;
         },
 
         memberExists: function()
         {
-            console.log("authentication.exists");
+            //console.log("authentication.exists");
             return memberUser != null;
         },
         exists: function()
         {
-            console.log("authentication.exists");
+            //console.log("authentication.exists");
             return authenticatedUser != null;
         },
 

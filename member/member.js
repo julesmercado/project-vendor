@@ -17,11 +17,11 @@ angular.module( 'member', [
   if(!Authentication.exists()){
     $state.go("index")
   }
-  console.log("membersssssssss");
+  //console.log("membersssssssss");
   $scope.user = {};
 
   $scope.loginMember = function() {
-    console.log($scope.user);
+    //console.log($scope.user);
     Authentication.requestMember( $scope.user );  
   }
 

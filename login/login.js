@@ -27,6 +27,7 @@ angular.module( 'login', [
         })
         $scope.login = function login() {
           Authentication.requestUser( $scope.user );  
+          
         }
 
   }
