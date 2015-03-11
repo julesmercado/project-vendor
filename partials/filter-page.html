@@ -2,11 +2,15 @@
 <section header-directive></section>
 <section class="content" >
     <section class="container">
-  
+    <section class="running-total">
+      Site fee: <br> 
+      Addons SkyEye {{skyEye | currency:"&#8369"}} GrabCar {{grabCar | currency:"&#8369"}}
+      Total {{total | currency:"&#8369"}}
+    </section>
       <section class="venue search-filtered">
         
         <form class="form search-filter col-lg-3" name="bookingFormSecondPage"><h3 class="headline col-lg-12">Filter results</h3>
-{{member.memberExperience}}| {{member.memberLocation}} | {{member.memberGuest}}
+
 <section class="input-group col-lg-12">
           <h5 class="label">Experience</h5>
           <select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, secondPageSelection.exp )" ng-model="secondPageSelection.exp" ng-options="selection for selection in initialize.experience">

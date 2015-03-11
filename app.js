@@ -19,7 +19,7 @@ angular.module('otter')
 
 .run(function (RouteFilter, Authentication, $location)
 {
-    console.log("filters run: first");
+    //console.log("filters run: first");
     RouteFilter.register('auth', ['/index'], function()
     {
         return Authentication.exists();
@@ -34,19 +34,19 @@ angular.module('otter')
     {
         return Authentication.isDeveloper();
     }, '/');
-    console.log("filters run: second");
+    //console.log("filters run: second");
 
-    //console.log("Test: " + $location.path().test('profile')); 
+    ////console.log("Test: " + $location.path().test('profile')); 
 });
 angular.module('otter')
  .run(function (Authentication, $rootScope, $location, RouteFilter) {
-    console.log("app.js run: first");
+    //console.log("app.js run: first");
 
     $rootScope.$on('$locationChangeStart', function(scope, next, current) {
-      console.log(next);
-      console.log(current);
-      console.log("From: " + $location.path()); 
+      //console.log(next);
+      //console.log(current);
+      //console.log("From: " + $location.path()); 
       RouteFilter.run($location.path());
     })
-    console.log("app.js run: second");
+    //console.log("app.js run: second");
   });

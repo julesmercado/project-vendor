@@ -9,40 +9,6 @@ VendorMine.controller( 'viewController',
 			}
 		}
 	] );
-VendorMine.controller( 'headerController', 
-	[
-		'$scope',
-		'tabService',
-		'venueFactory',
-		function headerController( $scope, tabService, venueFactory ){
-			$scope.log = 1;
-			$scope.tab = tabService.getTab();
-
-			$scope.getVenueSuppliers = function getVenueSuppliers(){
-				venueFactory( function onData( error, data ){
-					if( error ){
-						
-						return data = "null";
-					}else{
-						var dataVenue = data;
-						$scope.venueSuppliers = dataVenue;	
-					}
-				} );
-
-			};
-			$scope.setSupplierBookButton = function setSupplierBookButton(){
-				$scope.supplierBookButton = true;
-			};
-
-			$scope.setTab = function setTab( tab ){
-
-				tabService.setTab(tab);
-				$scope.tab = tabService.getTab();
-				$scope.getVenueSuppliers();	
-			};
-		}
-	] );
-
 VendorMine.controller('landPageController', 
 	[
 		'$scope',
@@ -91,7 +57,25 @@ VendorMine.controller( 'filterFormController',
 		'amenityAndFeatures',
 		'eventService',
 		'Authentication',
-		function filterFormController( $scope, $stateParams, $state, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures, eventService, Authentication){
+		'$state',
+		'otterFees',
+		function filterFormController( $scope, $stateParams, $state, $timeout, $location, $rootScope, getExperience, getAmenities, postFilter, postFilterResolver, getAmenitiesResolver, getSecondExperienceResolver, postFilterAmenities, amenityAndFeatures, eventService, Authentication, state, otterFees){
+			otterFees.resetSkyEye();
+			otterFees.resetGrabCar();
+			$scope.skyEye = otterFees.getSkyEye();
+			$scope.grabCar = otterFees.getGrabCar();
+
+			$scope.$watch( function(){
+				return otterFees.getTotal();
+			}, function( newvalue, oldvalue ){
+				if (typeof newvalue !== 'undefined' && newvalue != oldvalue) {
+			        $scope.total = otterFees.getTotal();
+			    }
+			} );
+
+			if(!Authentication.exists()){
+				state.go("login")
+			}
 			$scope.initialize = {
 					experience: getSecondExperienceResolver.map(function (w) {
 			            return w.name;

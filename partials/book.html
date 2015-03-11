@@ -1,11 +1,19 @@
-<section class="book-event" book-event>
+<section class="book-event">
+<growl-notification ttl="3000">{{otterSpeech}}</growl-notification>
 <section header-directive></section>
+  <section book-event ng-transclude>
+    
     <section class="content">
+        <section class="running-total">
+          Site fee: <br> 
+          Addons SkyEye {{skyEye | currency:"&#8369"}} GrabCar {{grabCar | currency:"&#8369"}}
+          Total {{total | currency:"&#8369"}}
+        </section>
       <section class="container">
           <section class="venue">
                   
                   <section class="gallery">
-                  <h2 class="headline">{{venuesNow.name}}</h2><img alt="Hotel" class="hotel-img" src="/img/venue.jpg">
+                  <h2 class="headline">{{venuesNow.name}}{{test}}</h2><img alt="Hotel" class="hotel-img" src="/img/venue.jpg">
                   <ul class="gallery-thumbnails unstyled">
                     <li><img class="thumbs" src="http://placehold.it/50x50"></li>
                     <li><img class="thumbs" src="http://placehold.it/50x50"></li>
@@ -26,112 +34,111 @@
     <section class="modal quick-view-modal current" id="quick-view-details" >
       <h2 class="headline">Book a Venue</h2>
       <section class="steps">
-        <a ng-class="{'active':checkThis(1)}" ng-click="setTabBook(1)">
-          <section class="step-container">
+        <a ng-click="setTabBook(1)">
+          <section ng-class="{'active':checkThis(1)} " class="step-container">
   	       <section class="step">1</section>
             <h3 class="headline">Guest Details</h3>
           </section>
         </a>
 
-        <a ng-class="{'active':checkThis(2)}" ng-click="setTabBook(2)">
-          <section class="step-container">
+        <a ng-click="setTabBook(2)">
+          <section ng-class="{'active':checkThis(2)}" class="step-container">
   	       <section class="step">2</section>
             <h3 class="headline">Amenities</h3>
           </section>
         </a>
 
-        <a ng-class="{'active':checkThis(3)}" ng-click="setTabBook(3)">
-          <section class="step-container">
+        <a ng-click="setTabBook(3)">
+          <section ng-class="{'active':checkThis(3)}" class="step-container">
            <section class="step">3</section>
-            <h3 class="headline">3rd Party Addons</h3>
+            <h3 class="headline">Addons</h3>
+            </section>
         </a>
         
-        <a ng-class="{'active':checkThis(4)}" ng-click="setTabBook(4)">
-          <section class="step-container">
+        <a ng-click="setTabBook(4)">
+          <section ng-class="{'active':checkThis(4)}" class="step-container">
 	         <section class="step">4</section>
             <h3 class="headline">Payment Method</h3>
+            </section>
         </a>
 	    </section>
-    </section>
-
-<section class="booking-form-container">
-	<section class="customer-info" ng-show="tabBook==1">
-      <flash:messages class="slide-down"></flash:messages>
-        <section class="step-container"><h3 class="headline">Guest Details</h3></section>
-        <input class="input" placeholder="Full Name" type="text" ng-model="formFields.name" required>
-        <input class="input" placeholder="Email" type="text" ng-model="formFields.email" required> 
-        <input class="input" placeholder="Contact #" type="text" ng-model="formFields.contact_no" required>
-        <input class="input" placeholder="Expected Guest" type="text" ng-model="formFields.expected_guest" required>
-        <section class="input datepicker-input">
-          <input type="text" name="first" class="form-control" datepicker-popup='yyyy/MM/dd' ng-model="dates.original_date" is-open="opened.first" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event, 'first')"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-        </section>
-        <button type="submit" class="btn btn-proceed" ng-click="setTabBook(2)">Continue to Amenities</button>
-  	</section>
-
-  	<section class="addons" ng-show="tabBook==2" amenities-details>
-        <section class="step-container"><section class="step">2</section><h3 class="headline">Amenities and Features</h3></section>
-        <ul class="addons unstyled">
-          <label class="label-checkbox" ng-repeat="amenities in amenities.amenities"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.amenities[$index].selected" class="input checkbox" value="{{amenity.name}}">{{amenities.name}}</label>
-         
-        </ul><hr>
-        <ul class="addons unstyled">
-          <label class="label-checkbox" ng-repeat="rooms in amenities.rooms"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.rooms[$index].selected" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}</label>
-        </ul>
-        
-    </section>
-    <section class="addons" ng-show="tabBook==3">
-        <section class="step-container"><section class="step">3</section><h3 class="headline">3rd Party Addons</h3></section>
-          <section class="steps">
-              <input type="checkbox" ng-model="addons.grabCar">
-              <section class="step-container">
-                <h3 class="headline">Grab Car</h3>
-              </section> 
-            
-              <input type="checkbox" ng-model="addons.skyEye">
-              <section class="step-container">
-                <h3 class="headline">Sky Eye</h3>
-              </section> 
-          </section> 
-        <section ng-show="addons.grabCar">
-          <input type="text" ng-model="formFields.grabCar" placeholder="Grab Car ">
-        </section>
-        <section ng-show="addons.skyEye">
-          <input type="text" ng-model="formFields.skyEye" placeholder="Sky Eye">
-        </section>  
-    </section>
-    <section class="payment-method" ng-show="tabBook==4">
-        <section class="step-container"><section class="step">4</section><h3 class="headline">
-          Payment Method
-        </h3></section>
-          <table>
-            <tr>
-              <td>Venue Name</td>
-              <td>Address</td>
-              <td>Contacts</td>
-              <td>Email</td>
-            </tr>
-            <tr>
-              <td>{{venue.name}}</td>
-              <td>{{venue.city_address}}</td>
-              <td>{{venue.contact}}</td>
-              <td>{{venue.email}}</td>
-            </tr>
-          </table>
-          <!-- {{formFields | json}} -->
-        <p>See instruction on how to pay after clicking the "Book Venue" button</p>
-        <button type="submit" class="btn btn-proceed" ng-click="bookVendor()">Book Venue</button>
-    </section>    
-    </section>
-
     
-</section>
 
-      
+      <section class="booking-form-container">
+      	<section class="customer-info" ng-show="tabBook==1">
+            <flash:messages class="slide-down"></flash:messages>
+              <section class="step-container"><h3 class="headline">Guest Details</h3></section>
+              <input class="input" placeholder="Full Name" ng-model="formFields.name" type="text"  required>
+              <input class="input" placeholder="Email" ng-model="formFields.email" type="text"  required> 
+              <input class="input" placeholder="Contact #" ng-model="formFields.contact_no" type="text"  required>
+              <input class="input" placeholder="Expected Guest" ng-model="formFields.expected_guest" type="text"  required>
+              <section class="input datepicker-input">
+                <input type="text" name="first" class="form-control" datepicker-popup='yyyy/MM/dd' ng-model="dates.original_date" is-open="opened.first" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled=""/>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="open($event, 'first')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+              </section>
+              <button type="submit" class="btn btn-proceed" ng-click="setTabBook(2)">Continue to Amenities</button>
+        	</section>
 
-      
+        	<section class="addons" ng-show="tabBook==2" amenities-details>
+              <section class="step-container"><section class="step">2</section><h3 class="headline">Amenities and Features</h3></section>
+              <ul class="addons unstyled">
+                <label class="label-checkbox" ng-repeat="amenities in amenities.amenities"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.amenities[$index].selected" class="input checkbox" value="{{amenity.name}}">{{amenities.name}}</label>
+               
+              </ul><hr>
+              <ul class="addons unstyled">
+                <label class="label-checkbox" ng-repeat="rooms in amenities.rooms"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.rooms[$index].selected" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}</label>
+              </ul>
+              
+              <button type="submit" class="btn btn-proceed" ng-click="setTabBook(2)">Continue to Addons</button>
+          </section>
+          <section class="addons" ng-show="tabBook==3">
+              <section class="step-container"><section class="step">3</section><h3 class="headline">Addons</h3></section>
+                <section class="steps">
+                    <input type="checkbox" ng-model="addons.grabCar">
+                    <section class="step-container">
+                      <h3 class="headline">Grab Car</h3>
+                    </section> 
+                  {{grabCar}}
+                    <input type="checkbox" ng-model="addons.skyEye">
+                    <section class="step-container">
+                      <h3 class="headline">Sky Eye</h3>
+                    </section>
+                  {{skyEye}}
+                </section> 
+              <section ng-show="addons.grabCar">
+                <input type="text" ng-model="formFields.grabCar" placeholder="Grab Car">
+                <button ng-click="addOns.okGrabCar()">ok</button>
+                <button ng-click="addOns.cancelGrabCar()">cancel</button>
+              </section>
+              <section ng-show="addons.skyEye">
+                <input type="text" ng-model="formFields.skyEye" placeholder="Sky Eye">
+                <button ng-click="addOns.okSkyEye()">ok</button>
+                <button ng-click="addOns.cancelSkyEye()">cancel</button>
+              </section>  
+          </section>
+          <section class="payment-method" ng-show="tabBook==4">
+              <section class="step-container"><section class="step">4</section><h3 class="headline">
+                Payment Method
+              </h3></section>
+                Venue Name : {{venue.name}} <br>
+                Address    : {{venue.address}}, {{venue.city_address}} <br>
+                Contacts   : {{venue.contact}} <br>
+                Email      : {{venue.email}} <br>
+                 
+              <p>See instruction on how to pay after clicking the "Book Venue" button</p>
+              <button type="submit" class="btn btn-proceed" ng-click="bookVendor()">Book Venue</button>
+          </section>    
+      </section><!-- booking-form-container -->
+
+    </section><!-- quick-view-modal -->
+  </section>  
+  </section>
+<!--
       <a href="#close-modal" rel="modal:close" class="close-modal">Close</a>
       <section></section>
-</section>
+</section> -->
+
+      
+      

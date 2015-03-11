@@ -5,7 +5,9 @@ var VendorMine = angular.module( 'VendorMine', [
   'angularUtils.directives.dirPagination', 
   'flash',
   'angular-storage',
-  'angular-jwt' 
+  'angular-jwt' ,
+  'growlNotifications',
+  'cc'
 ] );
 VendorMine.config([
   '$httpProvider', 

@@ -6,15 +6,9 @@ VendorMine.directive( 'headerDirective',
 			return {
 				
 				"restrict": "A",
-				"controller": "headerController",
 				"templateUrl": "main/js/template/tab.html",
 				"link": function link( scope, element, attribute ){
-					scope.member = {
-							memberExperience: $stateParams.memberExperience,
-							memberLocation: $stateParams.memberLocation,
-							memberGuest: $stateParams.memberGuest
-						};
-					
+				
 				}
 			}
 		}
@@ -94,92 +88,197 @@ VendorMine.directive( 'landPageDirective',
 			}
 		}
 	] )
-
-VendorMine.directive( 'filterFormDirective', 
-	[
-		function directive(){
-			return {
-				
-				"restrict": "A",
-				"controller": "filterFormController",
-				"link": function link( scope, element, attribute ){
-					
-					
-				}
-			}
-		}
-	] )
-
-VendorMine.directive( 'venueDirective', 
-	[
-		function directive(){
-			return {
-				
-				"restrict": "A",
-				"controller": "venueController",
-				"templateUrl": "js/template/venue-template.html",
-				"link": function link( scope, element, attribute ){
-					
-					
-				}
-			}
-		}
-	] )
 VendorMine.directive( 'bookEvent', 
 	[
 	'amenityAndFeatures',
 	'$rootScope',
-	'$stateParams',
+	'$filter',
 	'eventService',
 	'$timeout',
 	'$state',
 	'Authentication',
-		function directive( amenityAndFeatures, $rootScope, $stateParams, eventService, timeout, $state, Authentication ){
+	'otterSpeachBubble',
+	'otterFees',
+	'flash',
+		function directive( amenityAndFeatures, $rootScope, $filter, eventService, timeout, $state, Authentication, otterSpeachBubble, otterFees, flash ){
 			return {
 				
 				"restrict": "A",
 				"transclude": true,
-				"template": "<div ng-transclude></div>",
-				"link": function link( scope, element, attribute ){
-					//if member is not logged in AND view is not set
-					if( !Authentication.memberExists() && !Authentication.viewExists() ){
-			          $state.go("index")
-			        }
-					var venuesNow = {};
-					venuesNow = eventService.getVenue();
-					scope.venuesNow = venuesNow;
-					scope.getDetails = function(){
-						$('#quick-view-details').modal();
-						timeout( function(){
-						amenityAndFeatures.getAmenityAndFeatures(venuesNow.id, function(error, data){
-							if(error){
-								console.error(error)
-							}else{
-								timeout(function() {
-									scope.initialize = {
-										amenities: data.amenities,
-										rooms: data.rooms
-									};
-									$rootScope.$broadcast('amenities', scope.initialize, venuesNow );
+				"link": {
+					post: function link( scope, element, attribute ){
+							//if member is not logged in AND view is not set
+							if( !Authentication.memberExists() && !Authentication.viewExists() ){
+					          $state.go("index");
+					        }
+		//	otter Speech			        
+					       
+					        scope.otterSpeech = otterSpeachBubble.getSpeechOtter();
+							
+	
+		//	Init			
+							scope.skyEye = otterFees.getSkyEye();
+							scope.grabCar = otterFees.getGrabCar();
+							scope.test = "This is a test";
+							var venuesNow = {};
+							venuesNow = eventService.getVenue();
+							scope.venuesNow = venuesNow;
+							scope.tabBook = 1;
+
+							scope.setTabBook = function setTabBook(tab){
+								console.log("jules is ok");
+								scope.tabBook = tab;
+								//
+							};
+		//	DatePicker
+							scope.toggleMin = function() {
+							    scope.minDate = scope.minDate ? null : new Date();
+							  };
+							  scope.toggleMin();
+
+							scope.open = function($event,open) {
+							    $event.preventDefault();
+							    $event.stopPropagation();
+
+							    scope.opened[open] = true;
+							    
+							};
+							scope.opened = {
+								first: false
+							};
+							scope.dates = {
+								original_date: ""
+							};
+
+							/*scope.dateOptions = {
+							   formatYear: 'yy',
+							   startingDay: 1
+							};*/
+		// 	Tabs
+							scope.checkThis = function checkThis( num ){
+								if(scope.tabBook == num){
+									
+									return true;
+								}else{
+									return false;
+								}
+								
+							};
+							scope.getDetails = function getDetails(){
+								console.log('detailssdfa');
+								$('#quick-view-details').modal();
+								timeout( function(){
+								amenityAndFeatures.getAmenityAndFeatures(venuesNow.id, function(error, data){
+									if(error){
+										console.error(error)
+									}else{
+										timeout(function() {
+											scope.initialize = {
+												amenities: data.amenities,
+												rooms: data.rooms
+											};
+											$rootScope.$broadcast('amenities', scope.initialize, venuesNow );
+										}, 0);
+										
+									}
+								});
+								
 								}, 0);
 								
-							}
-						});
-						
-						}, 2000);
-						
-					};
-					scope.tabBook = 1;
+							};
+		//	step 1
+							scope.formFields = {
+								name: "",
+								email: "",
+								contact_no: "",
+								expected_guest: "",
+								original_date: "",
+								amenities: [],
+								rooms: []
+							};
+							scope.$watch('dates.original_date', function( newValue, oldValue ) {
+							 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
+							 		var dateOriginal = $filter('date')( scope.dates.original_date, 'yyyy-MM-dd' );
+							 		console.log( dateOriginal );
+							 		flash('error', 'Something went wrong…');
+							 	}
+							       console.log( typeof newValue);
+							       console.log(oldValue);
+							 });
+		//	step 3
+							scope.$watch( function(){
+								return otterFees.getSkyEye();
+							}, function( newvalue, oldvalue ){
+								if (typeof newvalue !== 'undefined' && newvalue != oldvalue) {
+							        scope.skyEye = otterFees.getSkyEye();
+							    }
+							} );
+							scope.$watch( function(){
+								return otterFees.getGrabCar();
+							}, function( newvalue, oldvalue ){
+								if (typeof newvalue !== 'undefined' && newvalue != oldvalue) {
+							        scope.grabCar = otterFees.getGrabCar();
+							    }
+							} );
+							scope.$watch( function(){
+								return otterFees.getTotal();
+							}, function( newvalue, oldvalue ){
+								if (typeof newvalue !== 'undefined' && newvalue != oldvalue) {
+							        scope.total = otterFees.getTotal();
+							    }
+							} );
 
-					scope.setTabBook = function setTabBook(tab){
-						scope.tabBook = tab;
-						//
-					};
-					scope.setAddons = function setAddons(tab){
-						scope.thirdPartyAddons = tab;
-						//
-					};
-					
+							scope.addOns = {
+								grabCar: false,
+								skyEye: false,
+								okGrabCar: function(){
+									otterFees.setGrabCar();
+								},
+								cancelGrabCar: function(){
+									otterFees.resetGrabCar();
+								},
+								okSkyEye: function(){
+									otterFees.setSkyEye();
+									console.log(scope.skyEye);
+								},
+								cancelSkyEye: function(){
+									otterFees.resetSkyEye();
+								}
+							};
+		//	button
+							scope.bookVendor = function bookVendor(){
+								scope.formFields.amenities = scope.amenityAndFeatures.amenities.map(function( element, index , array){
+									if(element.selected==true){
+										var indexAmenities = "";
+										return indexAmenities + element.id;
+									}
+								}).filter(function (w, idx, arr) {
+									if(w==undefined){
+										
+									}else{
+										return w;
+									}
+							            	
+							     });
+								scope.formFields.rooms = scope.amenityAndFeatures.rooms.map(function( element, index , array){
+									if(element.selected==true){
+										var indexAmenities = "";
+										return indexAmenities + element.id;
+									}
+								}).filter(function (w, idx, arr) {
+									if(w==undefined){
+										
+									}else{
+										return w;
+									}
+							            	
+							     });
+								scope.formFields.original_date = $filter('date')(scope.dates.original_date, 'yyyy-MM-dd');
+								bookVendorVenues( scope.formFields );
+								
+								$.modal.close();
+							};
+					}
 				}
 			}
 		}
@@ -187,36 +286,14 @@ VendorMine.directive( 'bookEvent',
 VendorMine.directive( 'amenitiesDetails', 
 	[
 		'bookVendorVenues',
-		'$filter',
-		'flash',
-		function directive(bookVendorVenues, $filter, flash){
+		function directive( bookVendorVenues ){
 			return {
 				
 				"restrict": "A",
 				"transclude": true,
 				"template": "<div ng-transclude></div>",
 				"link": function link( $scope, element, attribute ){
-					$scope.opened = {
-						first: false,
-						second: false,
-						third: false
-					};
-					$scope.addons = {
-						grabCar: false,
-						skyEye: false
-					}
-					$scope.dates = {
-						original_date: ""
-					};
-					 $scope.$watch('dates.original_date', function( newValue, oldValue ) {
-					 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
-					 		var dateOriginal = $filter('date')($scope.dates.original_date, 'yyyy-MM-dd');
-					 		console.log( dateOriginal );
-					 		flash('error', 'Something went wrong…');
-					 	}
-					       console.log( typeof newValue);
-					       console.log(oldValue);
-					 });
+	//	step 2
 					$scope.$on('amenities', function(event, data, venue){
 						$scope.amenities = data;
 						$scope.venue = venue;
@@ -233,33 +310,6 @@ VendorMine.directive( 'amenitiesDetails',
 						};
 						
 					});
-					$scope.formFields = {
-						name: "",
-						email: "",
-						contact_no: "",
-						expected_guest: "",
-						original_date: "",
-						amenities: [],
-						rooms: []
-					};
-					$scope.toggleMin = function() {
-					    $scope.minDate = $scope.minDate ? null : new Date();
-					  };
-					  $scope.toggleMin();
-
-					$scope.open = function($event,open) {
-					    $event.preventDefault();
-					    $event.stopPropagation();
-
-					    $scope.opened[open] = true;
-					    
-					};
-
-					  $scope.dateOptions = {
-					    formatYear: 'yy',
-					    startingDay: 1
-					  };
-
 					$scope.selectAmenity = function selectAmenity( id ){
 						if($scope.selectedAmenity.length == 0){
 							$scope.selectedAmenity.push( id );
@@ -275,11 +325,17 @@ VendorMine.directive( 'amenitiesDetails',
 							} );
 						}
 					};
+					/*
+					
+					 
+					
+					
+					
 					$scope.setTabAmenities = function(){
 						
-					}
+					};*/
 
-					$scope.checkThisAmenities = function checkThisAmenities( num ){
+					/*$scope.checkThisAmenities = function checkThisAmenities( num ){
 						if($scope.tabAmenities == num){
 							
 							return true;
@@ -287,50 +343,11 @@ VendorMine.directive( 'amenitiesDetails',
 							return false;
 						}
 						
-					};
+					};*/
 
-					$scope.checkThis = function checkThis( num ){
-						if($scope.tabBook == num){
-							
-							return true;
-						}else{
-							return false;
-						}
-						
-					};
+					
 
-					$scope.bookVendor = function bookVendor(){
-						$scope.formFields.amenities = $scope.amenityAndFeatures.amenities.map(function( element, index , array){
-							if(element.selected==true){
-								var indexAmenities = "";
-								return indexAmenities + element.id;
-							}
-						}).filter(function (w, idx, arr) {
-							if(w==undefined){
-								
-							}else{
-								return w;
-							}
-					            	
-					     });
-						$scope.formFields.rooms = $scope.amenityAndFeatures.rooms.map(function( element, index , array){
-							if(element.selected==true){
-								var indexAmenities = "";
-								return indexAmenities + element.id;
-							}
-						}).filter(function (w, idx, arr) {
-							if(w==undefined){
-								
-							}else{
-								return w;
-							}
-					            	
-					     });
-						$scope.formFields.original_date = $filter('date')($scope.dates.original_date, 'yyyy-MM-dd');
-						bookVendorVenues( $scope.formFields );
-						
-						$.modal.close();
-					};
+					
 				}
 			}
 		}
