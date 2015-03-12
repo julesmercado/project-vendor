@@ -238,6 +238,7 @@ VendorMine.directive( 'bookEvent',
 								return scope.addOns.grabCar;
 							}, function( newvalue, oldvalue ){
 								if( newvalue != oldvalue && newvalue == false ){
+									scope.addOns.msgGrabCar = false;
 									otterFees.resetGrabCar();
 								}
 							} );
@@ -245,6 +246,7 @@ VendorMine.directive( 'bookEvent',
 								return scope.addOns.skyEye;
 							}, function( newvalue, oldvalue ){
 								if( newvalue != oldvalue && newvalue == false ){
+									scope.addOns.msgSkyEye = false;
 									otterFees.resetSkyEye();
 								}
 							} );
@@ -259,6 +261,7 @@ VendorMine.directive( 'bookEvent',
 									otterFees.setGrabCar();
 								},
 								cancelGrabCar: function(){
+									scope.addOns.msgGrabCar = false;
 									otterFees.resetGrabCar();
 								},
 								okSkyEye: function(){
@@ -266,6 +269,7 @@ VendorMine.directive( 'bookEvent',
 									otterFees.setSkyEye();
 								},
 								cancelSkyEye: function(){
+									scope.addOns.msgSkyEye = false;
 									otterFees.resetSkyEye();
 								}
 							};
