@@ -99,7 +99,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 
 		      authenticatedUser = response.data;
 		      
-		      store.set('beta', response.data.token);
+		      store.set('beta', response.data);
 		      $state.go('index');
 		    })
 		    .error( function( error ) {
@@ -121,7 +121,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 		      //console.log(response.data);
 
 		      memberUser = response.data;
-		      store.set('member', response.data.token);
+		      store.set('member', response.data);
 		      $state.go('index');
 		    })
 		    .error( function( error ) {

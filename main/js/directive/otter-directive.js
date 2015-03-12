@@ -1,14 +1,19 @@
 VendorMine.directive( 'headerDirective', 
 	[
 
-		'$stateParams',
-		function directive( $stateParams ){
+		'store',
+		'Authentication',
+		function directive( store, Authentication ){
 			return {
 				
 				"restrict": "A",
 				"templateUrl": "main/js/template/tab.html",
 				"link": function link( scope, element, attribute ){
-				
+					scope.member = store.get( 'member' );
+					console.log( scope.member );
+					scope.memberCheckExist = function memberCheckExist(){
+						return Authentication.memberExists();
+					};
 				}
 			}
 		}
@@ -206,6 +211,7 @@ VendorMine.directive( 'bookEvent',
 							       console.log(oldValue);
 							 });
 		//	step 3
+			// 	fees
 							scope.$watch( function(){
 								return otterFees.getSkyEye();
 							}, function( newvalue, oldvalue ){
@@ -227,19 +233,37 @@ VendorMine.directive( 'bookEvent',
 							        scope.total = otterFees.getTotal();
 							    }
 							} );
+			//	addons
+							scope.$watch( function(){
+								return scope.addOns.grabCar;
+							}, function( newvalue, oldvalue ){
+								if( newvalue != oldvalue && newvalue == false ){
+									otterFees.resetGrabCar();
+								}
+							} );
+							scope.$watch( function(){
+								return scope.addOns.skyEye;
+							}, function( newvalue, oldvalue ){
+								if( newvalue != oldvalue && newvalue == false ){
+									otterFees.resetSkyEye();
+								}
+							} );
 
 							scope.addOns = {
 								grabCar: false,
 								skyEye: false,
+								msgGrabCar: false,
+								msgSkyEye: false,
 								okGrabCar: function(){
+									scope.addOns.msgGrabCar = true;
 									otterFees.setGrabCar();
 								},
 								cancelGrabCar: function(){
 									otterFees.resetGrabCar();
 								},
 								okSkyEye: function(){
+									scope.addOns.msgSkyEye = true;
 									otterFees.setSkyEye();
-									console.log(scope.skyEye);
 								},
 								cancelSkyEye: function(){
 									otterFees.resetSkyEye();

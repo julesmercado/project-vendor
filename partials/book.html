@@ -96,26 +96,28 @@
           <section class="addons" ng-show="tabBook==3">
               <section class="step-container"><section class="step">3</section><h3 class="headline">Addons</h3></section>
                 <section class="steps">
-                    <input type="checkbox" ng-model="addons.grabCar">
+                    <input type="checkbox" ng-model="addOns.grabCar">
                     <section class="step-container">
                       <h3 class="headline">Grab Car</h3>
                     </section> 
                   {{grabCar}}
-                    <input type="checkbox" ng-model="addons.skyEye">
+                    <input type="checkbox" ng-model="addOns.skyEye">
                     <section class="step-container">
                       <h3 class="headline">Sky Eye</h3>
                     </section>
                   {{skyEye}}
                 </section> 
-              <section ng-show="addons.grabCar">
+              <section ng-show="addOns.grabCar">
                 <input type="text" ng-model="formFields.grabCar" placeholder="Grab Car">
                 <button ng-click="addOns.okGrabCar()">ok</button>
                 <button ng-click="addOns.cancelGrabCar()">cancel</button>
+                <div ng-show="addOns.msgGrabCar">You choose to book with GrabCar worth ₱1,000</div>
               </section>
-              <section ng-show="addons.skyEye">
+              <section ng-show="addOns.skyEye">
                 <input type="text" ng-model="formFields.skyEye" placeholder="Sky Eye">
                 <button ng-click="addOns.okSkyEye()">ok</button>
                 <button ng-click="addOns.cancelSkyEye()">cancel</button>
+                <div ng-show="addOns.msgSkyEye">You choose to book with SkyEye worth ₱1,500</div>
               </section>  
           </section>
           <section class="payment-method" ng-show="tabBook==4">
