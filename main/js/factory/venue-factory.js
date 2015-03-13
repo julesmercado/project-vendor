@@ -90,7 +90,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
             //console.log("authentication.requestUser");
             var deferred = $q.defer();
 
-            $.post( 
+            $.get( 
 		      "http://demo1290827.mockable.io/venue/get/data", 
 		      credentials
 		    )
@@ -113,7 +113,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
         {
             var deferred = $q.defer();
 
-            $.post( 
+            $.get( 
 		      "http://demo1290827.mockable.io/venue/get/data", 
 		      credentials
 		    )
