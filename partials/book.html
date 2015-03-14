@@ -108,7 +108,7 @@
                   {{skyEye}}
                 </section> 
               <section ng-show="addOns.grabCar">
-                <input type="text" ng-model="formFields.grabCar" placeholder="Grab Car">
+                <input id="grabCar" type="text" ng-model="formFields.grabCar" maxlength="8" placeholder="Grab Car" disabled>
                 <button ng-click="addOns.okGrabCar()">ok</button>
                 <button ng-click="addOns.cancelGrabCar()">cancel</button>
                 <div ng-show="addOns.msgGrabCar">You choose to book with GrabCar worth ₱1,000</div>

@@ -146,6 +146,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
         memberExists: function()
         {
             //console.log("authentication.exists");
+            
             return memberUser != null;
         },
         exists: function()

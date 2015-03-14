@@ -122,6 +122,9 @@ VendorMine.directive( 'bookEvent',
 							
 	
 		//	Init			
+							if(Authentication.memberExists()){
+								$("#grabCar").removeAttr('disabled');
+							}
 							scope.skyEye = otterFees.getSkyEye();
 							scope.grabCar = otterFees.getGrabCar();
 							scope.test = "This is a test";
@@ -135,6 +138,7 @@ VendorMine.directive( 'bookEvent',
 								scope.tabBook = tab;
 								//
 							};
+							
 		//	DatePicker
 							scope.toggleMin = function() {
 							    scope.minDate = scope.minDate ? null : new Date();
@@ -170,7 +174,6 @@ VendorMine.directive( 'bookEvent',
 								
 							};
 							scope.getDetails = function getDetails(){
-								console.log('detailssdfa');
 								$('#quick-view-details').modal();
 								timeout( function(){
 								amenityAndFeatures.getAmenityAndFeatures(venuesNow.id, function(error, data){
@@ -199,7 +202,12 @@ VendorMine.directive( 'bookEvent',
 								expected_guest: "",
 								original_date: "",
 								amenities: [],
-								rooms: []
+								rooms: [],
+								skyEye: "",
+								grabCar: function() {
+									Authentication.memberExists() ? scope.formFields.grabCar = "" : scope.formFields.grabCar = makeid();
+									return scope.formFields.grabCar;
+								}
 							};
 							scope.$watch('dates.original_date', function( newValue, oldValue ) {
 							 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
@@ -380,3 +388,13 @@ VendorMine.directive( 'amenitiesDetails',
 			}
 		}
 	] )
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 8; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
