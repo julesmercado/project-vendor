@@ -4,7 +4,10 @@ angular.module( 'otter', [
   'member',
   'verify',
   'angular-storage',
-  'angular-jwt'
+  'angular-jwt',
+  'ngSanitize',
+  'ngAnimate',
+  'ngQuantum'
 ])
 .config( function myAppConfig ($urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
   $urlRouterProvider.otherwise('/');
@@ -15,6 +18,19 @@ angular.module( 'otter', [
 
   $httpProvider.interceptors.push('jwtInterceptor');
 });
+angular.module('otter')
+ .run(function (Authentication, $rootScope, $location, RouteFilter) {
+    //console.log("app.js run: first");
+
+    $rootScope.$on('$locationChangeStart', function(scope, next, current) {
+      //console.log(next);
+      //console.log(current);
+      //console.log("From: " + $location.path()); 
+      RouteFilter.run($location.path());
+    })
+    //console.log("app.js run: second");
+  });
+ /*
 angular.module('otter')
 
 .run(function (RouteFilter, Authentication, $location)
@@ -37,16 +53,4 @@ angular.module('otter')
     //console.log("filters run: second");
 
     ////console.log("Test: " + $location.path().test('profile')); 
-});
-angular.module('otter')
- .run(function (Authentication, $rootScope, $location, RouteFilter) {
-    //console.log("app.js run: first");
-
-    $rootScope.$on('$locationChangeStart', function(scope, next, current) {
-      //console.log(next);
-      //console.log(current);
-      //console.log("From: " + $location.path()); 
-      RouteFilter.run($location.path());
-    })
-    //console.log("app.js run: second");
-  });
+});*/

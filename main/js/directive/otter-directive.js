@@ -10,7 +10,7 @@ VendorMine.directive( 'headerDirective',
 				"templateUrl": "main/js/template/tab.html",
 				"link": function link( scope, element, attribute ){
 					scope.member = store.get( 'member' );
-					console.log( scope.member );
+					//console.log( scope.member );
 					scope.memberCheckExist = function memberCheckExist(){
 						return Authentication.memberExists();
 					};
@@ -73,7 +73,7 @@ VendorMine.directive( 'landPageDirective',
 						
 							
 						
-						console.log($scope.initialize.experience);
+						//console.log($scope.initialize.experience);
 						$scope.firstPageSelection = {
 								"exp": "", 
 								"city_address" : "", 
@@ -125,6 +125,7 @@ VendorMine.directive( 'bookEvent',
 							if(Authentication.memberExists()){
 								$("#grabCar").removeAttr('disabled');
 							}
+
 							scope.skyEye = otterFees.getSkyEye();
 							scope.grabCar = otterFees.getGrabCar();
 							scope.test = "This is a test";
@@ -134,7 +135,7 @@ VendorMine.directive( 'bookEvent',
 							scope.tabBook = 1;
 
 							scope.setTabBook = function setTabBook(tab){
-								console.log("jules is ok");
+								//console.log("jules is ok");
 								scope.tabBook = tab;
 								//
 							};
@@ -204,19 +205,17 @@ VendorMine.directive( 'bookEvent',
 								amenities: [],
 								rooms: [],
 								skyEye: "",
-								grabCar: function() {
-									Authentication.memberExists() ? scope.formFields.grabCar = "" : scope.formFields.grabCar = makeid();
-									return scope.formFields.grabCar;
-								}
+								grabCar: ""
 							};
+							init( scope, Authentication );
 							scope.$watch('dates.original_date', function( newValue, oldValue ) {
 							 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
 							 		var dateOriginal = $filter('date')( scope.dates.original_date, 'yyyy-MM-dd' );
-							 		console.log( dateOriginal );
+							 		//console.log( dateOriginal );
 							 		flash('error', 'Something went wrong…');
 							 	}
-							       console.log( typeof newValue);
-							       console.log(oldValue);
+							       //console.log( typeof newValue);
+							       //console.log(oldValue);
 							 });
 		//	step 3
 			// 	fees
@@ -333,7 +332,7 @@ VendorMine.directive( 'amenitiesDetails',
 					$scope.$on('amenities', function(event, data, venue){
 						$scope.amenities = data;
 						$scope.venue = venue;
-						console.log(venue);
+						//console.log(venue);
 						
 						$scope.formFields.venue_id = $scope.venue.id;
 						$scope.amenityAndFeatures = {
@@ -388,8 +387,7 @@ VendorMine.directive( 'amenitiesDetails',
 			}
 		}
 	] )
-function makeid()
-{
+function makeid(){
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -397,4 +395,11 @@ function makeid()
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
+}
+function init(scope, Authentication){
+	if( Authentication.memberExists() ){
+		scope.formFields.grabCar = "";
+	}else{
+		scope.formFields.grabCar = makeid();
+	}
 }
