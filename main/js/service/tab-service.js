@@ -17,6 +17,25 @@ VendorMine.service('tabService',
 			
 		}
 	]);
+VendorMine.service('features', 
+	[
+		function service(  ){
+			
+			var features = {};
+
+				return {
+					getFeatures: function getTab( ){
+						return tab;
+					},
+					setFeatures: function setTab( data ){
+						features = data;
+						return features;
+					}
+					
+				}
+			
+		}
+	]);
 VendorMine.service('eventService', 
 	[
 		function service(  ){
@@ -49,17 +68,17 @@ VendorMine.service('experienceService',
 					return experience;
 				},
 				setExperienced: function setExperienced(scope){
-					console.log("first");
+					//console.log("first");
 					getExperience(function(data){
 						scope.experienced = data.map(function (w) {
 						    return w.name;
 						});
 						experience = scope.experienced;
 						scope.$watch('experienced', function() {
-							console.log("changed");
+							//console.log("changed");
 						       safeApply(scope);
 						});
-						console.log(experience);
+						//console.log(experience);
 					});
 
 				}
@@ -108,7 +127,7 @@ VendorMine.service( 'otterFees',
 				return skyEyeFee;
 			},
 			setSkyEye: function(){
-				console.log("SkyEye set");
+				//console.log("SkyEye set");
 				skyEyeFee = 1500;
 			},
 			resetSkyEye: function(){
@@ -121,7 +140,7 @@ VendorMine.service( 'otterFees',
 				return angular.copy( grabCarFee );
 			},
 			setGrabCar: function(){
-				console.log("GrabCar set");
+				//console.log("GrabCar set");
 				grabCarFee = 1000;
 			},
 			resetGrabCar: function(){
@@ -131,20 +150,20 @@ VendorMine.service( 'otterFees',
 
 			test: function(){
 				if( Authentication.memberExists() ){
-					console.log("member exists");
+					//console.log("member exists");
 				}
 				if( Authentication.exists() ){
-					console.log("beta exist");
+					//console.log("beta exist");
 				}
 			},
 
 
 			getTotal: function(){
 				if(Authentication.memberExists()){
-					console.log("member");
+					//console.log("member");
 					return memberFee + skyEyeFee + grabCarFee;
 				}else{
-					console.log("non member");
+					//console.log("non member");
 					return nonMemberFee + skyEyeFee + grabCarFee;
 				}
 			}

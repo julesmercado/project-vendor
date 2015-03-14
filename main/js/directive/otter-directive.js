@@ -96,6 +96,7 @@ VendorMine.directive( 'landPageDirective',
 VendorMine.directive( 'bookEvent', 
 	[
 	'amenityAndFeatures',
+	'bookVendorVenues',
 	'$rootScope',
 	'$filter',
 	'eventService',
@@ -105,7 +106,7 @@ VendorMine.directive( 'bookEvent',
 	'otterSpeachBubble',
 	'otterFees',
 	'flash',
-		function directive( amenityAndFeatures, $rootScope, $filter, eventService, timeout, $state, Authentication, otterSpeachBubble, otterFees, flash ){
+		function directive( amenityAndFeatures, bookVendorVenues, $rootScope, $filter, eventService, timeout, $state, Authentication, otterSpeachBubble, otterFees, flash ){
 			return {
 				
 				"restrict": "A",
@@ -217,6 +218,41 @@ VendorMine.directive( 'bookEvent',
 							       //console.log( typeof newValue);
 							       //console.log(oldValue);
 							 });
+		//	step 2
+							scope.$on('amenities', function(event, data, venue){
+								scope.amenities = data;
+								scope.venue = venue;
+								//console.log(venue);
+								
+								scope.formFields.venue_id = scope.venue.id;
+								scope.amenityAndFeatures = {
+									amenities: scope.amenities.amenities.map(function(w){
+										return {name: w.name, id: w.id, selected: false};
+									}),
+									rooms: scope.amenities.rooms.map(function(w){
+										return {name: w.name, id: w.id, selected: false};
+									})
+								};
+								
+								features.setFeatures( scope.amenities );
+								console.log( scope.amenities );
+								
+							});
+							scope.selectAmenity = function selectAmenity( id ){
+								if(scope.selectedAmenity.length == 0){
+									scope.selectedAmenity.push( id );
+									
+								}else{
+									scope.selectedAmenity.map( function(w, index){
+										if(w==id){
+											scope.selectedAmenity.splice(index, 1)
+										}else{
+
+										}
+										
+									} );
+								}
+							};
 		//	step 3
 			// 	fees
 							scope.$watch( function(){
@@ -282,6 +318,8 @@ VendorMine.directive( 'bookEvent',
 							};
 		//	button
 							scope.bookVendor = function bookVendor(){
+								console.log( scope.amenityAndFeatures );
+								console.log( scope.formFields );
 								scope.formFields.amenities = scope.amenityAndFeatures.amenities.map(function( element, index , array){
 									if(element.selected==true){
 										var indexAmenities = "";
@@ -318,75 +356,7 @@ VendorMine.directive( 'bookEvent',
 			}
 		}
 	] )
-VendorMine.directive( 'amenitiesDetails', 
-	[
-		'bookVendorVenues',
-		function directive( bookVendorVenues ){
-			return {
-				
-				"restrict": "A",
-				"transclude": true,
-				"template": "<div ng-transclude></div>",
-				"link": function link( $scope, element, attribute ){
-	//	step 2
-					$scope.$on('amenities', function(event, data, venue){
-						$scope.amenities = data;
-						$scope.venue = venue;
-						//console.log(venue);
-						
-						$scope.formFields.venue_id = $scope.venue.id;
-						$scope.amenityAndFeatures = {
-							amenities: $scope.amenities.amenities.map(function(w){
-								return {name: w.name, id: w.id, selected: false};
-							}),
-							rooms: $scope.amenities.rooms.map(function(w){
-								return {name: w.name, id: w.id, selected: false};
-							})
-						};
-						
-					});
-					$scope.selectAmenity = function selectAmenity( id ){
-						if($scope.selectedAmenity.length == 0){
-							$scope.selectedAmenity.push( id );
-							
-						}else{
-							$scope.selectedAmenity.map( function(w, index){
-								if(w==id){
-									$scope.selectedAmenity.splice(index, 1)
-								}else{
 
-								}
-								
-							} );
-						}
-					};
-					/*
-					
-					 
-					
-					
-					
-					$scope.setTabAmenities = function(){
-						
-					};*/
-
-					/*$scope.checkThisAmenities = function checkThisAmenities( num ){
-						if($scope.tabAmenities == num){
-							
-							return true;
-						}else{
-							return false;
-						}
-						
-					};*/
-
-					
-
-					
-				}
-			}
-		}
-	] )
 function makeid(){
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
