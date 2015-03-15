@@ -108,18 +108,24 @@
                   {{skyEye}}
                 </section> 
               <section ng-show="addOns.grabCar" >
-                <input id="grabCar" type="text" ng-model="formFields.grabCar" maxlength="8" placeholder="Grab Car" disabled>
+              <form name="grabCarForm">
+                <input id="grabCar" name="grabCarInput" type="text" ng-model="formFields.grabCar" maxlength="8" placeholder="Grab Car" disabled required data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Required to fill up if you want to purchase">
                 
-                <button ng-click="addOns.okGrabCar()">ok</button>
+                <button ng-click="addOns.okGrabCar()" ng-disabled="grabCarForm.grabCarInput.$invalid || (grabCarForm.grabCarInput.$pristine && formFields.grabCar=='')" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with GrabCar">ok</button>
                 <button ng-click="addOns.cancelGrabCar()">cancel</button>
                 <div ng-show="addOns.msgGrabCar">You choose to book with GrabCar worth ₱1,000</div>
+              </form>
+                
               </section>
 
               <section ng-show="addOns.skyEye" >
-                <input type="text" ng-model="formFields.skyEye" placeholder="Sky Eye">                
-                <button ng-click="addOns.okSkyEye()">ok</button>
+              <form name="skyEyeForm">
+                <input type="text" name="skyEyeInput" ng-model="formFields.skyEye"  maxlength="8" placeholder="Sky Eye" required data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Required to fill up if you want to purchase">                
+                <button ng-click="addOns.okSkyEye()" ng-disabled="skyEyeForm.skyEyeInput.$invalid || skyEyeForm.skyEyeInput.$pristine" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with SkyEye">ok</button>
                 <button ng-click="addOns.cancelSkyEye()">cancel</button>
                 <div ng-show="addOns.msgSkyEye">You choose to book with SkyEye worth ₱1,500</div>
+              </form>
+                
               </section>  
           </section>
           <section class="payment-method" ng-show="tabBook==4">

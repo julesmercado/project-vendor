@@ -208,6 +208,9 @@ VendorMine.directive( 'bookEvent',
 								skyEye: "",
 								grabCar: ""
 							};
+							scope.$watch('formFields.grabCar', function( newValue, oldValue ) {
+							 	console.log(scope.grabCarForm);
+							 });
 							init( scope, Authentication );
 							scope.$watch('dates.original_date', function( newValue, oldValue ) {
 							 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
