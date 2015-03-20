@@ -106,7 +106,9 @@ VendorMine.directive( 'bookEvent',
 	'otterSpeachBubble',
 	'otterFees',
 	'flash',
-		function directive( amenityAndFeatures, bookVendorVenues, $rootScope, $filter, eventService, timeout, $state, Authentication, otterSpeachBubble, otterFees, flash ){
+	'features',
+	'$http',
+		function directive( amenityAndFeatures, bookVendorVenues, $rootScope, $filter, eventService, timeout, $state, Authentication, otterSpeachBubble, otterFees, flash, features, $http ){
 			return {
 				
 				"restrict": "A",
@@ -215,7 +217,16 @@ VendorMine.directive( 'bookEvent',
 							scope.$watch('dates.original_date', function( newValue, oldValue ) {
 							 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
 							 		var dateOriginal = $filter('date')( scope.dates.original_date, 'yyyy-MM-dd' );
-							 		//console.log( dateOriginal );
+							 		console.log( dateOriginal );
+							 		$http.post( "http://192.168.1.41:3000/vendormines/verify/dates",
+										{"date": dateOriginal}
+									)
+									.success( function(data){
+										console.log(data);
+									} )
+									.error( function(error){
+										console.log(error);
+									} );
 							 		flash('error', 'Something went wrong…');
 							 	}
 							       //console.log( typeof newValue);

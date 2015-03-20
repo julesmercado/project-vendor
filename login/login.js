@@ -23,7 +23,7 @@ angular.module( 'login', [
 
         $scope.user = {};
         $scope.$watch('user.exp', function(){
-          console.log("exp");
+          //console.log("exp");
         })
         $scope.login = function login() {
           Authentication.requestUser( $scope.user );  
