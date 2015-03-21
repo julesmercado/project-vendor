@@ -1,3 +1,90 @@
+VendorMine.service('dateSetter', 
+	[
+		'flash',
+		'$http',
+		function service( flash, $http ){
+			
+			var dateIsOkay = false
+			  , dateIsReallyOkay = false
+			  , count = 0;
+
+				return {
+					checkDate: function checkDate( date, num ){
+						$http.post( "http://192.168.1.41:3000/vendormines/verify/dates",
+							{"date": date}
+						)
+						.success( function(data){
+							count = num;
+							if( count == 1 ){
+								if( data.status ){
+									dateIsOkay = true;
+									console.log( "First " );
+									console.log( data );
+									console.log( dateIsOkay );
+									console.log("++++++++");
+									flash( data.data, data.message );
+								}else{
+									dateIsOkay = false;
+									console.log( "First ");
+									console.log( data );
+									console.log( dateIsOkay );
+									console.log("++++++++");
+									flash( data.data, data.message );
+								}
+							}else if( count == 2){
+								if( data.status ){
+									dateIsReallyOkay = true;
+									console.log( "Second ");
+									console.log( data );
+									console.log( dateIsReallyOkay );
+									flash( data.data, data.message );
+								}else{
+									dateIsReallyOkay = false;
+									console.log( "Second ");
+									console.log( data );
+									console.log( dateIsReallyOkay );
+									flash( data.data, data.message );
+								}
+								
+							}
+						} )
+						.error( function(error){
+							console.log(error);
+						} );
+					},
+					getStatus: function getStatus(  ){
+						console.log( dateIsOkay );
+						console.log( dateIsReallyOkay );
+						return dateIsOkay && dateIsReallyOkay;
+					},
+					cancelAll: function cancelAll( ){
+						dateIsOkay = false;
+						dateIsReallyOkay = false;
+						count = 0;
+					}
+				}
+			
+		}
+	]);
+VendorMine.service('dateChecker', 
+	[
+		function service(  ){
+			
+			
+
+				return {
+					getTab: function getTab( ){
+						return tab;
+					},
+					setTab: function setTab( num ){
+						tab = num;
+						return tab;
+					}
+					
+				}
+			
+		}
+	]);
 VendorMine.service('tabService', 
 	[
 		function service(  ){

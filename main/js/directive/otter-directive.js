@@ -108,7 +108,8 @@ VendorMine.directive( 'bookEvent',
 	'flash',
 	'features',
 	'$http',
-		function directive( amenityAndFeatures, bookVendorVenues, $rootScope, $filter, eventService, timeout, $state, Authentication, otterSpeachBubble, otterFees, flash, features, $http ){
+	'dateSetter',
+		function directive( amenityAndFeatures, bookVendorVenues, $rootScope, $filter, eventService, timeout, $state, Authentication, otterSpeachBubble, otterFees, flash, features, $http, dateSetter ){
 			return {
 				
 				"restrict": "A",
@@ -218,19 +219,9 @@ VendorMine.directive( 'bookEvent',
 							 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
 							 		var dateOriginal = $filter('date')( scope.dates.original_date, 'yyyy-MM-dd' );
 							 		console.log( dateOriginal );
-							 		$http.post( "http://192.168.1.41:3000/vendormines/verify/dates",
-										{"date": dateOriginal}
-									)
-									.success( function(data){
-										console.log(data);
-									} )
-									.error( function(error){
-										console.log(error);
-									} );
-							 		flash('error', 'Something went wrong…');
+							 		dateSetter.checkDate( dateOriginal, 1 );
+							 		
 							 	}
-							       //console.log( typeof newValue);
-							       //console.log(oldValue);
 							 });
 		//	step 2
 							scope.$on('amenities', function(event, data, venue){
@@ -332,8 +323,8 @@ VendorMine.directive( 'bookEvent',
 							};
 		//	button
 							scope.bookVendor = function bookVendor(){
-								console.log( scope.amenityAndFeatures );
-								console.log( scope.formFields );
+								//console.log( scope.amenityAndFeatures );
+								//console.log( scope.formFields );
 								scope.formFields.amenities = scope.amenityAndFeatures.amenities.map(function( element, index , array){
 									if(element.selected==true){
 										var indexAmenities = "";
@@ -361,7 +352,15 @@ VendorMine.directive( 'bookEvent',
 							            	
 							     });
 								scope.formFields.original_date = $filter('date')(scope.dates.original_date, 'yyyy-MM-dd');
-								bookVendorVenues( scope.formFields );
+								dateSetter.checkDate( scope.formFields.original_date, 2 );
+								if( dateSetter.getStatus() ){
+									bookVendorVenues( scope.formFields );
+									dateSetter.cancelAll();
+								}else{
+									console.log("Unsuccessful");
+									dateSetter.cancelAll();
+								}
+								
 								
 								$.modal.close();
 							};
