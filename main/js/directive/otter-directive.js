@@ -117,9 +117,9 @@ VendorMine.directive( 'bookEvent',
 				"link": {
 					post: function link( scope, element, attribute ){
 							//if member is not logged in AND view is not set
-							if( !Authentication.memberExists() && !Authentication.viewExists() ){
+							/*if( !Authentication.memberExists() && !Authentication.viewExists() ){
 					          $state.go("index");
-					        }
+					        }*/
 		//	otter Speech			        
 					       
 					        scope.otterSpeech = otterSpeachBubble.getSpeechOtter();

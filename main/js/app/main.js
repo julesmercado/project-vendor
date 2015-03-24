@@ -19,22 +19,40 @@ VendorMine.config([
   'jwtInterceptorProvider',
     function ($httpProvider, $locationProvider, $routeProvider, paginationTemplateProvider, $stateProvider, $urlRouterProvider, jwtInterceptorProvider) {
       paginationTemplateProvider.setPath('/lib/dirPagination.tpl.html');
+      var access = routingConfig.accessLevels;
 
-      jwtInterceptorProvider.tokenGetter = function(store) {
-        return store.get('jwt');
-      }
 
-      $httpProvider.interceptors.push('jwtInterceptor');
-
+     
       $urlRouterProvider.otherwise("/")
+
+      //Anon Routes
+        $stateProvider.
+            state('login', {
+              url: '/',
+              controller: 'LoginBetaCtrl',
+              templateUrl: 'partials/login/login.html',
+              data: {
+                access: access.anon
+              }
+            });
+
+      //User Routes
         $stateProvider.
             state("index",{ 
+              abstract: true,
+              template: "<ui-view/>",
+              data: {
+                  access: access.user
+              }
+            }).
+
+            state("index.index",{ 
               url: '/index',
               templateUrl: "/partials/land-page.html",
               controller: 'landPageController'
             }).
 
-            state("filter",{ 
+            state("index.filter",{ 
               url: "/filter?experience&location&guest",
               controller: "filterFormController",
               templateUrl: '/partials/filter-page.html',
@@ -51,22 +69,50 @@ VendorMine.config([
               } 
             }).
 
-            state( "view", {
+            state( "index.view", {
               url: "/view/:id",
               templateUrl: "/partials/book.html"
-            } )
+            } );
+
+        $stateProvider.state('member', {
+              url: '/member',
+              controller: 'LoginMemberCtrl',
+              templateUrl: 'partials/member/member.html',
+              data: {
+                  access: access.user
+              }
+            });
 
 }]);
 
-/*VendorMine.run(['$rootScope', function($root) {
-  $root.$on('$routeChangeStart', function(e, curr, prev) { 
-    if (curr.$$route && curr.$$route.resolve) {
-      // Show a loading message until promises are not resolved
-      $root.loadingView = true;
-    }
-  });
-  $root.$on('$routeChangeSuccess', function(e, curr, prev) { 
-    // Hide loading message
-    $root.loadingView = false;
-  });
-}]);*/
+VendorMine
+  .run(['$rootScope', '$state', 'Authentication', function( $rootScope, $state, Authentication) {
+      
+      $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+          console.log(event);
+          console.log(toState);
+          console.log(toParams);
+          console.log(fromState);
+          console.log(fromParams);
+          console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+          if(!('data' in toState) || !('access' in toState.data)){
+              $rootScope.error = "Access undefined for this state";
+              event.preventDefault();
+          }
+          else if (!Authentication.authorize(toState.data.access)) {
+              $rootScope.error = "Seems like you tried accessing a route you don't have access to...";
+              event.preventDefault();
+
+              if(fromState.url === '^') {
+                  if(Authentication.isLoggedIn()) {
+                      Authentication.isLoggedIn()
+                      $state.go('index');
+                  } else {
+                      $rootScope.error = null;
+                      $state.go('login');
+                  }
+              }
+          }
+      });
+  
+  }]);

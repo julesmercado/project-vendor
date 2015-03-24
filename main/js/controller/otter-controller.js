@@ -4,9 +4,7 @@ VendorMine.controller( 'viewController',
 		'state',
 		'Authentication',
 		function headerController( $scope, state, Authentication ){
-			if(!Authentication.exists()){
-				state.go("login")
-			}
+			
 		}
 	] );
 VendorMine.controller('landPageController', 
@@ -19,9 +17,7 @@ VendorMine.controller('landPageController',
 		'$state',
 		'Authentication',
 		function landPageController( $scope, http, postFilter, $rootScope, $location, state, Authentication ) {
-			if(!Authentication.exists()){
-				state.go("login")
-			}
+			
 		}
 		    
 	]);
@@ -38,7 +34,38 @@ VendorMine.controller( 'bookController',
 		}
 	] );
 
+VendorMine.controller( 'LoginBetaCtrl', [
+    '$scope',
+    '$http',
+    'store',
+    '$state',
+    'Authentication',
+    function LoginController( $scope, $http, store, $state, Authentication ) {
 
+       
+
+        $scope.user = {};
+        $scope.$watch('user.exp', function(){
+          //console.log("exp");
+        })
+        $scope.login = function login() {
+          Authentication.requestUser( $scope.user );  
+          
+        }
+
+  }
+]);
+VendorMine.controller( 'LoginMemberCtrl', 
+	function LoginController( $scope, $http, store, $state, Authentication ) {
+
+	  $scope.user = {};
+
+	  $scope.loginMember = function() {
+	    //console.log($scope.user);
+	    Authentication.requestMember( $scope.user );  
+	  }
+
+});
 VendorMine.controller( 'filterFormController', 
 	[
 		'$scope',
@@ -73,9 +100,7 @@ VendorMine.controller( 'filterFormController',
 			    }
 			} );
 
-			if(!Authentication.exists()){
-				state.go("login")
-			}
+			
 			$scope.initialize = {
 					experience: getSecondExperienceResolver.map(function (w) {
 			            return w.name;
@@ -112,7 +137,7 @@ VendorMine.controller( 'filterFormController',
 				Authentication.setView();
 				console.log($scope.venues[index]);
 				eventService.setVenue( $scope.venues[index] );
-				$state.go( 'view', {id: id} );
+				$state.go( 'index.view', {id: id} );
 			};
 
 			$scope.change = function change( id, selected ){

@@ -31,6 +31,7 @@
       </section>
     </section>
 
+    <!-- Quick-view Modal -->
     <section class="modal quick-view-modal current" id="quick-view-details" >
       <h2 class="headline">Book a Venue</h2>
       <section class="steps">
@@ -65,6 +66,8 @@
     
 
       <section class="booking-form-container">
+
+      <!-- Step 1 -->
       	<section class="customer-info" ng-show="tabBook==1">
             <flash:messages class="slide-down"></flash:messages>
               <section class="step-container"><h3 class="headline">Guest Details</h3></section>
@@ -81,6 +84,7 @@
               <button type="submit" class="btn btn-proceed" ng-click="setTabBook(2)">Continue to Amenities</button>
         	</section>
 
+          <!-- Step 2 -->
         	<section class="addons" ng-show="tabBook==2">
               <section class="step-container"><section class="step">2</section><h3 class="headline">Amenities and Features</h3></section>
               <ul class="addons unstyled">
@@ -91,8 +95,10 @@
                 <label class="label-checkbox" ng-repeat="rooms in amenities.rooms"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.rooms[$index].selected" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}</label>
               </ul>
               
-              <button type="submit" class="btn btn-proceed" ng-click="setTabBook(2)">Continue to Addons</button>
+              <button type="submit" class="btn btn-proceed" ng-click="setTabBook(3)">Continue to Addons</button>
           </section>
+
+          <!-- Step 3 -->
           <section class="addons" ng-show="tabBook==3">
               <section class="step-container"><section class="step">3</section><h3 class="headline">Addons</h3></section>
                 <section class="steps">
@@ -126,8 +132,11 @@
                 <div ng-show="addOns.msgSkyEye">You choose to book with SkyEye worth ₱1,500</div>
               </form>
                 
-              </section>  
+              </section> 
+              <button type="submit" class="btn btn-proceed" ng-click="setTabBook(4)">Continue to Review</button> 
           </section>
+
+          <!-- Step 4 -->
           <section class="payment-method" ng-show="tabBook==4">
               <section class="step-container"><section class="step">4</section><h3 class="headline">
                 Payment Method

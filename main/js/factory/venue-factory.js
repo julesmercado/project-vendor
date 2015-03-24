@@ -1,83 +1,36 @@
-'use strict';
-
-VendorMine.factory('RouteFilter', function Routefilter($location) {
-    var filters = [];
-
-    var getFilter = function(route)
-    {
-        //console.log(filters);
-        //console.log(route);
-        for (var i = filters.length - 1; i >= 0; i--) {
-            for (var j = filters[i].routes.length - 1; j >= 0; j--) {
-
-                if(matchRoute(filters[i].routes[j], route))
-                {
-                    return filters[i];
-                }
-            };
-        };
-    }
-
-    var matchRoute = function(filterRoute, route)
-    {
-        if(route instanceof RegExp)
-        {
-            return route.test(filterRoute);
-        }
-
-        else
-        {
-            return route === filterRoute;
-        }
-    }
-
-    return {
-        canAccess: function(route)
-        {
-            //console.log("routeFilter.canAccess");
-            var filter = getFilter(route);
-
-            return filter.callback();
-        },
-        
-        register: function(name, routes, callback, redirectUrl)
-        {
-            //console.log("routeFilter.register");
-            redirectUrl = typeof redirectUrl !== "undefined" ? redirectUrl : null;
-
-            filters.push({
-                name: name,
-                routes:routes,
-                callback: callback,
-                redirectUrl: redirectUrl
-            });
-        },
-
-        run: function(route)
-        {
-            //console.log("routeFilter.run");
-            //console.log(route);
-            var filter = getFilter(route);
-
-            if(filter != null && filter.redirectUrl != null)
-            {
-                // User can access this page
-                if(! filter.callback())
-                {
-                    $location.path(filter.redirectUrl);
-                }
-            }
-        }
-    }
-  });
 
 VendorMine.factory('Authentication', function Authentication($q, $http, $timeout, store, $state) {
 	
-    var authenticatedUser = store.get('beta');
-    var memberUser = store.get('member');
+	var accessLevels = routingConfig.accessLevels
+        , userRoles = routingConfig.userRoles;
+
+    var authenticatedUser = store.get('beta') || { username: '', role: userRoles.public };
+    var memberUser = store.get('member') || { username: '', role: userRoles.public };
     var setView = null;
 
+    function changeBetaUser( user ){
+    	angular.extend( authenticatedUser, user );
+    	console.log( authenticatedUser );
+    }
+
+    function changeMemberUser( user ){
+    	angular.extend( memberUser, user );
+    } 
     return  {
+    	authorize: function(accessLevel, role) {
+            if(role === undefined) {
+                role = authenticatedUser.role;
+            }
+
+            return accessLevel.bitMask & role.bitMask;
+        },
+        isLoggedIn: function(user) {
+            if(user === undefined) {
+                user = authenticatedUser;
+                console.log(authenticatedUser);
+            }
+            return user.role.title === userRoles.user.title || user.role.title === userRoles.member.title;
+        },
     	setView: function(){
     		//console.log("set");
     		setView = true;
@@ -88,25 +41,27 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
         requestUser: function( credentials )
         {
             //console.log("authentication.requestUser");
-            var deferred = $q.defer();
+            /*var deferred = $q.defer();
 
             $.get( 
 		      "http://demo1290827.mockable.io/venue/get/data", 
 		      credentials
 		    )
 		    .success( function( response ) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-		      //console.log(response.data);
-
-		      authenticatedUser = response.data;
+		      console.log(authenticatedUser);
+		      //changeBetaUser( response.data )
 		      
-		      store.set('beta', response.data);
-		      $state.go('index');
 		    })
 		    .error( function( error ) {
 		      alert( error.data );
 		    });
 
-            return deferred.promise;
+            return deferred.promise;*/
+            changeBetaUser( {
+            	username: 'user',
+            	role: userRoles.user
+            } );
+            $state.go('index.index');
         },
 
         requestMember: function( credentials )
@@ -153,41 +108,6 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
         {
             //console.log("authentication.exists");
             return authenticatedUser != null;
-        },
-
-        login: function(credentials)
-        {
-            var deferred = $q.defer();
-
-            $http.post('/auth/login', credentials).success(function(user)
-            {
-                if(user)
-                {
-                    authenticatedUser = user;
-                    deferred.resolve(user);
-                }
-                else
-                {
-                    deferred.reject('Given credentials are incorrect');
-                }
-
-            }).error(function(error)
-            {
-                deferred.reject(error);
-            });
-
-            return deferred.promise;
-        },
-
-
-        logout: function()
-        {
-            authenticatedUser = null;
-        },
-
-        isDeveloper: function()
-        {
-            return this.exists() && authenticatedUser.type == 'developer';
         }
     }
   });
