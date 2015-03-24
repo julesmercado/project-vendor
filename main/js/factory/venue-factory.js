@@ -5,7 +5,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
         , userRoles = routingConfig.userRoles;
 
     var authenticatedUser = store.get('beta') || { username: '', role: userRoles.public };
-    var memberUser = store.get('member') || { username: '', role: userRoles.public };
+    var memberUser = store.get('member') || { username: '', role: userRoles.user };
     var setView = null;
 
     function changeBetaUser( user ){
@@ -66,7 +66,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 
         requestMember: function( credentials )
         {
-            var deferred = $q.defer();
+            /*var deferred = $q.defer();
 
             $.get( 
 		      "http://demo1290827.mockable.io/venue/get/data", 
@@ -83,7 +83,12 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 		      alert( error.data );
 		    });
 
-            return deferred.promise;
+            return deferred.promise;*/
+            changeMemberUser( {
+            	username: 'user',
+            	role: userRoles.user
+            } );
+            $state.go('index.index');
         },
 
         getUser: function()

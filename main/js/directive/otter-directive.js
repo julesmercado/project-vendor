@@ -181,20 +181,20 @@ VendorMine.directive( 'bookEvent',
 							scope.getDetails = function getDetails(){
 								$('#quick-view-details').modal();
 								timeout( function(){
-								amenityAndFeatures.getAmenityAndFeatures(venuesNow.id, function(error, data){
-									if(error){
-										console.error(error)
-									}else{
-										timeout(function() {
-											scope.initialize = {
-												amenities: data.amenities,
-												rooms: data.rooms
-											};
-											$rootScope.$broadcast('amenities', scope.initialize, venuesNow );
-										}, 0);
-										
-									}
-								});
+								amenityAndFeatures.getAmenityAndFeatures(venuesNow.id,function (error, data) {
+										if(error){
+											console.error(error)
+										}else{
+											timeout(function() {
+												scope.initialize = {
+													amenities: data.amenities,
+													rooms: data.rooms
+												};
+												$rootScope.$broadcast('amenities', scope.initialize, venuesNow );
+											}, 0);
+											
+										}
+									});
 								
 								}, 0);
 								
@@ -325,32 +325,8 @@ VendorMine.directive( 'bookEvent',
 							scope.bookVendor = function bookVendor(){
 								//console.log( scope.amenityAndFeatures );
 								//console.log( scope.formFields );
-								scope.formFields.amenities = scope.amenityAndFeatures.amenities.map(function( element, index , array){
-									if(element.selected==true){
-										var indexAmenities = "";
-										return indexAmenities + element.id;
-									}
-								}).filter(function (w, idx, arr) {
-									if(w==undefined){
-										
-									}else{
-										return w;
-									}
-							            	
-							     });
-								scope.formFields.rooms = scope.amenityAndFeatures.rooms.map(function( element, index , array){
-									if(element.selected==true){
-										var indexAmenities = "";
-										return indexAmenities + element.id;
-									}
-								}).filter(function (w, idx, arr) {
-									if(w==undefined){
-										
-									}else{
-										return w;
-									}
-							            	
-							     });
+								scope.formFields.amenities = map( scope.amenityAndFeatures.amenities );
+								scope.formFields.rooms = map( scope.amenityAndFeatures.rooms );
 								scope.formFields.original_date = $filter('date')(scope.dates.original_date, 'yyyy-MM-dd');
 								dateSetter.checkDate( scope.formFields.original_date, 2 );
 								if( dateSetter.getStatus() ){
@@ -385,4 +361,24 @@ function init(scope, Authentication){
 	}else{
 		scope.formFields.grabCar = makeid();
 	}
+}
+function grabCarInit(){
+
+}
+function map( array ){
+	var result;
+	result = array.map(function( element, index , array){
+		if(element.selected==true){
+			var indexAmenities = "";
+			return indexAmenities + element.id;
+		}
+	}).filter(function (w, idx, arr) {
+		if(w==undefined){
+			
+		}else{
+			return w;
+		}
+            	
+     });
+	return result;
 }
