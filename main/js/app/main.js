@@ -1,5 +1,4 @@
 var VendorMine = angular.module( 'VendorMine', [ 
-  'ngRoute', 
   'ui.router', 
   'ui.bootstrap', 
   'angularUtils.directives.dirPagination', 
@@ -12,12 +11,11 @@ var VendorMine = angular.module( 'VendorMine', [
 VendorMine.config([
   '$httpProvider', 
   '$locationProvider', 
-  '$routeProvider', 
   'paginationTemplateProvider', 
   '$stateProvider', 
   '$urlRouterProvider', 
   'jwtInterceptorProvider',
-    function ($httpProvider, $locationProvider, $routeProvider, paginationTemplateProvider, $stateProvider, $urlRouterProvider, jwtInterceptorProvider) {
+    function ($httpProvider, $locationProvider, paginationTemplateProvider, $stateProvider, $urlRouterProvider, jwtInterceptorProvider) {
       paginationTemplateProvider.setPath('/lib/dirPagination.tpl.html');
       var access = routingConfig.accessLevels;
 
