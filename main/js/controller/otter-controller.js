@@ -135,7 +135,7 @@ VendorMine.controller( 'filterFormController',
 
 			$scope.bookVenue = function bookVenue( index, id ){
 				Authentication.setView();
-				console.log($scope.venues[index]);
+				//console.log($scope.venues[index]);
 				eventService.setVenue( $scope.venues[index] );
 				$state.go( 'index.view', {id: id} );
 			};
@@ -145,19 +145,7 @@ VendorMine.controller( 'filterFormController',
 			};
 
 			$scope.secondFilter = function secondFilter(){
-				$scope.secondPageSelection.amenities = $scope.initialize.amenities.map(function( element, index , array){
-					if(element.selected==true){
-						var indexAmenities = "";
-						return indexAmenities + element.id;
-					}
-				}).filter(function (w, idx, arr) {
-					if(w==undefined){
-						
-					}else{
-						return w;
-					}
-			            	
-			     });
+				$scope.secondPageSelection.amenities = map( $scope.initialize.amenities );
 				
 				postFilterAmenities.getPostFilterAmenities( $scope.secondPageSelection, function(error, data){
 					if(error){
@@ -173,3 +161,18 @@ VendorMine.controller( 'filterFormController',
 			
 		}
 	] );
+function map( amenities ){
+	amenities.map(function( element, index , array){
+		if(element.selected==true){
+			var indexAmenities = "";
+			return indexAmenities + element.id;
+		}
+	}).filter(function (w, idx, arr) {
+		if(w==undefined){
+			
+		}else{
+			return w;
+		}
+            	
+     });
+};

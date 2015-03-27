@@ -87,12 +87,12 @@ VendorMine
   .run(['$rootScope', '$state', 'Authentication', function( $rootScope, $state, Authentication) {
       
       $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-          console.log(event);
+         /* console.log(event);
           console.log(toState);
           console.log(toParams);
           console.log(fromState);
           console.log(fromParams);
-          console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+          console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");*/
           if(!('data' in toState) || !('access' in toState.data)){
               $rootScope.error = "Access undefined for this state";
               event.preventDefault();

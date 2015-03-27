@@ -1,8 +1,8 @@
 <section class="header">
     <section class="top-header container">
       <section class="quick-links pull-right">
-<a class="link" ng-show="memberCheckExist()" ui-sref="member()">Member Page</a>
-<label ng-show="memberCheckExist()" >{{ member.email }}</label>
+<a class="link" ng-show="!memberCheckExist()" ui-sref="member()">Member Page</a>
+<label ng-show="memberCheckExist()" >{{ member.username }}</label>
 <a class="link" ui-sref="verify()">Verify Payment</a>
 </section><section class="brand">
   <span class="logo-name">Otter</span> - <span class="tagline">Experience Lab</span>

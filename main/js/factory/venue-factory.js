@@ -5,7 +5,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
         , userRoles = routingConfig.userRoles;
 
     var authenticatedUser = store.get('beta') || { username: '', role: userRoles.public };
-    var memberUser = store.get('member') || { username: '', role: userRoles.user };
+    var memberUser = store.get('member') || { username: '', role: userRoles.public };
     var setView = null;
 
     function changeBetaUser( user ){
@@ -24,18 +24,18 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 
             return accessLevel.bitMask & role.bitMask;
         },
-        isLoggedIn: function(user) {
-            if(user === undefined) {
+        isLoggedIn: function( user ) {
+            if( user === undefined ) {
                 user = authenticatedUser;
                 console.log(authenticatedUser);
             }
             return user.role.title === userRoles.user.title || user.role.title === userRoles.member.title;
         },
-    	setView: function(){
+    	setView: function(  ){
     		//console.log("set");
     		setView = true;
     	},
-    	viewExists: function(){
+    	viewExists: function(  ){
     		return setView != null;
     	},
         requestUser: function( credentials )
@@ -107,7 +107,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
         {
             //console.log("authentication.exists");
             
-            return memberUser != null;
+            return memberUser.role.title === 'user';
         },
         exists: function()
         {

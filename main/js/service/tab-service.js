@@ -66,6 +66,49 @@ VendorMine.service('dateSetter',
 			
 		}
 	]);
+VendorMine.service('addOnService', 
+	[
+		
+		function service(  ){
+				var grabCarKey = "";
+				var skyEyeKey = "";
+	// 	service description:
+	/*
+		Set addOns key only when the client clicks ok button
+	*/
+				return {
+					// Setter
+					setGrabCarOK: function setGrabCarOK( key ){
+						grabCarKey = key;
+						console.log( grabCarKey );
+						
+					},
+					setSkyEyeOK: function setSkyEyeOK( key ){
+						skyEyeKey = key;
+						console.log( skyEyeKey );
+						
+					},
+
+					// Cancel
+					setGrabCarCancel: function setGrabCarCancel(  ){
+						grabCarKey = "";
+					},
+					setSkyEyeCancel: function setSkyEyeCancel(  ){
+						skyEyeKey = "";
+					},
+
+					// Getter
+					getGrabCarKey: function getGrabCarKey(  ){
+						return grabCarKey;
+					},
+					getSkyEyeKey: function getSkyEyeKey(  ){
+						return skyEyeKey;
+					}
+					
+				}
+			
+		}
+	]);
 VendorMine.service('dateChecker', 
 	[
 		function service(  ){
