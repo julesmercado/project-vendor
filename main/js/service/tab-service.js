@@ -9,9 +9,12 @@ VendorMine.service('dateSetter',
 			  , count = 0;
 
 				return {
-					checkDate: function checkDate( date, num ){
+					checkDate: function checkDate( date, id, num ){
 						$http.post( "http://192.168.1.41:3000/vendormines/verify/dates",
-							{"date": date}
+							{
+								"date": date,
+								"venue_id": id
+								}
 						)
 						.success( function(data){
 							count = num;
