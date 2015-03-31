@@ -1,39 +1,15 @@
-VendorMine.controller( 'viewController', 
-	[
-		'$scope',
-		'state',
-		'Authentication',
-		function headerController( $scope, state, Authentication ){
-			
-		}
-	] );
 VendorMine.controller('landPageController', 
 	[
 		'$scope',
-		'$http',
-		'postFilter',
-		'$rootScope',
-		'$location',
-		'$state',
-		'Authentication',
-		function landPageController( $scope, http, postFilter, $rootScope, $location, state, Authentication ) {
-			
+		'getSecondExperienceResolver',
+		function landPageController( $scope, getSecondExperienceResolver ) {
+			var data = getSecondExperienceResolver.data;
+			$scope.experience = data.map(function (w) {
+	            return w.name;
+	        });
 		}
 		    
 	]);
-
-VendorMine.controller( 'bookController', 
-	[
-		'$scope',
-		'$route',
-		'$rootScope',
-		'bookVendorVenues',
-		'amenityAndFeatures',
-		'$timeout',
-		function bookController( $scope, $route, $rootScope, bookVendorVenues, amenityAndFeatures, timeout ){  
-		}
-	] );
-
 VendorMine.controller( 'LoginBetaCtrl', [
     '$scope',
     '$http',
@@ -91,7 +67,7 @@ VendorMine.controller( 'filterFormController',
 			$scope.grabCar = otterFees.getGrabCar();
 
 			$scope.initialize = {
-					experience: getSecondExperienceResolver.map(function (w) {
+					experience: getSecondExperienceResolver.data.map(function (w) {
 			            return w.name;
 			        }),
 					amenities: getAmenitiesResolver.map(function (w) {

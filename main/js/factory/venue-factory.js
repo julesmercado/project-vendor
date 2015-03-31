@@ -155,21 +155,6 @@ VendorMine.factory('venueFactory',
 			
 		}
 	]);
-VendorMine.factory('getExperience', 
-	[
-		'$http',
-		function factory( $http ){
-
-			return function getExperience( callback ){
-				$.get( "https://demo-otter.herokuapp.com/vendormines/get_experience",
-					function(data){
-						callback(data);
-					} );
-
-			} 
-			
-		}
-	]);
 VendorMine.factory('getSecondExperience', 
 	[
 		'$http',
@@ -177,13 +162,13 @@ VendorMine.factory('getSecondExperience',
 
 			return {
 				getSecondExperience: function ( callback ){
-					var promise = $.get("https://demo-otter.herokuapp.com/vendormines/get_experience", 
-							function( data ){
-								var experience = data.map(function (w) {
-						            return w.name;
-						        });
-								return experience;
-							});
+					var promise = $http.get("https://demo-otter.herokuapp.com/vendormines/get_experience")
+									.success(function( data ){
+										var experience = data.map(function (w) {
+								            return w.name;
+								        });
+										return experience;
+									});
 					return promise;
 				} 
 			}

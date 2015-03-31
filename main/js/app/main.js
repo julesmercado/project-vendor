@@ -47,7 +47,12 @@ VendorMine.config([
             state("index.index",{ 
               url: '/index',
               templateUrl: "/partials/land-page.html",
-              controller: 'landPageController'
+              controller: 'landPageController',
+              resolve: {
+                getSecondExperienceResolver: function( getSecondExperience ){
+                    return getSecondExperience.getSecondExperience();
+                  }
+              }
             }).
 
             state("index.filter",{ 

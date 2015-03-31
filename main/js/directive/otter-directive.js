@@ -19,25 +19,15 @@ VendorMine.directive( 'headerDirective',
 	] )
 VendorMine.directive( 'experienceDirective', 
 	[
-		'experienceService',
 		'$timeout',
-		function directive( experienceService, timeout ){
+		function directive( timeout ){
 			return {
 				
 				"restrict": "A",
 				"transclude": true,
 				"template": "<div ng-transclude></div>",
-				"link": {
-					pre: function link( scope, element, attribute ){
-						experienceService.setExperienced(scope);
-					
-					},
-					post: function link( scope, element, attribute ){
-						timeout( function(){
-							scope.initialize.experience = experienceService.getExperienced();
-						}, 500 );
-						
-					}
+				"link": function link( scope, element, attrs ){
+
 				}
 				
 			}
@@ -46,12 +36,10 @@ VendorMine.directive( 'experienceDirective',
 VendorMine.directive( 'landPageDirective', 
 	[
 		'$location',
-		'getExperience',
-		'experienceService',
 		'$timeout',
 		'$state',
 		'$stateParams',
-		function directive( $location, getExperience, experienceService, timeout, $state, $stateParams ){
+		function directive( $location, timeout, $state, $stateParams ){
 			return {
 				
 				"restrict": "A",
@@ -72,10 +60,7 @@ VendorMine.directive( 'landPageDirective',
 						$scope.change = function change( id, selected ){
 						};
 						
-						$scope.setFirst= function( obj ){
-							alert(obj);
-							$state.go('filter', {experience: obj.exp});
-						};
+						
 
 					}
 				}
