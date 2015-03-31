@@ -182,13 +182,13 @@ VendorMine.factory('getAmenities',
 
 			return {
 				getAmenities: function ( callback ){
-					var promise = $.get("https://demo-otter.herokuapp.com/vendormines/get_amenities", 
-							function( data ){
-								var amenities = data.map(function (w) {
-							        	return {name: w.name, selected: false};
-							    	});
-								return amenities;
-							});
+					var promise = $http.get("https://demo-otter.herokuapp.com/vendormines/get_amenities")
+									.success(function( data ){
+										var amenities = data.map(function (w) {
+									        	return {name: w.name, selected: false};
+									    	});
+										return amenities;
+									});
 					return promise;
 				} 
 			}

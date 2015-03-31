@@ -70,7 +70,7 @@ VendorMine.controller( 'filterFormController',
 					experience: getSecondExperienceResolver.data.map(function (w) {
 			            return w.name;
 			        }),
-					amenities: getAmenitiesResolver.map(function (w) {
+					amenities: getAmenitiesResolver.data.map(function (w) {
 			            return {name: w.name, id: w.id, selected: false};
 			        })
 			};

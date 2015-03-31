@@ -60,9 +60,6 @@ VendorMine.config([
               controller: "filterFormController",
               templateUrl: '/partials/filter-page.html',
               resolve: {
-                  postFilterResolver: function( postFilter ){
-                    return  postFilter;
-                  },
                   getAmenitiesResolver: function( getAmenities ){
                     return getAmenities.getAmenities();
                   },

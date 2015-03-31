@@ -21,31 +21,31 @@ VendorMine.service('dateSetter',
 							if( count == 1 ){
 								if( data.status ){
 									dateIsOkay = true;
-									console.log( "First " );
-									console.log( data );
-									console.log( dateIsOkay );
-									console.log("++++++++");
+									//console.log( "First " );
+									//console.log( data );
+									//console.log( dateIsOkay );
+									//console.log("++++++++");
 									flash( data.data, data.message );
 								}else{
 									dateIsOkay = false;
-									console.log( "First ");
-									console.log( data );
-									console.log( dateIsOkay );
-									console.log("++++++++");
+									//console.log( "First ");
+									//console.log( data );
+									//console.log( dateIsOkay );
+									//console.log("++++++++");
 									flash( data.data, data.message );
 								}
 							}else if( count == 2){
 								if( data.status ){
 									dateIsReallyOkay = true;
-									console.log( "Second ");
-									console.log( data );
-									console.log( dateIsReallyOkay );
+									//console.log( "Second ");
+									//console.log( data );
+									//console.log( dateIsReallyOkay );
 									flash( data.data, data.message );
 								}else{
 									dateIsReallyOkay = false;
-									console.log( "Second ");
-									console.log( data );
-									console.log( dateIsReallyOkay );
+									//console.log( "Second ");
+									//console.log( data );
+									//console.log( dateIsReallyOkay );
 									flash( data.data, data.message );
 								}
 								
@@ -56,8 +56,8 @@ VendorMine.service('dateSetter',
 						} );
 					},
 					getStatus: function getStatus(  ){
-						console.log( dateIsOkay );
-						console.log( dateIsReallyOkay );
+						/*console.log( dateIsOkay );
+						console.log( dateIsReallyOkay );*/
 						return dateIsOkay && dateIsReallyOkay;
 					},
 					cancelAll: function cancelAll( ){
