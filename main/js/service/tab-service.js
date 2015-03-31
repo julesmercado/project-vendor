@@ -155,16 +155,49 @@ VendorMine.service('features',
 		function service(  ){
 			
 			var features = {};
-
+			var amenitiesAndFeatures = {};
+			var selectedAmenitiesAndRooms = {};
 				return {
 					getFeatures: function getTab( ){
-						return tab;
+						return features;
 					},
 					setFeatures: function setTab( data ){
 						features = data;
 						return features;
+					},
+					setAmenitiesAndFeatures: function setAmenitiesAndFeatures( data ){
+						amenitiesAndFeatures = data;
+					},
+					getWatch: function getWatch(){
+						return selectedAmenitiesAndRooms;
+					},
+					getAmenitiesAndFeatures: function getAmenitiesAndFeatures(){
+						function map( array ){
+							var result;
+							result = array.map(function( element, index , array){
+								if(element.selected==true){
+									var indexAmenities = "";
+									return indexAmenities + element.name;
+								}
+							}).filter(function (w, idx, arr) {
+								return result = ( w==undefined ) ? "" : w;
+						     });
+							return result;
+						}
+						var selectedAmenities = {};
+						var selectedRooms	= {};
+						
+
+						
+						selectedAmenities = map( amenitiesAndFeatures.amenities );
+						selectedRooms = map( amenitiesAndFeatures.rooms )
+						
+						selectedAmenitiesAndRooms = {
+									amenities: selectedAmenities,
+									rooms: selectedRooms
+								};
+						return selectedAmenitiesAndRooms;
 					}
-					
 				}
 			
 		}
