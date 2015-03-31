@@ -1,0 +1,23 @@
+<form class="form search-filter col-lg-3" name="bookingFormSecondPage" novalidate>
+   <h3 class="headline col-lg-12">Filter results</h3>
+   <section class="input-group col-lg-12">
+      <h5 class="label">Experience</h5>
+      <select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, secondPageSelection.exp )" ng-model="secondPageSelection.exp" ng-options="selection for selection in initialize.experience">
+      </select>
+   </section>
+   <section class="input-group col-lg-12">
+      <h5 class="label">Location</h5>
+      <input type="text" placeholder="Location(e.g. Makati City)" name="location" ng-model="secondPageSelection.city_address" class="input" required>
+   </section>
+   <section class="input-group col-lg-12">
+      <h5 class="label">Features &amp; Amenities</h5>
+      <ul class="list unstyled addon-list">
+         <li class=" list-item" =""="" ng-repeat="amenity in initialize.amenities">
+         <label class="label-checkbox"><input type="checkbox" name="selectedAmenity[]" ng-model="amenity.selected" class="input checkbox" value="{{amenity.name}}">{{amenity.name}}</label>
+         </li>
+      </ul>
+   </section>
+   <section class="input-group col-lg-12">
+      <button type="submit" class="btn" ng-click="secondFilter()">Update search</button>
+   </section>
+</form>

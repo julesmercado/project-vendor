@@ -1,0 +1,40 @@
+<section class="addons" ng-show="tabBook==3">
+        <section class="step-container"><section class="step">3</section><h3 class="headline">Addons</h3></section>
+          
+          <section class="steps">
+              <input type="checkbox" ng-model="addOns.grabCar">
+              <section class="step-container" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Lorem ipsum dolor sit amet, no altera fuisset eos. Mea ad simul cotidieque. Et admodum invenire definitiones vel, vis quas disputando no. Qui unum nonumy euripidis no, agam denique invidunt an pri.">
+                <h3 class="headline">Grab Car</h3>
+              </section> 
+            {{grabCar}}
+              <input type="checkbox" ng-model="addOns.skyEye">
+              <section class="step-container" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Lorem ipsum dolor sit amet, no altera fuisset eos. Mea ad simul cotidieque. Et admodum invenire definitiones vel, vis quas disputando no. Qui unum nonumy euripidis no, agam denique invidunt an pri.">
+                <h3 class="headline">Sky Eye</h3>
+              </section>
+            {{skyEye}}
+          </section> 
+          
+          <section ng-show="addOns.grabCar" >
+
+            <form name="grabCarForm">
+              <input id="grabCar" name="grabCarInput" type="text" ng-model="formFields.grabCar" maxlength="8" placeholder="Grab Car" disabled required data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Required to fill up if you want to purchase">
+              
+              <button ng-click="addOns.okGrabCar( formFields.grabCar )" ng-disabled="grabCarForm.grabCarInput.$invalid || (grabCarForm.grabCarInput.$pristine && formFields.grabCar=='')" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with GrabCar">ok</button>
+              <button ng-click="addOns.cancelGrabCar()">cancel</button>
+              <div ng-show="addOns.msgGrabCar">You choose to book with GrabCar worth ₱1,000</div>
+            </form>
+            
+          </section>
+
+        <section ng-show="addOns.skyEye" >
+
+          <form name="skyEyeForm">
+            <input type="text" name="skyEyeInput" ng-model="formFields.skyEye"  maxlength="8" placeholder="Sky Eye" required data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Required to fill up if you want to purchase">                
+            <button ng-click="addOns.okSkyEye( formFields.skyEye )" ng-disabled="skyEyeForm.skyEyeInput.$invalid || skyEyeForm.skyEyeInput.$pristine" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with SkyEye">ok</button>
+            <button ng-click="addOns.cancelSkyEye()">cancel</button>
+            <div ng-show="addOns.msgSkyEye">You choose to book with SkyEye worth ₱1,500</div>
+          </form>
+          
+        </section> 
+        <button type="submit" class="btn btn-proceed" ng-click="setTabBook(4)">Continue to Review</button> 
+</section>

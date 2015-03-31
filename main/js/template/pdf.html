@@ -1,0 +1,20 @@
+ 
+
+<div id="testcase">
+    <h5>Venue Details</h5>
+        <p>Venue Name : {{venues.name}} </p>
+        <p>Address    : {{venues.address}}, {{venues.city_address}} </p>
+        <p>Contacts   : {{venues.contact}} </p>
+        <p>Email      : {{venues.email}} </p>
+    <h5>Addons</h5>
+        <p>GrabCar: {{grabCar}}</p>
+        <p>SkyEye:  {{skyEye}}</p>
+    <h5>Amenities & Rooms</h5>
+        Amenities 
+        <li ng-repeat=" amenities in amenitiesAndRooms.amenities " >{{amenities}}</li>
+        Rooms
+        <li ng-repeat=" rooms in amenitiesAndRooms.rooms" >{{rooms}}</li>
+    <h5>Breakdown of Bills</h5>
+    <h5>Instructions for payment</h5>
+</div>
+

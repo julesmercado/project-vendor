@@ -1,0 +1,12 @@
+<section class="addons" ng-show="tabBook==2">
+  <section class="step-container"><section class="step">2</section><h3 class="headline">Amenities and Features</h3></section>
+  <ul class="addons unstyled">
+    <label class="label-checkbox" ng-repeat="amenities in amenities.amenities"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.amenities[$index].selected" disabled="false" class="input checkbox" value="{{amenity.name}}">{{amenities.name}}</label>
+   
+  </ul><hr>
+  <ul class="addons unstyled">
+    <label class="label-checkbox" ng-repeat="rooms in amenities.rooms"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.rooms[$index].selected" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}</label>
+  </ul>
+  
+  <button type="submit" class="btn btn-proceed" ng-click="setTabBook(3)">Continue to Addons</button>
+</section>

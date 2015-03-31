@@ -1,0 +1,36 @@
+<section class="modal quick-view-modal current" id="quick-view-details" tabs>
+      <h2 class="headline">Book a Venue</h2>
+      <section class="steps">
+        <a ng-click="setTabBook(1)">
+          <section ng-class="{'active':checkThis(1)} " class="step-container">
+  	       <section class="step">1</section>
+            <h3 class="headline">Guest Details</h3>
+          </section>
+        </a>
+
+        <a ng-click="setTabBook(2)">
+          <section ng-class="{'active':checkThis(2)}" class="step-container">
+  	       <section class="step">2</section>
+            <h3 class="headline">Amenities</h3>
+          </section>
+        </a>
+
+        <a ng-click="setTabBook(3)">
+          <section ng-class="{'active':checkThis(3)}" class="step-container">
+           <section class="step">3</section>
+            <h3 class="headline">Addons</h3>
+            </section>
+        </a>
+        
+        <a ng-click="setTabBook(4)">
+          <section ng-class="{'active':checkThis(4)}" class="step-container">
+	         <section class="step">4</section>
+            <h3 class="headline">Payment Method</h3>
+            </section>
+        </a>
+	    </section>
+    
+
+      <section booking-form-container></section>
+
+</section><!-- quick-view-modal -->

@@ -1,0 +1,15 @@
+<section class="customer-info" ng-show="tabBook==1">
+  <flash:messages class="slide-down"></flash:messages>
+    <section class="step-container"><h3 class="headline">Guest Details</h3></section>
+    <input class="input" placeholder="Full Name" ng-model="formFields.name" type="text"  required>
+    <input class="input" placeholder="Email" ng-model="formFields.email" type="text"  required> 
+    <input class="input" placeholder="Contact #" ng-model="formFields.contact_no" type="text"  required>
+    <input class="input" placeholder="Expected Guest" ng-model="formFields.expected_guest" type="text"  required>
+    <section class="input datepicker-input">
+      <input type="text" name="first" class="form-control" datepicker-popup='yyyy/MM/dd' ng-model="dates.original_date" is-open="opened.first" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled=""/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event, 'first')"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+    </section>
+    <button type="submit" class="btn btn-proceed" ng-click="setTabBook(2)">Continue to Amenities</button>
+</section>
