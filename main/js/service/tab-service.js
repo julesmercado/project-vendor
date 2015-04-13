@@ -10,7 +10,7 @@ VendorMine.service('dateSetter',
 			  , amenitiesAndRooms = {};
 				return {
 					checkDate: function checkDate( date, id, num ){
-						$http.post( "http://192.168.1.35:3000/vendormines/verify/dates",
+						$http.post( "https://demo-otter.herokuapp.com/vendormines/verify/dates",
 							{
 								"date": date,
 								"venue_id": id

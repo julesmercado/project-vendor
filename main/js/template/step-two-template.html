@@ -5,7 +5,7 @@
    
   </ul><hr>
   <ul class="addons unstyled">
-    <label class="label-checkbox" ng-repeat="rooms in amenityAndFeatures.room"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.rooms[$index].selected" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}</label>
+    <label class="label-checkbox" ng-repeat="rooms in amenityAndFeatures.room"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.room[$index].selected" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}</label>
   </ul>
   
   <button type="submit" class="btn btn-proceed" ng-click="setTabBook(3)">Continue to Addons</button>

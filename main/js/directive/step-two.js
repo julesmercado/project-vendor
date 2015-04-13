@@ -24,6 +24,7 @@ VendorMine.directive( 'stepTwo',
 									return {name: w.name, id: w.id, selected: false};
 								})
 							};
+							console.log(scope.amenityAndFeatures);
 							features.setFeatures( scope.amenities );
 							features.setAmenitiesAndFeatures( scope.amenityAndFeatures );
 							console.log(features.getFeatures());

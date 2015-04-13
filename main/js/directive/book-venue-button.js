@@ -12,8 +12,8 @@ VendorMine.directive( 'bookVenueButton',
 				"link": function link( scope, element, attribute ){
 					scope.bookVendor = function bookVendor(){
 
-						scope.formFields.amenities = map( scope.amenityAndFeatures.amenities );
-						scope.formFields.rooms = map( scope.amenityAndFeatures.rooms );
+						//scope.formFields.amenities = map( scope.amenityAndFeatures.amenities );
+						scope.formFields.rooms = map( scope.amenityAndFeatures.room );
 						scope.formFields.original_date = $filter('date')(scope.dates.original_date, 'yyyy-MM-dd');
 
 						// Only get Addons Key if client clicks ok
@@ -21,15 +21,17 @@ VendorMine.directive( 'bookVenueButton',
 						scope.formFields.skyEye = addOnService.getSkyEyeKey();
 						
 						//dateSetter.checkDate( scope.formFields.original_date, 2 );
-						if( dateSetter.getStatus() ){
+						/*if( dateSetter.getStatus() ){
 							
 							dateSetter.cancelAll();
 						}else{
 							console.log("Unsuccessful");
 							dateSetter.cancelAll();
-						}
+						}*/
 						
 						bookVendorVenues( scope.formFields );
+						//console.log( scope.formFields );
+						//console.log( scope.amenityAndFeatures.room );
 						$.modal.close();
 					};
 				}
