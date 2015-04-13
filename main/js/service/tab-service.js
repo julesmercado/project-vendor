@@ -6,11 +6,11 @@ VendorMine.service('dateSetter',
 			
 			var dateIsOkay = false
 			  , dateIsReallyOkay = false
-			  , count = 0;
-
+			  , count = 0
+			  , amenitiesAndRooms = {};
 				return {
 					checkDate: function checkDate( date, id, num ){
-						$http.post( "http://192.168.1.41:3000/vendormines/verify/dates",
+						$http.post( "http://192.168.1.35:3000/vendormines/verify/dates",
 							{
 								"date": date,
 								"venue_id": id
@@ -19,21 +19,7 @@ VendorMine.service('dateSetter',
 						.success( function(data){
 							count = num;
 							if( count == 1 ){
-								if( data.status ){
-									dateIsOkay = true;
-									//console.log( "First " );
-									//console.log( data );
-									//console.log( dateIsOkay );
-									//console.log("++++++++");
-									flash( data.data, data.message );
-								}else{
-									dateIsOkay = false;
-									//console.log( "First ");
-									//console.log( data );
-									//console.log( dateIsOkay );
-									//console.log("++++++++");
-									flash( data.data, data.message );
-								}
+								amenitiesAndRooms = data;
 							}else if( count == 2){
 								if( data.status ){
 									dateIsReallyOkay = true;
@@ -64,6 +50,9 @@ VendorMine.service('dateSetter',
 						dateIsOkay = false;
 						dateIsReallyOkay = false;
 						count = 0;
+					}, 
+					getData: function getData(){
+						return amenitiesAndRooms;
 					}
 				}
 			
@@ -189,12 +178,12 @@ VendorMine.service('features',
 						
 
 						
-						selectedAmenities = map( amenitiesAndFeatures.amenities );
-						selectedRooms = map( amenitiesAndFeatures.rooms )
+						//selectedAmenities = map( amenitiesAndFeatures.amenities );
+						selectedRooms = map( amenitiesAndFeatures.room )
 						
 						selectedAmenitiesAndRooms = {
-									amenities: selectedAmenities,
-									rooms: selectedRooms
+									//amenities: selectedAmenities,
+									room: selectedRooms
 								};
 						return selectedAmenitiesAndRooms;
 					}

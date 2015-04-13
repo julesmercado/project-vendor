@@ -17,7 +17,6 @@ VendorMine.directive( 'stepOne',
 					 		var dateOriginal = $filter('date')( scope.dates.original_date, 'yyyy-MM-dd' );
 					 		//console.log( dateOriginal );
 					 		dateSetter.checkDate( dateOriginal, scope.venue.id, 1 );
-					 		//console.log(scope.venue);
 					 	}
 					 });
 
@@ -46,7 +45,8 @@ VendorMine.directive( 'stepOne',
 					};
 					scope.dates = {
 						original_date: ""
-					};			  	
+					};		
+					console.log(scope.opened);	  	
 				}
 			}
 		}

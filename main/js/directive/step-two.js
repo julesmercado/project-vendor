@@ -1,28 +1,39 @@
 VendorMine.directive( 'stepTwo', 
 	[
 		'features',
-		function directive( features ){
+		'dateSetter',
+		function directive( features, dateSetter ){
 			return {
 				
 				"restrict": "A",
 				"templateUrl": "main/js/template/step-two-template.html",
 				"link": function link( scope, element, attribute ){
+					
+					scope.$watch( function(){
+							return dateSetter.getData();
+						}, function( newvalue, oldvalue ){
+							var datas = newvalue;
+							console.log( datas );
 
-					scope.$on('amenities', function(event, data, venue){
-						scope.amenities = data;
-						scope.amenityAndFeatures = {
-							amenities: scope.amenities.amenities.map(function(w){
-								return {name: w.name, id: w.id, selected: false};
-							}),
-							rooms: scope.amenities.rooms.map(function(w){
-								return {name: w.name, id: w.id, selected: false};
-							})
-						};
+							scope.amenities = datas;
+							scope.amenityAndFeatures = {
+								/*amenities: scope.amenities.amenities.map(function(w){
+									return {name: w.name, id: w.id, selected: false};
+								}),*/
+								room: scope.amenities.room.map(function(w){
+									return {name: w.name, id: w.id, selected: false};
+								})
+							};
+							features.setFeatures( scope.amenities );
+							features.setAmenitiesAndFeatures( scope.amenityAndFeatures );
+							console.log(features.getFeatures());
+						} );
+
+					/*scope.$on('amenities', function(event, data, venue){
+						console.log(data);
 						
-						features.setFeatures( scope.amenities );
-						features.setAmenitiesAndFeatures( scope.amenityAndFeatures );
 						
-					});
+					});*/
 					scope.selectAmenity = function selectAmenity( id ){
 						if(scope.selectedAmenity.length == 0){
 							scope.selectedAmenity.push( id );

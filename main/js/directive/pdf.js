@@ -35,7 +35,7 @@ VendorMine.directive( 'pdf',
 							return features.getWatch();
 						}, function( newvalue, oldvalue ){
 							scope.amenitiesAndRooms = oldvalue;
-							console.log( scope.amenitiesAndRooms );	
+							//console.log( scope.amenitiesAndRooms );	
 						} );
 					}
 				}
