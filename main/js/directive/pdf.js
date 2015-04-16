@@ -27,7 +27,10 @@ VendorMine.directive( 'pdf',
 							return addOnService.getSkyEyeKey();
 						}, function( newvalue, oldvalue ){
 							if( newvalue != oldvalue ){
-								scope.skyEye = addOnService.getSkyEyeKey();
+								scope.skyEye = addOnService.getSkyEyeBooking();
+								scope.skyEyeDate = scope.skyEye.date;
+								scope.skyEyeTime = scope.skyEye.time;
+								console.log(scope.skyEye);
 							}
 						} );
 

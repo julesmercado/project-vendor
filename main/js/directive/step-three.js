@@ -9,17 +9,36 @@ VendorMine.directive( 'stepThree',
 				"restrict": "A",
 				"templateUrl": "main/js/template/step-three-template.html",
 				"link": function link( scope, element, attribute ){
-							if(Authentication.memberExists()){
-								$("#grabCar").removeAttr('disabled');
-							}
+							
 							init(scope, Authentication);
-		//	step 3
+							scope.skyTime = time();
+							scope.form = {};
+							scope.form.skyEye = {
+								date: "",
+								timeOne: "",
+								timeTwo: ""
+							};
+							scope.toggleMin = function() {
+							    scope.minDate = scope.minDate ? null : new Date();
+							  };
+							  scope.toggleMin();
+
+							scope.openSecond = function($event,open) {
+							    $event.preventDefault();
+							    $event.stopPropagation();
+
+							    scope.opened[open] = true;
+							    
+							};
+							scope.opened = {
+								second: false
+							};
+		//	step 3	
 			//	addOns
 							scope.addOns = {
 								grabCar: false,
 								skyEye: false,
 								msgGrabCar: false,
-								msgSkyEye: false,
 								okGrabCar: function( key ){
 									scope.addOns.msgGrabCar = true;
 									addOnService.setGrabCarOK( key );
@@ -33,8 +52,9 @@ VendorMine.directive( 'stepThree',
 
 								okSkyEye: function( key ){
 									scope.addOns.msgSkyEye = true;
-									addOnService.setSkyEyeOK( key );
+									addOnService.setSkyEyeOK( scope.form.skyEye.date, scope.form.skyEye.timeOne, scope.form.skyEye.timeTwo );
 									otterFees.setSkyEye();
+									console.log(  )
 								},
 								cancelSkyEye: function(){
 									scope.addOns.msgSkyEye = false;
@@ -42,6 +62,8 @@ VendorMine.directive( 'stepThree',
 									addOnService.setSkyEyeCancel();
 								}
 							};
+
+
 							scope.$watch( function(){
 								return scope.addOns.grabCar;
 							}, function( newvalue, oldvalue ){
@@ -103,9 +125,14 @@ function grabCar( Authentication ){
 function init(scope, Authentication){
 	if( Authentication.memberExists() ){
 		scope.formFields.grabCar = "";
+		$("#grabCar").removeAttr('disabled');
 	}else{
 		scope.formFields.grabCar = makeid();
 	}
+}
+function time(){
+	var skyTime = ["12:00 AM","12:30 AM","1:00 AM","1:30 AM","2:00 AM","2:30 AM","3:00 AM","3:30 AM","4:00 AM","4:30 AM","5:00 AM","5:30 AM","6:00 AM","6:30 AM","7:00 AM","7:30 AM","8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM","1:00 PM","1:30 PM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM","4:30 PM","5:00 PM","5:30 PM","6:00 PM","6:30 PM","7:00 PM","7:30 PM","8:00 PM","8:30 PM","9:00 PM","9:30 PM","10:00 PM","10:30 PM","11:00 PM","11:30 PM"];
+		return skyTime;
 }
 function makeid(){
     var text = "";

@@ -62,7 +62,15 @@ VendorMine.service('addOnService',
 		
 		function service(  ){
 				var grabCarKey = "";
-				var skyEyeKey = "";
+				var skyEye = "";
+				var skyEyeKey = {};
+				function formatter( date ){
+					var day = date.getDate();	
+					var month = date.getMonth();
+					var year = date.getFullYear();	
+					var fullDate = "(dd/mm/yy)" + " " + day +"-" + (month + 1) +"-" + year;
+					return fullDate;
+				}
 	// 	service description:
 	/*
 		Set addOns key only when the client clicks ok button
@@ -74,9 +82,12 @@ VendorMine.service('addOnService',
 						console.log( grabCarKey );
 						
 					},
-					setSkyEyeOK: function setSkyEyeOK( key ){
-						skyEyeKey = key;
-						console.log( skyEyeKey );
+					setSkyEyeOK: function setSkyEyeOK( date, timeOne, timeTwo ){
+						skyEye = Math.random();
+						skyEyeKey.date = formatter(date);
+						skyEyeKey.time = timeOne + "-" + timeTwo;
+						console.log( skyEyeKey.date );
+						console.log( skyEyeKey.time );
 						
 					},
 
@@ -93,6 +104,9 @@ VendorMine.service('addOnService',
 						return grabCarKey;
 					},
 					getSkyEyeKey: function getSkyEyeKey(  ){
+						return skyEye;
+					},
+					getSkyEyeBooking: function getSkyEyeKey(  ){
 						return skyEyeKey;
 					}
 					
