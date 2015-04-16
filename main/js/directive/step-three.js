@@ -3,7 +3,8 @@ VendorMine.directive( 'stepThree',
 		'otterFees',
 		'Authentication',
 		'addOnService',
-		function directive( otterFees, Authentication, addOnService ){
+		'$rootScope',
+		function directive( otterFees, Authentication, addOnService, $rootScope ){
 			return {
 				
 				"restrict": "A",
@@ -18,6 +19,7 @@ VendorMine.directive( 'stepThree',
 								timeOne: "",
 								timeTwo: ""
 							};
+
 							scope.toggleMin = function() {
 							    scope.minDate = scope.minDate ? null : new Date();
 							  };
@@ -54,7 +56,7 @@ VendorMine.directive( 'stepThree',
 									scope.addOns.msgSkyEye = true;
 									addOnService.setSkyEyeOK( scope.form.skyEye.date, scope.form.skyEye.timeOne, scope.form.skyEye.timeTwo );
 									otterFees.setSkyEye();
-									console.log(  )
+									$rootScope.$broadcast( 'timeOne', scope.form.skyEye.timeOne, scope.form.skyEye.timeTwo );
 								},
 								cancelSkyEye: function(){
 									scope.addOns.msgSkyEye = false;
@@ -63,7 +65,12 @@ VendorMine.directive( 'stepThree',
 								}
 							};
 
-
+							/*scope.$watch( function(){
+								var timeCompare = scope.form.skyEye.timeOne < scope.form.skyEye.timeTwo 
+								return timeCompare;
+							}, function( newvalue, oldvalue ){
+								
+							} );*/
 							scope.$watch( function(){
 								return scope.addOns.grabCar;
 							}, function( newvalue, oldvalue ){

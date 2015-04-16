@@ -84,10 +84,14 @@ VendorMine.service('addOnService',
 					},
 					setSkyEyeOK: function setSkyEyeOK( date, timeOne, timeTwo ){
 						skyEye = Math.random();
-						skyEyeKey.date = formatter(date);
-						skyEyeKey.time = timeOne + "-" + timeTwo;
-						console.log( skyEyeKey.date );
-						console.log( skyEyeKey.time );
+						skyEyeKey.time = "";
+						if( timeOne<timeTwo ){
+							skyEyeKey.date = formatter(date);
+							skyEyeKey.time = timeOne + "-" + timeTwo;
+							/*console.log( skyEyeKey.date );
+							console.log( skyEyeKey.time );*/
+						}
+						
 						
 					},
 
