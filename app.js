@@ -5,7 +5,8 @@ angular.module( 'otter', [
   'angular-jwt',
   'ngSanitize',
   'ngAnimate',
-  'ngQuantum'
+  'ngQuantum',
+  'components'
 ])
 
  
