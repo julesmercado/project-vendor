@@ -9,7 +9,6 @@ VendorMine.directive( 'stepThree',
 				"restrict": "A",
 				"templateUrl": "main/js/template/step-three-template.html",
 				"link": function link( scope, element, attribute ){
-					console.log(scope.opened);
 							if(Authentication.memberExists()){
 								$("#grabCar").removeAttr('disabled');
 							}

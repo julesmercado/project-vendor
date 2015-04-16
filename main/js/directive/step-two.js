@@ -27,7 +27,6 @@ VendorMine.directive( 'stepTwo',
 							console.log(scope.amenityAndFeatures);
 							features.setFeatures( scope.amenities );
 							features.setAmenitiesAndFeatures( scope.amenityAndFeatures );
-							console.log(features.getFeatures());
 						} );
 
 					/*scope.$on('amenities', function(event, data, venue){

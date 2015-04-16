@@ -2,7 +2,6 @@ var VendorMine = angular.module( 'VendorMine', [
   'ui.router', 
   'ui.bootstrap', 
   'angularUtils.directives.dirPagination', 
-  'flash',
   'angular-storage',
   'angular-jwt' ,
   'growlNotifications',

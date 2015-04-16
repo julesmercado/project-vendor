@@ -1,8 +1,7 @@
 VendorMine.service('dateSetter', 
 	[
-		'flash',
 		'$http',
-		function service( flash, $http ){
+		function service( $http ){
 			
 			var dateIsOkay = false
 			  , dateIsReallyOkay = false
@@ -26,13 +25,13 @@ VendorMine.service('dateSetter',
 									//console.log( "Second ");
 									//console.log( data );
 									//console.log( dateIsReallyOkay );
-									flash( data.data, data.message );
+									
 								}else{
 									dateIsReallyOkay = false;
 									//console.log( "Second ");
 									//console.log( data );
 									//console.log( dateIsReallyOkay );
-									flash( data.data, data.message );
+									
 								}
 								
 							}

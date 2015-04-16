@@ -30,7 +30,7 @@ VendorMine.directive( 'bookVenueButton',
 						}*/
 						
 						bookVendorVenues( scope.formFields );
-						//console.log( scope.formFields );
+						console.log( scope.formFields );
 						//console.log( scope.amenityAndFeatures.room );
 						$.modal.close();
 					};

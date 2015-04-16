@@ -2,13 +2,11 @@ VendorMine.directive( 'rooms',
 	[
 		function directive( features, dateSetter ){
 			return {
-				"scope": {
-					
-				},
+				"scope": {},
 				"restrict": "A",
 				"link": function link( scope, element, attribute ){
 					
-					console.log(scope);
+					scope.$on()
 				  
 				}
 			}
