@@ -18,7 +18,7 @@ VendorMine.directive( 'bookVenueButton',
 
 						// Only get Addons Key if client clicks ok
 						scope.formFields.grabCar = addOnService.getGrabCarKey();
-						scope.formFields.skyEye = addOnService.getSkyEyeKey();
+						scope.formFields.skyEye = addOnService.getSkyEyeBooking();
 						
 						//dateSetter.checkDate( scope.formFields.original_date, 2 );
 						/*if( dateSetter.getStatus() ){

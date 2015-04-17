@@ -61,7 +61,7 @@ VendorMine.service('addOnService',
 	[
 		
 		function service(  ){
-				var grabCarKey = "";
+				var grabCar = {};
 				var skyEye = "";
 				var skyEyeKey = {};
 				function formatter( date ){
@@ -78,7 +78,8 @@ VendorMine.service('addOnService',
 				return {
 					// Setter
 					setGrabCarOK: function setGrabCarOK( key ){
-						grabCarKey = key;
+						grabCar.grabCarKey = key;
+						grabCar.price = 1000;
 						console.log( grabCarKey );
 						
 					},
@@ -88,6 +89,7 @@ VendorMine.service('addOnService',
 						if( timeOne<timeTwo ){
 							skyEyeKey.date = formatter(date);
 							skyEyeKey.time = timeOne + "-" + timeTwo;
+							skyEyeKey.price = 1000;
 							/*console.log( skyEyeKey.date );
 							console.log( skyEyeKey.time );*/
 						}
@@ -105,7 +107,7 @@ VendorMine.service('addOnService',
 
 					// Getter
 					getGrabCarKey: function getGrabCarKey(  ){
-						return grabCarKey;
+						return grabCar;
 					},
 					getSkyEyeKey: function getSkyEyeKey(  ){
 						return skyEye;

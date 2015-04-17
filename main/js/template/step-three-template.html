@@ -25,7 +25,7 @@
           </section>
 
         <section ng-show="addOns.skyEye" >
-        <error-message error-message="Time Input Invalid" ng-show="true"></error-message>
+        <error-message error-message="Time Input Invalid" trigger ng-show="comparison"></error-message>
           <form name="skyEyeForm">
             <section class="input datepicker-input">
               <input type="text" name="second" class="form-control" placeholder="Date" datepicker-popup='yyyy/MM/dd' ng-model="form.skyEye.date" is-open="opened.second" min-date="minDate" datepicker-options="dateOptions" close-text="Close" disabled="" required/>
@@ -42,7 +42,7 @@
               <option ng-repeat="time in skyTime" value="{{time}}">{{time}}</option>
             </select>
 
-            <button ng-click="addOns.okSkyEye( )"  data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with SkyEye">ok</button>
+            <button ng-disabled="skyEyeForm.$invalid || comparison" ng-click="addOns.okSkyEye( )"  data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with SkyEye">ok</button>
             <button ng-click="addOns.cancelSkyEye()">cancel</button>
             <div ng-show="addOns.msgSkyEye">You choose to book with SkyEye worth ₱1,500</div>
           </form>
