@@ -9,7 +9,7 @@
         <label class="label-checkbox" ng-repeat="rooms in amenityAndFeatures.room">
           <booked-room>
               <input type="checkbox" ng-disabled="message" name="selectedAmenity[]" ng-model="amenityAndFeatures.room[$index].selected" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}
-              <error-message error-message="Not Available" ng-show="message">{{errorMessage}}</error-message>
+              <error-message error-message="Booked for this date" ng-show="message">{{errorMessage}}</error-message>
           </booked-room>
         </label>
     </form>
