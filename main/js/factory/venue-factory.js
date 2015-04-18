@@ -56,6 +56,25 @@ VendorMine.factory('getSecondExperience',
 			
 		}
 	]);
+VendorMine.factory('getLocation', 
+	[
+		'$http',
+		function factory( $http ){
+
+			return {
+				locations: function ( callback ){
+					var promise = $http.post("https://demo-otter.herokuapp.com/vendormines/get_cities")
+									.success(function( data ){
+										var location = data;
+								        //console.log(data)
+										return location;
+									});
+					return promise;
+				} 
+			}
+			
+		}
+	]);
 VendorMine.factory('getAmenities', 
 	[
 		'$http',

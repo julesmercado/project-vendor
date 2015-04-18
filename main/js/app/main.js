@@ -50,6 +50,9 @@ VendorMine.config([
               resolve: {
                 getSecondExperienceResolver: function( getSecondExperience ){
                     return getSecondExperience.getSecondExperience();
+                  },
+                  getLocation: function( getLocation ){
+                    return getLocation.locations();
                   }
               }
             }).

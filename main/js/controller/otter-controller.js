@@ -2,11 +2,16 @@ VendorMine.controller('landPageController',
 	[
 		'$scope',
 		'getSecondExperienceResolver',
-		function landPageController( $scope, getSecondExperienceResolver ) {
+		'getLocation',
+		function landPageController( $scope, getSecondExperienceResolver, getLocation ) {
 			var data = getSecondExperienceResolver.data;
 			$scope.experience = data.map(function (w) {
 	            return w.name;
 	        });
+	        $scope.locations = getLocation.data.map(function (w) {
+	            return w.name;
+	        });
+	        //console.log( $scope.location);
 		}
 		    
 	]);
@@ -79,6 +84,7 @@ VendorMine.controller( 'filterFormController',
 				"city_address": $stateParams.location,
 				"est_guest": $stateParams.guest
 			};	
+			console.log($scope.filters);
 			postFilter.getPostFilter( $scope.filters, function(error, data){
 				if(error){
 					

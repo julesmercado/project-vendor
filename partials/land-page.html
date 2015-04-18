@@ -12,7 +12,9 @@
 
 
             </section><section class="input-group col-lg-6">
-              <input type="text" placeholder="Location(e.g. Makati City)" name="location" ng-model="firstPageSelection.city_address" class="input" required>
+              <select class="input" name="event-location" id="classic-selections-location" ng-change="change( $index, firstPageSelection.city_address )" ng-model="firstPageSelection.city_address" ng-options="location for location in locations">
+                <option value="">select location...</option>
+              </select>
             </section><section class="input-group col-lg-6">
               <input type="text" placeholder="Expected guests(e.g. 100)" name="mobile-name" ng-model="firstPageSelection.est_guest" class="input" required>
             </section></section>

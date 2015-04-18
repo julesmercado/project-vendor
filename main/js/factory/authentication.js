@@ -10,7 +10,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 
     function changeBetaUser( user ){
     	angular.extend( authenticatedUser, user );
-    	console.log( authenticatedUser );
+    	//console.log( authenticatedUser );
     }
 
     function changeMemberUser( user ){
@@ -27,7 +27,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
         isLoggedIn: function( user ) {
             if( user === undefined ) {
                 user = authenticatedUser;
-                console.log(authenticatedUser);
+                //console.log(authenticatedUser);
             }
             return user.role.title === userRoles.user.title || user.role.title === userRoles.member.title;
         },
