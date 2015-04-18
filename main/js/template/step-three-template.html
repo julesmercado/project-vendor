@@ -15,9 +15,9 @@
           <section ng-show="addOns.grabCar" >
 
             <form name="grabCarForm">
-              <input id="grabCar" name="grabCarInput" type="text" ng-model="formFields.grabCar" maxlength="8" placeholder="Grab Car" disabled required data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Required to fill up if you want to purchase">
+              <input id="grabCar" name="grabCarInput" type="text" ng-model="formFields.grabCar.key" maxlength="8" placeholder="Grab Car" disabled required data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Required to fill up if you want to purchase">
               
-              <button ng-click="addOns.okGrabCar( formFields.grabCar )" ng-disabled="grabCarForm.grabCarInput.$invalid || (grabCarForm.grabCarInput.$pristine && formFields.grabCar=='')" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with GrabCar">ok</button>
+              <button ng-click="addOns.okGrabCar( formFields.grabCar.key )" ng-disabled="grabCarForm.grabCarInput.$invalid || (grabCarForm.grabCarInput.$pristine && formFields.grabCar=='')" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with GrabCar">ok</button>
               <button ng-click="addOns.cancelGrabCar()">cancel</button>
               <div ng-show="addOns.msgGrabCar">You choose to book with GrabCar worth ₱1,000</div>
             </form>
@@ -28,7 +28,7 @@
         <error-message error-message="Time Input Invalid" trigger ng-show="comparison"></error-message>
           <form name="skyEyeForm">
             <section class="input datepicker-input">
-              <input type="text" name="second" class="form-control" placeholder="Date" datepicker-popup='yyyy/MM/dd' ng-model="form.skyEye.date" is-open="opened.second" min-date="minDate" datepicker-options="dateOptions" close-text="Close" disabled="" required/>
+              <input type="text" name="second" class="form-control" placeholder="Date" datepicker-popup='yyyy/MM/dd' ng-model="form.skyEye.date" is-open="opened.second" min-date="minDates" datepicker-options="dateOptions" close-text="Close" disabled="" required/>
                   <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="openSecond($event, 'second')"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>

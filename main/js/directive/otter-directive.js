@@ -98,7 +98,10 @@ VendorMine.directive( 'bookEvent',
 								amenities: [],
 								rooms: [],
 								skyEye: "",
-								grabCar: ""
+								grabCar: {
+									key: "",
+									price: ""
+								}
 							};
 								
 					}

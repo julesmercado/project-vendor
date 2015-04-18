@@ -81,8 +81,7 @@ VendorMine.service('addOnService',
 					setGrabCarOK: function setGrabCarOK( key ){
 						grabCar.key = key;
 						grabCar.price = 1000;
-						console.log( grabCarKey );
-						
+						console.log(key);
 					},
 					setSkyEyeOK: function setSkyEyeOK( date, timeOne, timeTwo ){
 						skyEye = Math.random();
@@ -100,14 +99,14 @@ VendorMine.service('addOnService',
 
 					// Cancel
 					setGrabCarCancel: function setGrabCarCancel(  ){
-						grabCarKey = "";
+						grabCarKey = {};
 					},
 					setSkyEyeCancel: function setSkyEyeCancel(  ){
-						skyEyeKey = "";
+						skyEyeKey = {};
 					},
 
 					// Getter
-					getGrabCarKey: function getGrabCarKey(  ){
+					getGrabCar: function getGrabCarKey(  ){
 						return grabCar;
 					},
 					getSkyEyeKey: function getSkyEyeKey(  ){
@@ -205,7 +204,7 @@ VendorMine.service('features',
 						
 						//selectedAmenities = map( amenitiesAndFeatures.amenities );
 						selectedRooms = map( amenitiesAndFeatures.room )
-						
+						//console.log(amenitiesAndFeatures)
 						selectedAmenitiesAndRooms = {
 									//amenities: selectedAmenities,
 									room: selectedRooms

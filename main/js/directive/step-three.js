@@ -21,7 +21,7 @@ VendorMine.directive( 'stepThree',
 							};
 
 							scope.toggleMin = function() {
-							    scope.minDate = scope.minDate ? null : new Date();
+							    scope.minDates = scope.minDate ? null : new Date();
 							  };
 							  scope.toggleMin();
 
@@ -131,10 +131,10 @@ function grabCar( Authentication ){
 };
 function init(scope, Authentication){
 	if( Authentication.memberExists() ){
-		scope.formFields.grabCar = "";
+		scope.formFields.grabCar.key = "";
 		$("#grabCar").removeAttr('disabled');
 	}else{
-		scope.formFields.grabCar = makeid();
+		scope.formFields.grabCar.key = makeid();
 	}
 }
 function time(){

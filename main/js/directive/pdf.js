@@ -17,11 +17,10 @@ VendorMine.directive( 'pdf',
 					post: function link( scope, element, attribute ){
 					
 						scope.$watch( function(){
-							return addOnService.getGrabCarKey();
+							return addOnService.getGrabCar();
 						}, function( newvalue, oldvalue ){
-							if( newvalue != oldvalue ){
-								scope.grabCar = addOnService.getGrabCarKey();
-							}
+							scope.grabCar = addOnService.getGrabCar();
+							console.log(scope.grabCar);
 						} );
 						scope.$watch( function(){
 							return addOnService.getSkyEyeKey();

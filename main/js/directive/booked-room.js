@@ -35,13 +35,14 @@ VendorMine.directive( 'bookedRoom',
 					        "price_model": null,
 					        "status": "vacant"
 					    }];*/
+					    //console.log(scope.bookedRoom);
 						scope.bookedRoom.map( function( obj , index , array ){
-							if( obj.id == scope.rooms.id ){
+							if( obj.room_id == scope.rooms.id ){
 								scope.message = true;
 							}
 						} )
 
-						console.log( scope.rooms );
+						//console.log( scope.rooms );
 					} );
 					//console.log(scope.room);
 				}

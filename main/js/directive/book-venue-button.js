@@ -17,7 +17,7 @@ VendorMine.directive( 'bookVenueButton',
 						scope.formFields.original_date = $filter('date')(scope.dates.original_date, 'yyyy-MM-dd');
 
 						// Only get Addons Key if client clicks ok
-						scope.formFields.grabCar = addOnService.getGrabCarKey();
+						scope.formFields.grabCar = addOnService.getGrabCar();
 						scope.formFields.skyEye = addOnService.getSkyEyeBooking();
 						
 						//dateSetter.checkDate( scope.formFields.original_date, 2 );
