@@ -19,6 +19,7 @@ VendorMine.service('dateSetter',
 							count = num;
 							if( count == 1 ){
 								amenitiesAndRooms = data;
+								console.log( amenitiesAndRooms );
 							}else if( count == 2){
 								if( data.status ){
 									dateIsReallyOkay = true;
@@ -78,7 +79,7 @@ VendorMine.service('addOnService',
 				return {
 					// Setter
 					setGrabCarOK: function setGrabCarOK( key ){
-						grabCar.grabCarKey = key;
+						grabCar.key = key;
 						grabCar.price = 1000;
 						console.log( grabCarKey );
 						
@@ -164,6 +165,7 @@ VendorMine.service('features',
 			
 			var features = {};
 			var amenitiesAndFeatures = {};
+			var bookedRooms = {};
 			var selectedAmenitiesAndRooms = {};
 				return {
 					getFeatures: function getTab( ){
@@ -175,6 +177,10 @@ VendorMine.service('features',
 					},
 					setAmenitiesAndFeatures: function setAmenitiesAndFeatures( data ){
 						amenitiesAndFeatures = data;
+						bookedRooms = data.booked_rooms;
+					},
+					getBookedRooms: function getBookedRooms( ){
+						return bookedRooms;
 					},
 					getWatch: function getWatch(){
 						return selectedAmenitiesAndRooms;

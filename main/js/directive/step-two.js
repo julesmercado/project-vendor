@@ -13,7 +13,7 @@ VendorMine.directive( 'stepTwo',
 							return dateSetter.getData();
 						}, function( newvalue, oldvalue ){
 							var datas = newvalue;
-							console.log( datas );
+							//console.log( datas );
 
 							scope.amenities = datas;
 							scope.amenityAndFeatures = {
@@ -24,7 +24,7 @@ VendorMine.directive( 'stepTwo',
 									return {name: w.name, id: w.id, selected: false};
 								})
 							};
-							console.log(scope.amenityAndFeatures);
+							//console.log(scope.amenityAndFeatures);
 							features.setFeatures( scope.amenities );
 							features.setAmenitiesAndFeatures( scope.amenityAndFeatures );
 						} );

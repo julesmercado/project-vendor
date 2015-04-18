@@ -169,7 +169,7 @@ VendorMine.service('bookVendorVenues',
 			return function bookVendorVenues( dataVendor ){
 					$.ajax( {
 						type: "POST",
-						url: "http://192.168.1.41:3000/vendormines/",
+						url: "https://demo-otter.herokuapp.com/vendormines/",
 						data: dataVendor
 						})
 					.success( function(data){
