@@ -1,26 +1,115 @@
-<section header-directive></section>
+
 <section class="lead-page">
+  <section header-directive></section>
   <section class="content" land-page-directive>
-    <section class="container">
-      <form action="" class="form" name="bookingFormFirstPage" no-validate>
-          <section class="form book-venue">
-            <h5 class="form-headline">Find your Dream Location</h5>
-            <section class="row"><section class="input-group col-lg-12" experience-directive>
-              <select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, firstPageSelection.exp )" ng-model="firstPageSelection.exp" ng-options="selection for selection in experience">
-                <option value="">select experience...</option>
-              </select>
+
+          <section class="slider">
+              <section class="slider">
+                  <section class="container">
+                    <form action="" class="form" name="bookingFormFirstPage" no-validate>
+                        <section class="form book-venue">
+
+                          <section class="headline row">
+                            <section class="col-lg-4"><img src="img/otter-yo.png"></section>
+                            <section class="bubble col-lg-8">
+                            <h5 class="form-headline">Find your Dream Location</h5>
+                            <span>Let Otter help you with your event.</span>
+                             </section>
+                          </section>
+
+                          <section class="form-fields row">
+                              <section class="input-group col-sm-12 col-md-12 col-lg-12" experience-directive>
+                                <!--select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, firstPageSelection.exp )" ng-model="firstPageSelection.exp" ng-options="selection for selection in experience">
+                                  <option value="">select experience...</option>
+                                </select-->
+                                <select class="input" name="event-name" placeholder="What event are you celebrating?">
+                                  <option value="" disabled="" selected="">Pick a Theme</option>
+                                  <option value="">BEACH</option>
+                                  <option value="">CABIN</option>
+                                  <option value="">CITY</option>
+                                  <option value="">CLUBHOUSE</option>
+                                  <option value="">CLASSIC FILIPINO</option>
+                                  <option value="">FARM</option>  
+                                  <option value="">FREE-SPIRIT</option>
+                                  <option value="">MINI THEATRE</option>
+                                  <option value="">MUSEUM</option>
+                                  <option value="">PRIVATE ISLAND</option>
+                                  <option value="">OUTDOOR</option>
+                                  <option value="">YACHT</option>
+                                </select>
 
 
-            </section><section class="input-group col-lg-6">
-              <select class="input" name="event-location" id="classic-selections-location" ng-change="change( $index, firstPageSelection.city_address )" ng-model="firstPageSelection.city_address" ng-options="location for location in locations">
-                <option value="">select location...</option>
-              </select>
-            </section><section class="input-group col-lg-6">
-              <input type="text" placeholder="Expected guests(e.g. 100)" name="mobile-name" ng-model="firstPageSelection.est_guest" class="input" required>
-            </section></section>
-            <button type="submit" class="btn" ui-sref="index.filter( {experience: firstPageSelection.exp, location: firstPageSelection.city_address, guest: firstPageSelection.est_guest} )">See My Options</button>
+                              </section>
+                              <section class="input-group col-sm-12 col-md-12 col-lg-12">
+                                <select class="input" name="event-location" id="classic-selections-location" ng-change="change( $index, firstPageSelection.city_address )" ng-model="firstPageSelection.city_address" ng-options="location for location in locations">
+                                  <option value="">select location...</option>
+                                </select>
+                              </section>
+                              <section class="input-group col-sm-12 col-md-12 col-lg-12">
+                                <input type="text" placeholder="Expected guests(e.g. 100)" name="mobile-name" ng-model="firstPageSelection.est_guest" class="input" required>
+                              </section>
+                          </section>
+                          
+                          <button type="submit" class="btn" ui-sref="index.filter( {experience: firstPageSelection.exp, location: firstPageSelection.city_address, guest: firstPageSelection.est_guest} )">See My Options
+                          </button>
+                        
+                        </section>
+                    </form>
+                </section>
+              </section>
           </section>
-      </form>
-    </section>
+
+          <section class="services container">
+                <section class="service-headline">
+                  <h2>Start your journey now</h2>
+                  <p class="lead">by choosing what kind of event you want to book</p>
+                </section>
+
+                <section class="col-lg-4 service service-corporate">
+        
+                  <section class="service-details">
+                    <h3>Corporate</h3>
+                    <section class="service-inclusion">
+                      <ul class="unstyled">
+                        <li>meetings</li>
+                        <li>launches</li>
+                        <li>seminars</li>
+                      </ul>  
+                    </section>
+                  </section>
+
+                </section>
+
+                <section class="col-lg-4 service service-socials">
+                  
+                  <section class="service-details">
+                    <h3>Socials</h3>
+                    <section class="service-inclusion">
+                      <ul class="unstyled">
+                        <li>birthdays</li>
+                        <li>engagements</li>
+                        <li>weddings</li>
+                      </ul>  
+                    </section>
+                  </section>
+                </section>
+
+                <section class="col-lg-4 service service-film">
+        
+                    <section class="service-details">
+                      <h3>Film</h3>
+                      <section class="service-inclusion">
+                        <ul class="unstyled">
+                          <li>photo shoot</li>
+                          <li>movie shoot</li>
+                          
+                        </ul>  
+                      </section>
+                    </section>
+
+                </section>
+          </section>
+
+    <section footer></section>
   </section>
 </section>
