@@ -21,18 +21,18 @@ VendorMine.factory('venueFactory',
 	[
 		'$http',
 		function service( $http ){
-			var url = "http://demo1290827.mockable.io/venue/get/data";
+			return {
+				getVenues: function venueFactory( id, callback ){
+					$http.get( "http://192.168.1.51:3000/vendormines/get/venue/details/" + id )
+						.success( function onSuccess( result ){
+							callback( null, result );
+						} )
+						.error( function onError( error ){
+							callback( error );
+						} );
 
-			return function venueFactory( callback ){
-				$http.get( url )
-					.success( function onSuccess( result ){
-						callback( null, result );
-					} )
-					.error( function onError( error ){
-						callback( error );
-					} );
-
-			} 
+				} 
+			}
 			
 		}
 	]);

@@ -108,7 +108,14 @@ a:hover
     margin-top: 1em;
     margin-bottom: 0;
 }
+.lead-page .content
+{
+    height: 100%;
+    /* text-align: center; */
 
+    background-image: url('../img/conference.jpg');
+    background-size: cover;
+}
 .input-group
 {
     margin-bottom: 20px;
@@ -761,4 +768,87 @@ a.btn:hover, a.btn:active  {
 
 .service-headline {
     margin-bottom: 30px;
+}
+
+.image-thumbnails .list {}
+
+.unstyled-list {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.slider-showcase.col-lg-12 {}
+
+.main-image {
+    /* height: 500px; */
+}
+
+.slider-showcase {
+    background-color: #000;
+    position: relative;
+}
+
+.venue-logo {
+    display: inline-block;
+    position: absolute;
+    bottom: 150px;
+}
+
+.image-thumbnails li {
+    padding: 10px;
+    background-color: #EEE;
+    margin-right: 5px;
+    display: inline-block;
+    width: 138px;
+}
+
+.image-thumbnails li img {
+    width: 100%;
+}
+
+.details-panel {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.image-thumbnails li:last-child {
+    margin-right: 0;
+}
+
+p.lead {
+    font-size: 1.2em;
+}
+
+.details-panel .panel p {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 10px;
+}
+
+.details-panel .panel .h5 {
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+address {
+    padding-bottom: 10px;
+}
+
+p,address {
+    font-weight: lighter;
+}
+
+.btn-cta {
+    font-weight: bold;
+    font-size: 1.2em;
+    height: auto;
+    background-color: #E5A442;
+    margin-bottom: 15px;
+}
+.details-info{
+    padding-top: 20px;
+    position: relative;
+    top: -90px;
 }

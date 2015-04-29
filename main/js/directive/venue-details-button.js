@@ -8,7 +8,7 @@ VendorMine.directive( 'venueDetailsButton',
 			return {
 				
 				"restrict": "A",
-				"template": "<a ng-click='getDetails()' class='venue-details btn btn-proceed'>Book this venue</a>",
+				"template": "<a ng-click='getDetails()' class='btn btn-cta'>Book this venue</a>",
 				"link": function link( scope, element, attribute ){
 				
 					/*Init*/

@@ -3,7 +3,8 @@ VendorMine.directive( 'venuesPanel',
 		'Authentication',
 		'eventService',
 		'$state',
-		function directive( Authentication, eventService, $state ){
+		'venueFactory',
+		function directive( Authentication, eventService, $state, venueFactory ){
 			return {
 				
 				"restrict": "A",
@@ -16,6 +17,9 @@ VendorMine.directive( 'venuesPanel',
 					scope.bookVenue = function bookVenue( index, id, venue ){
 						Authentication.setView();
 						//console.log(scope.venues[index]);
+						venueFactory.getVenues( id, function( error, data ){
+							console.log(data);
+						} );
 						eventService.setVenue( venue );
 						$state.go( 'index.view', {id: id} );
 					};
