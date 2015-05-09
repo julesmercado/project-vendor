@@ -23,7 +23,7 @@ VendorMine.factory('venueFactory',
 		function service( $http ){
 			return {
 				getVenues: function venueFactory( id, callback ){
-					$http.get( "http://192.168.1.51:3000/vendormines/get/venue/details/" + id )
+					$http.get( "http://demo-otter.herokuapp.com/vendormines/get/venue/details/" + id )
 						.success( function onSuccess( result ){
 							callback( null, result );
 						} )
@@ -43,7 +43,7 @@ VendorMine.factory('getSecondExperience',
 
 			return {
 				getSecondExperience: function ( callback ){
-					var promise = $http.get("https://demo-otter.herokuapp.com/vendormines/get_experience")
+					var promise = $http.get("http://demo-otter.herokuapp.com/vendormines/get_experience")
 									.success(function( data ){
 										var experience = data.map(function (w) {
 								            return w.name;
@@ -63,7 +63,7 @@ VendorMine.factory('getLocation',
 
 			return {
 				locations: function ( callback ){
-					var promise = $http.post("https://demo-otter.herokuapp.com/vendormines/get_cities")
+					var promise = $http.post("http://demo-otter.herokuapp.com/vendormines/get_cities")
 									.success(function( data ){
 										var location = data;
 								        //console.log(data)
@@ -82,7 +82,7 @@ VendorMine.factory('getAmenities',
 
 			return {
 				getAmenities: function ( callback ){
-					var promise = $http.get("https://demo-otter.herokuapp.com/vendormines/get_amenities")
+					var promise = $http.get("http://demo-otter.herokuapp.com/vendormines/get_amenities")
 									.success(function( data ){
 										var amenities = data.map(function (w) {
 									        	return {name: w.name, selected: false};
@@ -104,7 +104,7 @@ VendorMine.service('postFilter',
 			return {
 				getPostFilter: function( dataFirst, callback ){
 					if(dataFirst){
-						var promise = $.post( "https://demo-otter.herokuapp.com/vendormines/venues",
+						var promise = $.post( "http://demo-otter.herokuapp.com/vendormines/venues",
 							{
 								"exp": dataFirst.exp, 
 								"city_address" : dataFirst.city_address, 
@@ -132,7 +132,7 @@ VendorMine.service('postFilterAmenities',
 			return {
 				getPostFilterAmenities: function( dataFirst, callback ){
 					if(dataFirst){
-						var promise = $.post( "https://demo-otter.herokuapp.com/vendormines/venues",
+						var promise = $.post( "http://demo-otter.herokuapp.com/vendormines/venues",
 							{
 								"exp": dataFirst.exp, 
 								"city_address" : dataFirst.city_address, 
@@ -162,7 +162,7 @@ VendorMine.service('amenityAndFeatures',
 				getAmenityAndFeatures: function( id, callback ){
 					if(id){
 						var promise = $.ajax( {
-										url: "https://demo-otter.herokuapp.com/vendormines/show",
+										url: "http://demo-otter.herokuapp.com/vendormines/show",
 										type: "POST",
 										data: {
 											id: id
@@ -188,22 +188,43 @@ VendorMine.service('bookVendorVenues',
 			return function bookVendorVenues( dataVendor ){
 					$.ajax( {
 						type: "POST",
-						url: "https://demo-otter.herokuapp.com/vendormines/",
-						data: dataVendor
-						})
+						url: "http://demo-otter.herokuapp.com/vendormines/book/check/",
+						data: {
+							date: dataVendor.original_date,
+							room_id: dataVendor.rooms
+						}
+					})
 					.success( function(data){
-						alert(data.confirmation);
-						var amenityAndFeatures = data;
-						return amenityAndFeatures;
+						console.log( data );
+						if( data.status==true ){
+							
+							$.ajax( {
+								type: "POST",
+								url: "http://demo-otter.herokuapp.com/vendormines/",
+								data: dataVendor
+								})
+							.success( function(data){
+								console.log(data);
+								var amenityAndFeatures = data;
+								return amenityAndFeatures;
+							} )
+							.error( function(error){
+								return error;
+							} );
+							
+						}else{
+							alert( "The rooms are unfortunately unavailable. Please change your booking" );
+						}
 					} )
 					.error( function(error){
-						return error;
+						alert( "Oops! Something went wrong. Check you connection" )
 					} );
 				}
 				
 			
 		}
 	]);
+
 VendorMine.service('staticVenue', 
 	[
 		'$http',

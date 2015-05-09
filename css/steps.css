@@ -1,0 +1,132 @@
+.container-header{
+	width: 70%;
+	margin: 0 auto;
+}
+
+
+.steps-img img{
+	width: 100%;
+}
+.booking-form-text{
+	text-align: center;
+	color: #E5A342;	
+}
+
+.line-hr{
+	position: relative;
+	top: 54px;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.hr-cuz{
+	height: 2px;
+	background: #C8C8C8;
+}
+
+.working-body{
+	padding-top: 40px;
+}
+
+.sub-text-header{
+	color: #E5A342;	
+}
+.content-main{
+	width: 40%;
+	margin: 0 auto;
+}
+
+.form-section input{
+	background: #F2F2F2;
+	border-radius: 2px;
+	width: 100%;
+	border: none;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+.section-field{
+	padding-bottom: 30px;
+}
+
+
+.container-continue-btn{
+	text-align: center;
+	width: 40%;
+	margin: 0 auto;
+}
+
+.btn-continue{
+	background: #E5A342;
+	color: white;
+	border: none;
+	padding: 10px;
+	font-weight: bold;
+	border-radius: 5px;
+	width: 100%;
+	font-size: 25px;
+	margin-top: 50px;
+}
+
+.side-fixed{
+	width: 350px;
+	display: flex;
+	position: absolute;
+	right: 45px;
+	top: 206px;
+}
+
+.box-border{
+	border: 1px solid #E6E6E6;
+	border-radius: 5px;
+}
+
+.otter-img{
+	padding-right: 20px;
+}
+
+.header-side{
+	background: #FCF9DA;
+}
+
+.content-side{
+	padding: 10px;
+}
+.capacity{
+	color: #999999;
+}
+
+.text-common-1{
+	color: #666666;
+	font-size: 16px;
+}
+
+.text-common-2{
+	color: #B3B3B3;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.text-common-3{
+	font-size: 16px;
+}
+.code{
+	font-size: 16px;
+	color: #B3B3B3;
+	font-weight: lighter;
+}
+
+.text-common-4{
+	font-size: 16px;
+	color: #B3B3B3;
+}
+
+.table-center{
+	width: 95%;
+	margin: 0 auto;
+}
+
+.side-table tr td{
+	width: 100px;
+	padding: 10px 0px;
+}

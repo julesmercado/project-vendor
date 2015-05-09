@@ -21,7 +21,7 @@ VendorMine.directive( 'venuesPanel',
 							console.log(data);
 						} );
 						eventService.setVenue( venue );
-						$state.go( 'index.view', {id: id} );
+						$state.go( 'index.landPage.view', {id: id} );
 					};
 							
 				}

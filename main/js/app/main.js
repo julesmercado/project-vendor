@@ -42,8 +42,17 @@ VendorMine.config([
                   access: access.user
               }
             }).
-
-            state("index.index",{ 
+            state("index.landPage",{ 
+              abstract: true,
+              template: 
+                          " <section header-directive></section> " +
+                            " <section class='lead-page'> " + 
+                                " <ui-view/> " +
+                                " " +
+                            " </section> " +
+                          " <section footer></section> "
+            }).
+            state("index.landPage.index",{ 
               url: '/index',
               templateUrl: "/partials/land-page.html",
               controller: 'landPageController',
@@ -57,7 +66,7 @@ VendorMine.config([
               }
             }).
 
-            state("index.filter",{ 
+            state("index.landPage.filter",{ 
               url: "/filter?experience&location&guest",
               controller: "filterFormController",
               templateUrl: '/partials/filter-page.html',
@@ -71,9 +80,14 @@ VendorMine.config([
               } 
             }).
 
-            state( "index.view", {
+            state( "index.landPage.view", {
               url: "/view/:id",
               templateUrl: "/partials/book.html"
+            } ).
+
+            state( "index.landPage.bookform", {
+              url: "/:venue/booking-form",
+              templateUrl: "/partials/booking-form.html"
             } );
 
         $stateProvider.state('member', {

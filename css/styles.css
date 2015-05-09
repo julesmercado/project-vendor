@@ -108,14 +108,6 @@ a:hover
     margin-top: 1em;
     margin-bottom: 0;
 }
-.lead-page .content
-{
-    height: 100%;
-    /* text-align: center; */
-
-    background-image: url('../img/conference.jpg');
-    background-size: cover;
-}
 .input-group
 {
     margin-bottom: 20px;

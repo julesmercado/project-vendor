@@ -4,7 +4,8 @@ VendorMine.directive( 'venueDetailsButton',
 		'amenityAndFeatures',
 		'eventService',
 		'$rootScope',
-		function directive( timeout, amenityAndFeatures, eventService, $rootScope ){
+		'$state',
+		function directive( timeout, amenityAndFeatures, eventService, $rootScope, $state ){
 			return {
 				
 				"restrict": "A",
@@ -14,10 +15,14 @@ VendorMine.directive( 'venueDetailsButton',
 					/*Init*/
 					venuesNow = eventService.getVenue();
 					scope.venuesNow = venuesNow;
+					var venue = scope.venuesNow.name;
 
 					scope.getDetails = function getDetails(){
-						$('#quick-view-details').modal();
-						timeout( function(){
+						console.log( venue );
+						$state.go( 'index.landPage.bookform', { venue: venue } );
+
+						//$('#quick-view-details').modal();
+						/*timeout( function(){
 						amenityAndFeatures.getAmenityAndFeatures(venuesNow.id,function (error, data) {
 								if(error){
 									console.error(error)
@@ -33,7 +38,7 @@ VendorMine.directive( 'venueDetailsButton',
 								}
 							});
 						
-						}, 0);
+						}, 0);*/
 						
 					};
 				}
