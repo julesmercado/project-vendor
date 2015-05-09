@@ -8,23 +8,26 @@
 	                  
 	                <section class="slider-showcase">
 		                <section class="main-image container">
-		                    <img src="img/venue/slider.png" alt="Venue Image">
-		                    <section class="venue-logo"><img src="img/venue/the-blue-leaf-logo.png" alt="The Venue Logo"></section>
+		                    <!-- <img src="img/venue/slider.png" alt="Venue Image">
+		                    <section class="venue-logo"><img src="img/venue/the-blue-leaf-logo.png" alt="The Venue Logo"></section> -->
+		                    <section class="image-thumbnails">
+		                    	<ul class="unstyled-list">
+				                    <flex-slider slide="image in venueImage track by $index " control-nav="thumbnails" direction-nav="false" pause-play="false" start-at="0">
+		
+				                    		<li data-thumb="{{image}}">
+				                    			<img ng-src="{{image}}">
+				                    		</li>
+					                   	
+				                    </flex-slider>
+		                        </ul>
+		                	</section>
 		                </section>
 		                
 		            </section>
 
 		            <section class="venue-details container">
 			                <section class="details-info col-lg-8">
-			                    <section class="image-thumbnails">
-			                    <ul class="unstyled-list">
-			                        <li><img src="img/venue/image-thumbnail.jpg" alt="Venue thumbnail"></li>
-			                        <li><img src="img/venue/image-thumbnail.jpg" alt="Venue thumbnail"></li>
-			                        <li><img src="img/venue/image-thumbnail.jpg" alt="Venue thumbnail"></li>
-			                        <li><img src="img/venue/image-thumbnail.jpg" alt="Venue thumbnail"></li>
-			                        <li><img src="img/venue/image-thumbnail.jpg" alt="Venue thumbnail"></li>
-			                    </ul>
-			                	</section><h2 class="venue-name">The Blue Leaf Hotel: Function Hall 1</h2>
+			                    <h2 class="venue-name">The Blue Leaf Hotel: Function Hall 1</h2>
 			                    
 			                    <section class="description">
 			                                <p class="lead">The nature’s escape from the city. lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>

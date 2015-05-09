@@ -1,6 +1,5 @@
 var VendorMine = angular.module( 'VendorMine', [ 
   'ui.router', 
-  'ui.bootstrap', 
   'angularUtils.directives.dirPagination', 
   'angular-storage',
   'angular-jwt' ,

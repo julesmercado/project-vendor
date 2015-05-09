@@ -6,7 +6,8 @@ angular.module( 'otter', [
   'ngSanitize',
   'ngAnimate',
   'ngQuantum',
-  'components'
+  'components',
+  'angular-flexslider'
 ])
 
  
