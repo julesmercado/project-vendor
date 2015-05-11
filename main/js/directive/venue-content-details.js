@@ -9,6 +9,7 @@ VendorMine.directive( 'venueContentDetails',
 					scope.venueImage = [
 							'img/venue/kitchen_adventurer_caramel.jpg',
 							'img/venue/kitchen_adventurer_cheesecake_brownie.jpg',
+							'img/venue/kitchen_adventurer_donut.jpg',
 							'img/venue/kitchen_adventurer_donut.jpg'
 					];
 				}

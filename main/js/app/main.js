@@ -4,7 +4,8 @@ var VendorMine = angular.module( 'VendorMine', [
   'angular-storage',
   'angular-jwt' ,
   'growlNotifications',
-  'cc'
+  'cc',
+  'mp.datePicker'
 ] );
 VendorMine.config([
   '$httpProvider', 
@@ -81,12 +82,34 @@ VendorMine.config([
 
             state( "index.landPage.view", {
               url: "/view/:id",
-              templateUrl: "/partials/book.html"
+              templateUrl: "/partials/venue-details.html"
             } ).
 
             state( "index.landPage.bookform", {
               url: "/:venue/booking-form",
-              templateUrl: "/partials/booking-form.html"
+              templateUrl: "/partials/booking-form.html",
+              controller: [ '$scope', 'otterFees', function controller( scope , otterFees ){
+                  console.log( "State loaded" );
+                  scope.skyEye = otterFees.getSkyEye();
+                  scope.grabCar = otterFees.getGrabCar();
+                  var venuesNow = {};
+                  
+                  scope.formFields = {
+                    name: "",
+                    email: "",
+                    contact_no: "",
+                    expected_guest: "",
+                    original_date: "",
+                    amenities: [],
+                    rooms: [],
+                    skyEye: "",
+                    grabCar: {
+                      key: "",
+                      price: ""
+                    }
+                  };
+              } ] 
+              
             } );
 
         $stateProvider.state('member', {

@@ -1,4 +1,4 @@
-<section class="addons" ng-show="tabBook==2">
+<!-- <section class="addons" ng-show="tabBook==2">
   <section class="step-container"><section class="step">2</section><h3 class="headline">Amenities and Features</h3></section>
   <ul class="addons unstyled">
     <label class="label-checkbox" ng-repeat="amenities in amenities.amenities"><input type="checkbox" name="selectedAmenity[]" ng-model="amenityAndFeatures.amenities[$index].selected" disabled="false" class="input checkbox" value="{{amenity.name}}">{{amenities.name}}</label>
@@ -18,3 +18,53 @@
   
   <button type="submit" class="btn btn-proceed" ng-click="setTabBook(3)">Continue to Addons</button>
 </section>
+ -->
+
+    <section class="working-body" ng-show="tabBook==2">
+        <section class="row content-main">
+            <section class="col-lg-12 col-md-12">
+                <section class="row">
+                    <section class="col-lg-12 col-md-12">
+                        <h3 class="sub-text-header">Amenities</h3>
+                    </section>
+                </section>
+                <section class="row form-section">
+                    <section class="col-lg-6 col-md-6">
+                        <input type="checkbox" name="wifi" value="wifi"> Wifi<br>
+                        <input type="checkbox" name="pool" value="pool"> Pool<br>
+                        <input type="checkbox" name="pool" value="pool"> Pool<br>
+                    </section>
+                    <section class="col-lg-6 col-md-6">
+                        <label for="">250</label><br>
+                        <label for="">250</label><br>
+                        <label for="">250</label>
+                    </section>
+                </section>
+
+                <section class="row form-section">
+                
+                    <section class="col-lg-6 col-md-6">
+                        <form name="rooms">
+                            <label class="label-checkbox" ng-repeat="rooms in amenityAndFeatures.room">
+                              <booked-room>
+                                  <input type="checkbox" ng-disabled="message" name="room" ng-model="amenityAndFeatures.room[$index].selected" ng-click="updateSelection($index, amenityAndFeatures.room)" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}
+                                  <error-message error-message="Booked for this date" ng-show="message">{{errorMessage}}</error-message>
+                              </booked-room>
+                            </label>
+                        </form>
+                    </section>
+                    
+                </section>
+            </section>
+        </section>
+   
+        <section class="row">
+            <section class="col-lg-12 col-md-12">
+                <section class="row container-continue-btn">
+                    <section class="col-lg-12 col-md-12">
+                        <button class="btn-continue" ng-click="setTabBook(3)">Continue to Add-ons</button>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>

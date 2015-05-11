@@ -11,10 +11,10 @@ VendorMine.directive( 'bookVenueButton',
 				"template": "<button type='submit' class='btn btn-proceed' ng-click='bookVendor()''>Book Venue</button>",
 				"link": function link( scope, element, attribute ){
 					scope.bookVendor = function bookVendor(){
+						scope.tabBook = 4;
 
 						//scope.formFields.amenities = map( scope.amenityAndFeatures.amenities );
 						scope.formFields.rooms = map( scope.amenityAndFeatures.room );
-						scope.formFields.original_date = $filter('date')(scope.dates.original_date, 'yyyy-MM-dd');
 
 						// Only get Addons Key if client clicks ok
 						scope.formFields.grabCar = addOnService.getGrabCar();

@@ -9,7 +9,8 @@ VendorMine.service('dateSetter',
 			  , amenitiesAndRooms = {};
 				return {
 					checkDate: function checkDate( date, id, num ){
-						$http.post( "https://demo-otter.herokuapp.com/vendormines/verify/dates",
+						//console.log( date );
+						$http.post( "http://demo-otter.herokuapp.com/vendormines/verify/dates",
 							{
 								"date": date,
 								"venue_id": id
@@ -20,7 +21,7 @@ VendorMine.service('dateSetter',
 							if( count == 1 ){
 								amenitiesAndRooms = data;
 								console.log( amenitiesAndRooms );
-							}else if( count == 2){
+							}/*else if( count == 2){
 								if( data.status ){
 									dateIsReallyOkay = true;
 									//console.log( "Second ");
@@ -35,7 +36,7 @@ VendorMine.service('dateSetter',
 									
 								}
 								
-							}
+							}*/
 						} )
 						.error( function(error){
 							console.log(error);
@@ -70,6 +71,7 @@ VendorMine.service('addOnService',
 					var month = date.getMonth();
 					var year = date.getFullYear();	
 					var fullDate = "(dd/mm/yy)" + " " + day +"-" + (month + 1) +"-" + year;
+
 					return fullDate;
 				}
 	// 	service description:
@@ -85,13 +87,13 @@ VendorMine.service('addOnService',
 					},
 					setSkyEyeOK: function setSkyEyeOK( date, timeOne, timeTwo ){
 						skyEye = Math.random();
+						var dateToFormate = new Date( date )
 						skyEyeKey.time = "";
 						if( timeOne<timeTwo ){
-							skyEyeKey.date = formatter(date);
+							skyEyeKey.date = formatter(dateToFormate);
+							console.log( skyEyeKey.date );
 							skyEyeKey.time = timeOne + "-" + timeTwo;
 							skyEyeKey.price = 1000;
-							/*console.log( skyEyeKey.date );
-							console.log( skyEyeKey.time );*/
 						}
 						
 						

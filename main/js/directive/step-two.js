@@ -13,7 +13,6 @@ VendorMine.directive( 'stepTwo',
 							return dateSetter.getData();
 						}, function( newvalue, oldvalue ){
 							var datas = newvalue;
-							//console.log( datas );
 
 							scope.amenities = datas;
 							scope.amenityAndFeatures = {
@@ -21,8 +20,9 @@ VendorMine.directive( 'stepTwo',
 									return {name: w.name, id: w.id, selected: false};
 								}),*/
 								room: scope.amenities.room.map(function(w){
-									return {name: w.name, id: w.id, selected: false};
-								})
+									return {name: w.name, id: w.id, selected: false}; 
+								}),
+								selectedRooms: ""
 							};
 							//console.log(scope.amenityAndFeatures);
 							features.setFeatures( scope.amenities );
@@ -34,6 +34,14 @@ VendorMine.directive( 'stepTwo',
 						
 						
 					});*/
+					//for multiple selection delete updateSelection
+					scope.updateSelection = function updateSelection( position, entities ) {
+
+						angular.forEach(entities, function(subscription, index) {
+						    if (position != index)
+						      	scope.amenityAndFeatures.room[ index ].selected = false;
+						});
+					}
 					scope.selectAmenity = function selectAmenity( id ){
 						if(scope.selectedAmenity.length == 0){
 							scope.selectedAmenity.push( id );

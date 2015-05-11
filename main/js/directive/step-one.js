@@ -4,28 +4,33 @@ VendorMine.directive( 'stepOne',
 		'$filter',
 		function directive( dateSetter, $filter ){
 			return {
-				
-				"restrict": "A",
 				"templateUrl": "main/js/template/step-one-template.html",
+				"restrict": "A",
 				"link": function link( scope, element, attribute ){
-					
+					scope.datepicker = false;
 					scope.$watch('formFields.grabCar', function( newValue, oldValue ) {
 					 	// console.log( scope.grabCarForm );
 					 });
 					scope.$watch('dates.original_date', function( newValue, oldValue ) {
-					 	if( newValue != oldValue && ( typeof newValue == "object" ) ){
-					 		var dateOriginal = $filter('date')( scope.dates.original_date, 'yyyy-MM-dd' );
-					 		//console.log( dateOriginal );
+						if( newValue != oldValue ){
+
+							var dateOriginal = new Date( newValue );
+							var dateObj = $filter('date')( dateOriginal, 'yyyy-MM-dd' );
+							scope.formFields.original_date = dateObj;
+							console.log( scope.formFields )
+					 		//console.log( dateObj );
 					 		//console.log(scope.venue);
-					 		dateSetter.checkDate( dateOriginal, scope.venue.id, 1 );
-					 	}
+					 		dateSetter.checkDate( dateObj, scope.venue.id, 1 );
+
+						}
 					 });
 
 					scope.$on('amenities', function(event, data, venue){
+						/*console.log(data);
+						console.log(venue);
+						console.log(scope.formFields);*/
 						scope.venue = venue;
-						//console.log(venue);
 						scope.formFields.venue_id = scope.venue.id;
-						
 						
 					});
 	//	DatePicker
@@ -34,12 +39,8 @@ VendorMine.directive( 'stepOne',
 					  };
 					  scope.toggleMin();
 
-					scope.open = function($event,open) {
-					    $event.preventDefault();
-					    $event.stopPropagation();
-
-					    scope.opened[open] = true;
-					    
+					scope.open = function() {
+						scope.datepicker = !scope.datepicker; 
 					};
 					scope.opened = {
 						first: false
@@ -47,7 +48,7 @@ VendorMine.directive( 'stepOne',
 					scope.dates = {
 						original_date: ""
 					};		
-					//console.log(scope.opened);	  	
+					  	
 				}
 			}
 		}

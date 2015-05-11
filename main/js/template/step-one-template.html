@@ -1,4 +1,4 @@
-<section class="customer-info" ng-show="tabBook==1">
+<!-- <section class="customer-info" ng-show="tabBook==1">
   <flash:messages class="slide-down"></flash:messages>
     <section class="step-container"><h3 class="headline">Guest Details</h3></section>
     <form name="stepOne">
@@ -15,4 +15,64 @@
     </form>
     
     <button type="submit" class="btn btn-proceed" ng-disabled="stepOne.$invalid" ng-click="setTabBook(2)">Continue to Amenities</button>
-</section>
+</section> -->
+
+<section class="working-body" ng-show="tabBook==1">
+        <section class="row content-main">
+
+            <section class="col-lg-12 col-md-12">
+
+                <section class="row">
+                    <section class="col-lg-12 col-md-12">
+                        <h3 class="sub-text-header">Guest Details</h3>
+                    </section>
+                </section>
+             
+                <section class="row form-section">
+                    <form name="stepOne">
+                        <section class="col-lg-12 col-md-12">
+                            <section class="section-field">
+                                <label for="">FULL NAME</label><br>
+                                <input type="text" placeholder="Write your fullname here" ng-model="formFields.name">
+                            </section>
+
+                            <section class="section-field">
+                                <label for="">EMAIL</label><br>
+                                <input type="email" placeholder="Your email here" ng-model="formFields.email" required>
+                            </section>
+
+                            <section class="section-field">
+                                <label for="">CONTACT #</label><br>
+                                <input type="text" placeholder="Your contact #" ng-pattern="/(?:(?:^63)|(?:^0))\d{10}$/" ng-model="formFields.contact_no" required>
+                            </section>
+
+                            <section class="section-field">
+                                <label for="">EXPECTED GUEST</label><br>
+                                <input type="number" placeholder="Number of expected guest" ng-model="formFields.expected_guest" required>
+                            </section>
+
+                            <section class="section-field">
+                                <label for="">DATE</label><br>
+                                <input type="text" name="first" class="form-control" placeholder="Choose a date" ng-model="dates.original_date" ng-required="true" disabled="" />
+                                <date-picker ng-model="dates.original_date" ng-show="datepicker"></date-picker>
+                                <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </section>
+                        </section>
+                    </form>
+                </section>
+
+            </section>
+        </section>
+
+        <section class="row">
+            <section class="col-lg-12 col-md-12">
+                <section class="row container-continue-btn">
+                    <section class="col-lg-12 col-md-12">
+                        <button class="btn-continue" ng-click="setTabBook(2)">Continue to Aminities</button>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>

@@ -1,4 +1,4 @@
-<section class="addons" ng-show="tabBook==3">
+<!-- <section class="addons" ng-show="tabBook==3">
         <section class="step-container"><section class="step">3</section><h3 class="headline">Addons</h3></section>
           
           <section class="steps">
@@ -49,4 +49,84 @@
           
         </section> 
         <button type="submit" class="btn btn-proceed" ng-click="setTabBook(4)">Continue to Review</button> 
-</section>
+</section> -->
+
+    <section class="working-body" ng-show="tabBook==3">
+        <section class="row content-main">
+            <section class="col-lg-12 col-md-12">
+                <section class="row">
+                    <section class="col-lg-12 col-md-12">
+                        <h3 class="sub-text-header">Add-ons</h3>
+                    </section>
+                </section>
+                <section class="row form-section">
+                    <section class="col-lg-12 col-md-12">
+                        <section class="graccar-section">
+                            <label for="" class="label-cb"><input type="checkbox" name="" value="" class="grabcar-cb">GrabCar</label><br>
+                            <p class="p-content">It is a private hire car booking service. We ensure that only vehicles and 
+                            drivers with the appropriate commercial license are allowed to register as 
+                            GrabCar service providers so that you can have peace of mind.
+                            </p>
+                            <p class="p-bold">GrabCar CODE</p>
+                            
+                            <form name="grabCarForm">
+                              <input id="grabCar" name="grabCarInput" type="text" ng-model="formFields.grabCar.key" maxlength="8" placeholder="Grab Car" disabled required data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Required to fill up if you want to purchase">
+                              
+                              <button ng-click="addOns.okGrabCar( formFields.grabCar.key )" ng-disabled="grabCarForm.grabCarInput.$invalid || (grabCarForm.grabCarInput.$pristine && formFields.grabCar=='')" data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with GrabCar">ok</button>
+                              <button ng-click="addOns.cancelGrabCar()">cancel</button>
+                              <div ng-show="addOns.msgGrabCar">You choose to book with GrabCar worth ₱1,000</div>
+                            </form>
+                        </section>
+
+                        <section class="skyeye-section">
+                            <label for="" class="label-cb">SkyEye</label><br>
+                            <p class="p-content">SkyEye provides a high resolution images to give you the most accurate image 
+                            possible. We fly just below the clouds to give you an unobstructed view of the
+                            target area. All images taken are from our fleet UAVs. 
+                            </p>
+                            <error-message error-message="Time Input Invalid" trigger ng-show="comparison"></error-message>
+                            
+                            <form name="skyEyeForm">
+
+                              <label for="">DATE</label><br>
+                                <input type="text" name="first" class="form-control" placeholder="Choose a date" ng-model="formFields.original_date" ng-required="true" disabled="" />
+                                <!-- <date-picker ng-model="form.skyEye.date" ng-show="datepicker"></date-picker>
+                                <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span> -->
+                              
+                              <label>From:</label>
+                              
+                              <select class="form-input" name="serving" id="serving" ng-model='form.skyEye.timeOne' required>
+                                <option ng-repeat="time in skyTime" value="{{time}}">{{time}}</option>
+                              </select>
+                              <label>To:</label>
+                              
+                              <select class="form-input" name="serving" id="serving" ng-model='form.skyEye.timeTwo' required>
+                                <option ng-repeat="time in skyTime" value="{{time}}">{{time}}</option>
+                              </select>
+
+                              <button ng-disabled="skyEyeForm.$invalid || comparison" ng-click="addOns.okSkyEye( )"  data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" data-qs-title="Book with SkyEye">ok</button>
+                              
+                              <button ng-click="addOns.cancelSkyEye()">cancel</button>
+                              
+                              <div ng-show="addOns.msgSkyEye">You choose to book with SkyEye worth ₱1,500</div>
+                            </form>
+                        </section>
+
+                    </section>
+                </section>
+            </section>
+        </section>
+
+        <section class="row">
+            <section class="col-lg-12 col-md-12">
+                <section class="row container-continue-btn">
+                    <section class="col-lg-12 col-md-12">
+                        <section book-venue-button></section>
+                        <!-- <button class="btn-continue" ng-click="setTabBook(4)" >Book and Pay</button> -->
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>

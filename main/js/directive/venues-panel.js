@@ -17,9 +17,9 @@ VendorMine.directive( 'venuesPanel',
 					scope.bookVenue = function bookVenue( index, id, venue ){
 						Authentication.setView();
 						//console.log(scope.venues[index]);
-						venueFactory.getVenues( id, function( error, data ){
+						/*venueFactory.getVenues( id, function( error, data ){
 							console.log(data);
-						} );
+						} );*/
 						eventService.setVenue( venue );
 						$state.go( 'index.landPage.view', {id: id} );
 					};

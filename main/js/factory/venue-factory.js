@@ -161,22 +161,16 @@ VendorMine.service('amenityAndFeatures',
 			return {
 				getAmenityAndFeatures: function( id, callback ){
 					if(id){
-						var promise = $.ajax( {
-										url: "http://demo-otter.herokuapp.com/vendormines/show",
-										type: "POST",
-										data: {
-											id: id
-										}
-										})
-						.success( function(data){
-							callback(null, data);
-						} )
-						.error( function(error){
-							callback(error);
-						} );
 						
-					}
-					return promise;
+						var promise = $.post( "http://demo-otter.herokuapp.com/vendormines/show",
+							{
+								"id": id
+							})
+							.success( function(data){
+								callback( null, data );
+							} );
+						return promise;
+					}	
 				}
 			}
 		}

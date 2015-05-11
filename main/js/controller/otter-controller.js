@@ -84,7 +84,7 @@ VendorMine.controller( 'filterFormController',
 				"city_address": $stateParams.location,
 				"est_guest": $stateParams.guest
 			};	
-			console.log($scope.filters);
+			//console.log($scope.filters);
 			postFilter.getPostFilter( $scope.filters, function(error, data){
 				if(error){
 					

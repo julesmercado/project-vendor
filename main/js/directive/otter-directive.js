@@ -81,7 +81,7 @@ VendorMine.directive( 'bookEvent',
 					pre: function link( scope, element, attribute ){
 		//	otter Speech			        
 					       
-					        scope.otterSpeech = otterSpeachBubble.getSpeechOtter();
+					        //scope.otterSpeech = otterSpeachBubble.getSpeechOtter();
 							
 	
 		//	Init			

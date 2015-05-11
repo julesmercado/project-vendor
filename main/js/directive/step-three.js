@@ -54,7 +54,7 @@ VendorMine.directive( 'stepThree',
 
 								okSkyEye: function( key ){
 									scope.addOns.msgSkyEye = true;
-									addOnService.setSkyEyeOK( scope.form.skyEye.date, scope.form.skyEye.timeOne, scope.form.skyEye.timeTwo );
+									addOnService.setSkyEyeOK( scope.formFields.original_date, scope.form.skyEye.timeOne, scope.form.skyEye.timeTwo );
 									otterFees.setSkyEye();
 									$rootScope.$broadcast( 'timeOne', scope.form.skyEye.timeOne, scope.form.skyEye.timeTwo );
 								},
