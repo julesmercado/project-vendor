@@ -8,7 +8,32 @@
              <li class="nav-items"><a href="#">LOOKBOOK</a></li>
              <li class="nav-items"><a href="#">GRATIS</a></li>
              <li class="nav-items"><a href="#">CONNECT</a></li>
-           <li class="nav-items"><a href="#">Verify Payment</a></li></ul>
+            
+
+            <li class="nav-items">
+            <label ng-show="memberCheckExist()" >{{ member.email }}</label>
+            </li>
+
+            <li class="nav-items">  
+              <a class="link" ng-show="!memberCheckExist()" ui-sref="member()">Member Page</a>
+            </li>
+
+            <li class="nav-items">
+            <label ng-show="memberCheckExist()" >Welcome! {{ member.username }}</label>
+            </li>
+
+            <li class="nav-items"><a href="#">Verify Payment</a></li></ul>
          
           </section>
   </section>
+
+   <!--  <section class="header">
+      <section class="top-header container">
+        <section class="quick-links pull-right">
+          <a class="link" ng-show="memberCheckExist()" ui-sref="member()">Member Page</a>
+          <label ng-show="memberCheckExist()" >{{ member.email }}</label>
+          <a class="link" ng-show="!memberCheckExist()" ui-sref="member()">Member Page</a>
+          <label ng-show="memberCheckExist()" >{{ member.username }}</label>
+           <a class="link" ui-sref="verify()">Verify Payment</a>
+        </section><section class="brand">
+    <span class="logo-name">Otter</span> - <span class="tagline">Experience Lab</span> -->

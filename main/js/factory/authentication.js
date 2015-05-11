@@ -88,7 +88,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
             	username: 'user',
             	role: userRoles.user
             } );
-            $state.go('index.index');
+            $state.go('index.landPage.index');
         },
 
         getUser: function()

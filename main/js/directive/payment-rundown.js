@@ -2,11 +2,21 @@ VendorMine.directive( 'paymentRundown',
 	[
 		'otterFees',
 		'$rootScope',
-		function directive( otterFees, rootScope ){
+		'Authentication',
+		function directive( otterFees, rootScope, Authentication ){
 			return {
 				"templateUrl": "main/js/template/payment-rundown.html",
 				"restrict": "A",
 				"link": function link( scope, element, attribute ){
+					if( Authentication.memberExists() ){
+						scope.siteFee = 240;
+						scope.feeMember = true;
+						scope.feeNonMember = false;
+					}else{
+						scope.siteFee = 400;
+						scope.feeMember = false;
+						scope.feeNonMember = true;
+					}
 					scope.payment = {
 						grabCarFee: scope.grabCarFee,
 						skyEyeFee: scope.skyEyeFee,
@@ -21,7 +31,6 @@ VendorMine.directive( 'paymentRundown',
 
 						scope.payment.grabCarFee = otterFees.getGrabCar();
 						//$rootScope.broadcast( 'payment', scope.payment );
-						console.log( scope.payment );
 					} );
 
 					scope.$watch( function(){
@@ -30,7 +39,6 @@ VendorMine.directive( 'paymentRundown',
 
 						scope.payment.skyEyeFee  = otterFees.getSkyEye();
 						//$rootScope.broadcast( 'payment', scope.payment );
-						console.log( scope.payment );
 					} )
 
 					scope.$watch( function(){
@@ -39,7 +47,6 @@ VendorMine.directive( 'paymentRundown',
 
 						scope.payment.total 	 = otterFees.getTotal();
 						//$rootScope.broadcast( 'payment', scope.payment );
-						console.log( scope.payment );
 					} )
 					
 				}

@@ -22,7 +22,8 @@
                                             <table class="side-table">
                                                 <tr>
                                                     <td class="text-common-1">Site Fee</td>
-                                                    <td class="text-common-3">{{ 400 | currency:"&#8369"}}(members: {{ 240 | currency:"&#8369"}})</td>
+                                                    <td class="text-common-3" ng-show="feeNonMember">Non-member: {{ 400 | currency:"&#8369"}}</td>
+                                                    <td class="text-common-3" ng-show="feeMember">Member: {{ 240 | currency:"&#8369"}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-common-2">Amenities</td>
