@@ -17,7 +17,7 @@ VendorMine.directive( 'stepOne',
 							var dateOriginal = new Date( newValue );
 							var dateObj = $filter('date')( dateOriginal, 'yyyy-MM-dd' );
 							scope.formFields.original_date = dateObj;
-							console.log( scope.formFields )
+							//console.log( scope.formFields )
 					 		//console.log( dateObj );
 					 		//console.log(scope.venue);
 					 		dateSetter.checkDate( dateObj, scope.venue.id, 1 );
@@ -27,8 +27,8 @@ VendorMine.directive( 'stepOne',
 
 					scope.$on('amenities', function(event, data, venue){
 						/*console.log(data);
-						console.log(venue);
 						console.log(scope.formFields);*/
+						console.log(venue);
 						scope.venue = venue;
 						scope.formFields.venue_id = scope.venue.id;
 						

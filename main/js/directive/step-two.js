@@ -20,9 +20,8 @@ VendorMine.directive( 'stepTwo',
 									return {name: w.name, id: w.id, selected: false};
 								}),*/
 								room: scope.amenities.room.map(function(w){
-									return {name: w.name, id: w.id, selected: false}; 
-								}),
-								selectedRooms: ""
+									return {name: w.name, id: w.id, selected: false, price: w.price}; 
+								})
 							};
 							//console.log(scope.amenityAndFeatures);
 							features.setFeatures( scope.amenities );

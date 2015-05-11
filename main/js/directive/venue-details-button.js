@@ -18,7 +18,7 @@ VendorMine.directive( 'venueDetailsButton',
 					var venue = scope.venuesNow.name;
 
 					scope.goToBookForm = function goToBookForm(){
-						console.log( venuesNow );
+						//console.log( venuesNow );
 						amenityAndFeatures.getAmenityAndFeatures(venuesNow.id,function (error, data) {
 								if(error){
 									console.error(error)

@@ -11,9 +11,14 @@
                 <section class="row steps-img" 
                         steps-booking-form
                         >
+                        <section>
+                            <h1 ng-click="traverseBack()" form-requirements><a><-</a></h1>
+                            <h1 ng-click="traverseForward()" form-requirements><a>-></a></h1>
+                        </section>
                     <section class="line-hr">
                         <hr class="hr-cuz">
                     </section>
+                    <section payment-rundown></section>
                     <section class="col-lg-3 col-md-3" >
                         <img ng-src="{{stepOneImage}}" alt="">  
                     </section>

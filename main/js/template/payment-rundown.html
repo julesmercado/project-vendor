@@ -12,8 +12,8 @@
                       </sectio>
                       <section class="row content-side">
                           <section class="col-lg-12 col-md-12">
-                              <h3>Funtion Hall</h3>
-                              <p class="capacity">Capacity: 50 - 100</p>
+                              <h3>{{ venue.name }}</h3>
+                              <p class="capacity">Capacity: {{ venue.min_guest }} - {{ venue.max_guest }}</p>
                                 
 
                                 <section class="row">
@@ -21,8 +21,8 @@
                                         <section class="table-center">
                                             <table class="side-table">
                                                 <tr>
-                                                    <td class="text-common-1">Rental</td>
-                                                    <td class="text-common-3">40000.00</td>
+                                                    <td class="text-common-1">Site Fee</td>
+                                                    <td class="text-common-3">{{ 400 | currency:"&#8369"}}(members: {{ 240 | currency:"&#8369"}})</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-common-2">Amenities</td>
@@ -40,18 +40,18 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text-common-1">GrabCar</td>
-                                                    <td class="text-common-3">1250.00</td>
+                                                    <td class="text-common-3">{{ payment.grabCarFee | currency:"&#8369" }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-common-4"><span class="code">CODE: </span>good2great</td>
+                                                    <td class="text-common-4"><span class="code">CODE: </span>{{ formFields.grabCar.key }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-common-1">SkyEye</td>
-                                                    <td class="text-common-3">2250.00</td>
+                                                    <td class="text-common-3">{{ payment.skyEyeFee | currency:"&#8369" }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-common-1">Total</td>
-                                                    <td class="text-common-3">250.00</td>
+                                                    <td class="text-common-3">{{ payment.total | currency:"&#8369" }}</td>
                                                 </tr>
 
                                             </table>

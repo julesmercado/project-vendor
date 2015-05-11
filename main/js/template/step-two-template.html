@@ -44,10 +44,10 @@
                 <section class="row form-section">
                 
                     <section class="col-lg-6 col-md-6">
-                        <form name="rooms">
+                        <form name="formRooms">
                             <label class="label-checkbox" ng-repeat="rooms in amenityAndFeatures.room">
                               <booked-room>
-                                  <input type="checkbox" ng-disabled="message" name="room" ng-model="amenityAndFeatures.room[$index].selected" ng-click="updateSelection($index, amenityAndFeatures.room)" class="input checkbox" value="{{amenity.name}}">{{rooms.name}}
+                                  <input type="checkbox" ng-disabled="message" name="room" ng-model="amenityAndFeatures.room[$index].selected" ng-click="updateSelection($index, amenityAndFeatures.room)" class="input checkbox" value="{{amenity.name}}" required>{{rooms.name}}
                                   <error-message error-message="Booked for this date" ng-show="message">{{errorMessage}}</error-message>
                               </booked-room>
                             </label>

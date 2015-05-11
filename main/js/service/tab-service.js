@@ -263,7 +263,6 @@ VendorMine.service( 'otterFees',
 		var memberFee = 200;
 		var skyEyeFee = 0;
 		var grabCarFee = 0;
-
 		var skyEye = false;
 		var grabCar = false;
 		return{
@@ -308,7 +307,16 @@ VendorMine.service( 'otterFees',
 					//console.log("beta exist");
 				}
 			},
+			getSiteFee: function(){
+				if(Authentication.memberExists()){
+					//console.log("member");
+					return memberFee;
+				}else{
+					//console.log("non member");
+					return nonMemberFee;
+				}
 
+			},
 
 			getTotal: function(){
 				if(Authentication.memberExists()){
