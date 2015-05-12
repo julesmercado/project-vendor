@@ -1,5 +1,5 @@
 
-VendorMine.factory('Authentication', function Authentication($q, $http, $timeout, store, $state) {
+VendorMine.factory('Authentication', function Authentication( $q , $http , $timeout , store , $state , spinnerService ) {
 	
 	var accessLevels = routingConfig.accessLevels
         , userRoles = routingConfig.userRoles;
@@ -38,7 +38,7 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
     	viewExists: function(  ){
     		return setView != null;
     	},
-        requestUser: function( credentials )
+        requestUser: function( credentials , name )
         {
             //console.log("authentication.requestUser");
             /*var deferred = $q.defer();
@@ -57,10 +57,13 @@ VendorMine.factory('Authentication', function Authentication($q, $http, $timeout
 		    });
 
             return deferred.promise;*/
-            changeBetaUser( {
-            	username: 'user',
-            	role: userRoles.user
+            spinnerService.show( name );
+                changeBetaUser( {
+                username: 'user',
+                role: userRoles.user
             } );
+            spinnerService.hide( name );
+            
             $state.go('index.landPage.index');
         },
 

@@ -99,11 +99,13 @@ VendorMine.factory('getAmenities',
 VendorMine.service('postFilter', 
 	[
 		'$http',
-		function service( $http ){
+		'spinnerService',
+		function service( $http , spinnerService ){
 
 			return {
 				getPostFilter: function( dataFirst, callback ){
 					if(dataFirst){
+							spinnerService.show( 'landPageSpinner' );
 						var promise = $.post( "http://demo-otter.herokuapp.com/vendormines/venues",
 							{
 								"exp": dataFirst.exp, 
@@ -113,6 +115,7 @@ VendorMine.service('postFilter',
 						)
 						.success( function(data){
 							callback(null, data)
+							spinnerService.hide( 'landPageSpinner' );
 						} )
 						.error( function(error){
 							callback(error);

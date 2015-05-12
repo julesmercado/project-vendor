@@ -122,6 +122,27 @@ VendorMine.service('addOnService',
 			
 		}
 	]);
+VendorMine.service('spinnerService', 
+	[
+		function service(  ){
+			
+			
+
+				return {
+					show: function getTab( name ){
+						angular.element( '#' + name ).attr( 'ng-show', 'true' );
+						angular.element( '#' + name ).removeAttr( "class" );
+						console.log( angular.element( '#' + name ).attr( 'ng-show' ) );
+						console.log( angular.element( '#' + name ) );
+					},
+					hide: function setTab( name ){
+						angular.element( '#' + name ).attr( 'ng-show', 'false' );
+					}
+					
+				}
+			
+		}
+	]);
 VendorMine.service('dateChecker', 
 	[
 		function service(  ){

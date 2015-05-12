@@ -22,7 +22,7 @@
                                 <!--select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, firstPageSelection.exp )" ng-model="firstPageSelection.exp" ng-options="selection for selection in experience">
                                   <option value="">select experience...</option>
                                 </select-->
-                                <select class="input" name="event-name" placeholder="What event are you celebrating?">
+                                <select class="input" ng-model="firstPageSelection.exp" name="event-name" placeholder="What event are you celebrating?">
                                   <option value="" disabled="" selected="">Pick a Theme</option>
                                   <option value="">BEACH</option>
                                   <option value="">CABIN</option>
@@ -46,12 +46,12 @@
                                 </select>
                               </section>
                               <section class="input-group col-sm-12 col-md-12 col-lg-12">
-                                <input type="text" placeholder="Expected guests(e.g. 100)" name="mobile-name" ng-model="firstPageSelection.est_guest" class="input" required>
+                                <input type="text" placeholder="Expected guests(e.g. 100)" name="expected-guest" ng-model="firstPageSelection.est_guest" class="input" required>
                               </section>
                           </section>
                           
                           <button type="submit" class="btn" ui-sref="index.landPage.filter( {experience: firstPageSelection.exp, location: firstPageSelection.city_address, guest: firstPageSelection.est_guest} )">See My Options
-                          </button>
+                          </button><spinner id="landPageSpinner" ng-show="false" size="large"></spinner>
                         
                         </section>
                     </form>

@@ -2,8 +2,21 @@
    <h3 class="headline col-lg-12">Filter results</h3>
    <section class="input-group col-lg-12">
       <h5 class="label">Experience</h5>
-      <select class="input" name="event-name" placeholder="What event are you celebrating?" id="classic-selections" ng-change="change( $index, secondPageSelection.exp )" ng-model="secondPageSelection.exp" ng-options="selection for selection in initialize.experience">
-      </select>
+      <select class="input" ng-model="firstPageSelection.exp" name="event-name" placeholder="What event are you celebrating?">
+       <option value="" disabled="" selected="">Pick a Theme</option>
+       <option value="">BEACH</option>
+       <option value="">CABIN</option>
+       <option value="">CITY</option>
+       <option value="">CLUBHOUSE</option>
+       <option value="">CLASSIC FILIPINO</option>
+       <option value="">FARM</option>  
+       <option value="">FREE-SPIRIT</option>
+       <option value="">MINI THEATRE</option>
+       <option value="">MUSEUM</option>
+       <option value="">PRIVATE ISLAND</option>
+       <option value="">OUTDOOR</option>
+       <option value="">YACHT</option>
+     </select>
    </section>
    <section class="input-group col-lg-12">
       <h5 class="label">Location</h5>

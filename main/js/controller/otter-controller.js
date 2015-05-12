@@ -29,8 +29,8 @@ VendorMine.controller( 'LoginBetaCtrl', [
         $scope.$watch('user.exp', function(){
           //console.log("exp");
         })
-        $scope.login = function login() {
-          Authentication.requestUser( $scope.user );  
+        $scope.login = function login( name ) {
+          Authentication.requestUser( $scope.user, name );  
           
         }
 
